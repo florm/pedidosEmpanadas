@@ -1,0 +1,84 @@
+﻿.div-contenedor-alertas {
+    position: absolute;
+    z-index: 999999;
+    display: block;
+    width: 100%;
+    text-align: center;
+    top: 68px;
+    padding: 10px;
+}
+
+    .div-contenedor-alertas.sticky-alerta {
+        top: 0;
+        position: fixed;
+    }
+
+.row{
+    margin-right: 0px !important;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.navbar-brand{
+    color: #ffffff !important;
+}
+.menu {
+    background-color: #454496;
+    
+}
+    .menu li a {
+        color: #ffffff !important;
+    }
+
+#portada {
+    background-image: url(http://locosxlaparrilla.com/wp-content/uploads/2015/02/Receta-recetas-locos-x-la-parrilla-locosxlaparrilla-receta-empanadas-pollo-empanadas-pollo-receta-empanadas-empanadas-2.jpg);
+    height: 480px;
+    max-width: 100%;
+    filter: brightness(0.4);
+    background-size: cover;
+}
+
+.lista-portada{
+    position: absolute;
+    top:100px;
+    left: 35%;
+}
+    .lista-portada i{
+        font-size: 40px;
+        color: #ffffff;
+    }
+    .lista-portada span {
+        font-size: 20px;
+        font-weight: 700;
+        padding-left: 10px;
+        color: #ffffff;
+    }
+.custom-modal-content {
+    box-shadow: 0 1px 3px 0 #ced5da;
+    border: .5px solid #ced5da;
+    border-radius: 8px;
+}
+.btn-aceptar {
+    background-color: #43d260;
+    color: #ffffff;
+}
+.btn-cancelar {
+    background: #ced5da;
+    color: #ffffff;
+}
+footer {
+    background-color: #454496;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+}
