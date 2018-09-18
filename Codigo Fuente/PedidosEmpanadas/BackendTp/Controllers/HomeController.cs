@@ -22,7 +22,7 @@ namespace BackendTp.Controllers
 
         public JsonResult Registro(Usuario usuario)
         {
-            ServicioUsuario.CrearUsuario(usuario);
+            //ServicioUsuario.CrearUsuario(usuario);
             return Json("");
         }
 
