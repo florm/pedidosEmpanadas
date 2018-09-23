@@ -13,7 +13,6 @@ namespace BackendTp.Servicios
         
         public void CrearUsuario(Usuario usuario)
         {
-            ValidarEmail();
             Db.Usuario.Add(usuario);
             Db.SaveChanges();
         }
@@ -22,13 +21,10 @@ namespace BackendTp.Servicios
         {
             var user = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
             if(user == null)
-                throw new UsuarioDeslogueadoException();
+                throw new UsuarioInvalidoException();
             return user;
         }
 
-        private void ValidarEmail()
-        {
-
-        }
+        
     }
 }

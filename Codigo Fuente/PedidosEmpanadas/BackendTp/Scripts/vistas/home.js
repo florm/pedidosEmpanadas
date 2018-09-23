@@ -9,6 +9,25 @@ var loginPassword = $("#loginPassword");
 var btnAceptarLogin = $("#btnAceptarLogin");
 
 
+modalLogin.find(".btn-cancelar").click(function () {
+    modalLogin.modal('hide');
+    loginEmail.val("");
+    loginPassword.val("");
+    ocultarMensajeValidacionErronea(loginEmail);
+    ocultarMensajeValidacionErronea(loginPassword);
+
+
+});
+
+modalRegistro.find(".btn-cancelar").click(function() {
+    modalRegistro.modal('hide');
+    textEmail.val("");
+    textPassword.val("");
+    ocultarMensajeValidacionErronea(textEmail);
+    ocultarMensajeValidacionErronea(textPassword);
+    ocultarMensajeValidacionErronea(textRepetirPassword);
+});
+
 btnAceptar.click(function () {
     if (!validar())
         return;
@@ -47,11 +66,10 @@ function loginOk() {
     window.location.href = window.pathPedidos;
 
 }
-function loginError(mensaje, params) {
-    mensaje = JSON.parse(mensaje);
-    mostrarMsgError(mensaje.message);
-    console.log(mensaje);
-    console.log(params);
+function loginError(data) {
+    var mensaje = JSON.parse(data);
+    mostrarMsgError(mensaje.ErrorMessage);
+    
 }
 
 
