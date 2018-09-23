@@ -27,6 +27,7 @@ modalRegistro.find(".btn-cancelar").click(function() {
     ocultarMensajeValidacionErronea(textPassword);
     ocultarMensajeValidacionErronea(textRepetirPassword);
 });
+
 btnAceptar.click(function () {
     if (!validar())
         return;
