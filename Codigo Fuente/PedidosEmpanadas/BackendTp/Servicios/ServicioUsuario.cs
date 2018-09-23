@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using Exceptions;
 
 namespace BackendTp.Servicios
 {
@@ -19,8 +20,10 @@ namespace BackendTp.Servicios
 
         public Usuario Login(Usuario usuario)
         {
-            return Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
-
+            var user = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
+            if(user == null)
+                throw new UsuarioDeslogueadoException();
+            return user;
         }
 
         private void ValidarEmail()

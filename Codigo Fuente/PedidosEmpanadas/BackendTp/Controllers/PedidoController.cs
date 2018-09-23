@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace BackendTp.Controllers
 {
-    public class ErrorHandlerController : BaseController
+    public class PedidoController : BaseController
     {
-        public ActionResult Error()
+        public ActionResult Pedido()
         {
             return View();
         }
