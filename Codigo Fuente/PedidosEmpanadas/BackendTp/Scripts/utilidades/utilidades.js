@@ -30,9 +30,12 @@ function mostrarAlerta(msg, tipoAlerta, hacerFadeOut) {
             break;
         case "e":
             alerta.css("background", "#ff5150");
+            alerta.css("padding", "10px");
             imgIcon.attr("src", window.pathImgError);
             break;
-        case "w": alerta.css("background", "#ffc917");
+        case "w":
+            alerta.css("background", "#ffc917");
+            alerta.css("padding", "10px");
             break;
     }
     alerta.append(imgIcon);

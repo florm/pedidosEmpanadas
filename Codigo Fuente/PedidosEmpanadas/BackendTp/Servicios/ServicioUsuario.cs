@@ -22,7 +22,7 @@ namespace BackendTp.Servicios
         {
             var user = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
             if(user == null)
-                throw new UsuarioDeslogueadoException();
+                throw new UsuarioInvalidoException();
             return user;
         }
 
