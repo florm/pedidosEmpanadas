@@ -460,7 +460,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Globons\\.nuget\\packages\\": {}
+    "C:\\Users\\usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -468,12 +468,12 @@
       "projectUniqueName": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Tp1\\Tp1.csproj",
       "projectName": "Tp1",
       "projectPath": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Tp1\\Tp1.csproj",
-      "packagesPath": "C:\\Users\\Globons\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
       "outputPath": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Tp1\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Globons\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

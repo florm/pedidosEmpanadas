@@ -1,68 +1,56 @@
-C:\Proyectos\Tp1\Tp1\bin\Debug\Tp1.dll
-C:\Proyectos\Tp1\Tp1\bin\Debug\Tp1.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\Tp1.Tp1.apk
-C:\Proyectos\Tp1\Tp1\bin\Debug\Tp1.Tp1-Signed.apk
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\Tp1.csprojAssemblyReference.cache
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res.flag
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\Tp1.csproj.CoreCompileInputs.cache
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\Tp1.dll
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\Tp1.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\bin\Tp1.Tp1.apk
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\layout\activity_main.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\values\colors.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\values\ic_launcher_background.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\values\strings.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\values\styles.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-anydpi-v26\ic_launcher.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-anydpi-v26\ic_launcher_round.xml
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher_foreground.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher_round.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher_foreground.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher_round.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher_foreground.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher_round.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher_foreground.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher_round.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher_round.png
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\R.cs.flag
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\R.txt
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\uploadflags.txt
-C:\Proyectos\Tp1\Tp1\bin\Debug\Mono.Android.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\mscorlib.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.Core.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.Xml.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.ComponentModel.Composition.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.Net.Http.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.Runtime.Serialization.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\System.ServiceModel.Internals.pdb
-C:\Proyectos\Tp1\Tp1\bin\Debug\Mono.Security.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\Tp1.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\Mono.Android.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\mscorlib.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Core.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Xml.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.ComponentModel.Composition.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Net.Http.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Runtime.Serialization.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\System.ServiceModel.Internals.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\Mono.Security.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\Mono.Android.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\Mono.Security.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\mscorlib.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.ComponentModel.Composition.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.Core.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.Net.Http.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.Runtime.Serialization.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.ServiceModel.Internals.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\System.Xml.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\android\assets\Tp1.pdb
-C:\Proyectos\Tp1\Tp1\obj\Debug\MonoAndroid81\linksrc\Tp1.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Tp1.dll
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Tp1.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Tp1.Tp1.apk
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Tp1.Tp1-Signed.apk
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\Tp1.csprojAssemblyReference.cache
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res.flag
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\Tp1.csproj.CoreCompileInputs.cache
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\Tp1.dll
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\Tp1.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\android\bin\Tp1.Tp1.apk
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\layout\activity_main.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\values\colors.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\values\ic_launcher_background.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\values\strings.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\values\styles.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-anydpi-v26\ic_launcher.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-anydpi-v26\ic_launcher_round.xml
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher_foreground.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-hdpi\ic_launcher_round.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher_foreground.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-mdpi\ic_launcher_round.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher_foreground.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xhdpi\ic_launcher_round.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher_foreground.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxhdpi\ic_launcher_round.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher_foreground.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\res\mipmap-xxxhdpi\ic_launcher_round.png
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\R.cs.flag
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\R.txt
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\uploadflags.txt
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Mono.Android.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\Mono.Security.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\mscorlib.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.ComponentModel.Composition.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.Core.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.Net.Http.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.Runtime.Serialization.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.ServiceModel.Internals.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\bin\Debug\System.Xml.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\Tp1.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\Mono.Android.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\mscorlib.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Core.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Xml.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.ComponentModel.Composition.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Net.Http.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.Runtime.Serialization.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\System.ServiceModel.Internals.pdb
+C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Tp1\obj\Debug\MonoAndroid81\linksrc\Mono.Security.pdb
