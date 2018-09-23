@@ -17,6 +17,12 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
         }
 
+        public Usuario Login(Usuario usuario)
+        {
+            return Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
+
+        }
+
         private void ValidarEmail()
         {
 
