@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Optimization;
+using BackendTp.App_Start;
 
 namespace BackendTp
 {
@@ -15,6 +16,7 @@ namespace BackendTp
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalFilters.Filters.Add(new ManejadorExceptionFilter());
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
         
     }
