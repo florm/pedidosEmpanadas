@@ -20,7 +20,7 @@ namespace BackendTp
             _context = context;
 
             base.OnActionExecuting(context);
-            //ValidarUsuarioLogueado();
+            ValidarUsuarioLogueado();
         }
 
         public void OnException(ExceptionContext filterContext)
