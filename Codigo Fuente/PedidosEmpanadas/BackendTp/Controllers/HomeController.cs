@@ -27,10 +27,10 @@ namespace BackendTp.Controllers
         }
 
 
-        public ActionResult Login(Usuario usuario)
+        public JsonResult Login(Usuario usuario)
         {
             Sesion.Usuario = ServicioUsuario.Login(usuario);
-            return View();
+            return Json("");
         }
 
 
