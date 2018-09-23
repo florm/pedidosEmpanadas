@@ -13,7 +13,6 @@ namespace BackendTp.Servicios
         
         public void CrearUsuario(Usuario usuario)
         {
-            ValidarEmail();
             Db.Usuario.Add(usuario);
             Db.SaveChanges();
         }
@@ -26,9 +25,6 @@ namespace BackendTp.Servicios
             return user;
         }
 
-        private void ValidarEmail()
-        {
-
-        }
+        
     }
 }

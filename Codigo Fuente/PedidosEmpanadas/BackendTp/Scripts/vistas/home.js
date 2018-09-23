@@ -66,7 +66,7 @@ function loginOk() {
     window.location.href = window.pathPedidos;
 
 }
-function loginError(data, params) {
+function loginError(data) {
     var mensaje = JSON.parse(data);
     mostrarMsgError(mensaje.ErrorMessage);
     
