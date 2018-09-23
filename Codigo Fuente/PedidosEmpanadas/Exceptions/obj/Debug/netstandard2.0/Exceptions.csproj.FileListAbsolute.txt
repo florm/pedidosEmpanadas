@@ -12,3 +12,12 @@ C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debu
 C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.csproj.CopyComplete
 C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.dll
 C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.pdb
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\bin\Debug\netstandard2.0\Exceptions.deps.json
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\bin\Debug\netstandard2.0\Exceptions.dll
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\bin\Debug\netstandard2.0\Exceptions.pdb
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.csprojAssemblyReference.cache
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.csproj.CoreCompileInputs.cache
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.AssemblyInfoInputs.cache
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.AssemblyInfo.cs
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.dll
+G:\ProyectosVisualStudio\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\Exceptions\obj\Debug\netstandard2.0\Exceptions.pdb

@@ -80,10 +80,11 @@
   },
   "libraries": {
     "Microsoft.AspNet.Mvc/5.2.4": {
-      "sha512": "Enl//Q98M1+A5o26GlPtbtfWiGVNrLvLSFRbfDc14CG6UQn7o4Xux4CXuMAJkDqaRfHXQWsssumsPofwJoiQVw==",
+      "sha512": "aBSENa9s0KnB/Oh9D94l/g1BQKcjX3Ra6NFmWMWFmCW7diglEHoGOpSozX4lcYdTq/HDGLHfkEFbRLD/Pu6MMQ==",
       "type": "package",
       "path": "microsoft.aspnet.mvc/5.2.4",
       "files": [
+        ".signature.p7s",
         "Content/Web.config.install.xdt",
         "Content/Web.config.uninstall.xdt",
         "lib/net45/System.Web.Mvc.dll",
@@ -93,10 +94,11 @@
       ]
     },
     "Microsoft.AspNet.Razor/3.2.4": {
-      "sha512": "yqSkHUZNjR01MO2NbpXIfjlUEFJqw3xcT57Fc5orJryZlzgAVMUluOsDW2jyGkDg8/Xv91/RQ+0NNz4kinfGhQ==",
+      "sha512": "XIqwE6RU3Wx5lzxjHakGjZ6AxePlEY8oxAt99YOjY49tzjChZGDWia807YQr1w/sTtQo1cvfcQqvMs3yKWgXrg==",
       "type": "package",
       "path": "microsoft.aspnet.razor/3.2.4",
       "files": [
+        ".signature.p7s",
         "lib/net45/System.Web.Razor.dll",
         "lib/net45/System.Web.Razor.xml",
         "microsoft.aspnet.razor.3.2.4.nupkg.sha512",
@@ -280,23 +282,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\Ksu\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\Exceptions.csproj",
+      "projectUniqueName": "G:\\ProyectosVisualStudio\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\Exceptions.csproj",
       "projectName": "Exceptions",
-      "projectPath": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\Exceptions.csproj",
-      "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Proyectos\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\obj\\",
+      "projectPath": "G:\\ProyectosVisualStudio\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\Exceptions.csproj",
+      "packagesPath": "C:\\Users\\Ksu\\.nuget\\packages\\",
+      "outputPath": "G:\\ProyectosVisualStudio\\pedidosEmpanadas\\Codigo Fuente\\PedidosEmpanadas\\Exceptions\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ksu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
