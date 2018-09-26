@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using Exceptions;
 
 namespace BackendTp.Servicios
 {
@@ -12,14 +13,18 @@ namespace BackendTp.Servicios
         
         public void CrearUsuario(Usuario usuario)
         {
-            ValidarEmail();
             Db.Usuario.Add(usuario);
             Db.SaveChanges();
         }
 
-        private void ValidarEmail()
+        public Usuario Login(Usuario usuario)
         {
-
+            var user = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
+            if(user == null)
+                throw new UsuarioInvalidoException();
+            return user;
         }
+
+        
     }
 }
