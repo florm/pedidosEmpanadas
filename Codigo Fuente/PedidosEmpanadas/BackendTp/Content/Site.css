@@ -37,7 +37,7 @@ textarea {
     background-color: #454496;
     
 }
-    .menu li a {
+    .menu li > a {
         color: #ffffff !important;
     }
 
