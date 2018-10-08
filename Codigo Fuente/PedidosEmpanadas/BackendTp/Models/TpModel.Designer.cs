@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Proyectos\Tp1\BackendTp\Models\TpModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Proyectos\pedidosEmpanadas\Codigo Fuente\PedidosEmpanadas\BackendTp\Models\TpModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

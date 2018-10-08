@@ -29,8 +29,16 @@ namespace BackendTp.Controllers
 
         public JsonResult Login(Usuario usuario)
         {
-            Sesion.IdUsuario = ServicioUsuario.Login(usuario);
+            var usuarioLogueado = ServicioUsuario.Login(usuario);
+            Sesion.IdUsuario = usuarioLogueado.IdUsuario;
+            Sesion.EmailUsuario = usuarioLogueado.Email;
             return Json("");
+        }
+
+        public ActionResult LogOut()
+        {
+            Sesion.IdUsuario = 0;
+            return RedirectToAction("Index");
         }
 
 

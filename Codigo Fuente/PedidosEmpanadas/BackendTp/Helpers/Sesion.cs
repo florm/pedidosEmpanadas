@@ -10,20 +10,26 @@ namespace BackendTp.Helpers
     public class Sesion
     {
 
-        public static int? IdUsuario
+        public static int IdUsuario
+        {
+            get => Convert.ToInt32(HttpContext.Current.Session["IdUsuario"]);
+            set => HttpContext.Current.Session["IdUsuario"] = value;
+        }
+
+        public static string EmailUsuario
         {
             get
             {
-                if (HttpContext.Current.Session["Usuario"] != null)
+                if (HttpContext.Current.Session["EmailUsuario"] != null)
                 {
-                    return Convert.ToInt32(HttpContext.Current.Session["Usuario"]);
+                    return HttpContext.Current.Session["EmailUsuario"].ToString();
                 }
                 else
                 {
                     return null;
                 }
             }
-            set => HttpContext.Current.Session["Usuario"] = value;
+            set => HttpContext.Current.Session["EmailUsuario"] = value;
         }
     }
 }

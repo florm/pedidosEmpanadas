@@ -201,7 +201,13 @@ table {
     margin: 0 auto !important;
 }
 
+.table td, .table th {
+    border-left: 1px solid #dee2e6 !important;
+}
 
+tbody {
+    border-bottom: 1px solid #dee2e6 !important;
+}
 .vertical-middle {
     vertical-align: middle !important;
 }
