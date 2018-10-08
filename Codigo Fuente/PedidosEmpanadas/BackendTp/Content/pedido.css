@@ -1,0 +1,11 @@
+﻿
+.pasos {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-group {
+    width: 50%;
+}

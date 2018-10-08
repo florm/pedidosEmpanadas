@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="IdPedido" />
           </Key>
-          <Property Name="IdPedido" Type="int" Nullable="false" />
+          <Property Name="IdPedido" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="IdUsuarioResponsable" Type="int" Nullable="false" />
           <Property Name="NombreNegocio" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
@@ -284,7 +284,7 @@
           <Key>
             <PropertyRef Name="IdPedido" />
           </Key>
-          <Property Name="IdPedido" Type="Int32" Nullable="false" />
+          <Property Name="IdPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUsuarioResponsable" Type="Int32" Nullable="false" />
           <Property Name="NombreNegocio" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />

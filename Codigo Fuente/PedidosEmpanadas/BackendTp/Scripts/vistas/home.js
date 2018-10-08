@@ -63,7 +63,7 @@ function registroError(mensaje, params) {
 }
 
 function loginOk() {
-    window.location.href = window.pathPedidos;
+    window.location.href = window.pathListaPedidos;
 
 }
 function loginError(data) {

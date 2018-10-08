@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BackendTp.Models.GustoEmpanada>
+
+@{
+    ViewBag.Title = "Elegir";
+    Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+}
+
+<h2>Elegir</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th class="th-check-column text-default-grid vertical-middle centrar">
+            <div class="check-column">
+                <input type="checkbox" id="selectAll">
+                <label for="selectAll"></label>
+            </div>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        
+        <td class="th-check-column text-default-grid vertical-middle centrar">
+            <div class="check-column">
+                <input type="checkbox" class="checkbox" value="@item.IdGustoEmpanada" id="checkbox @item.IdGustoEmpanada">
+                <label for="checkbox @item.IdGustoEmpanada"></label>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script src="@Url.Content("~/Scripts/vistas/pedidosElegir.js")"></script>
