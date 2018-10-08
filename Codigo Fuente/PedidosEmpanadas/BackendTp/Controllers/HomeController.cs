@@ -29,7 +29,7 @@ namespace BackendTp.Controllers
 
         public JsonResult Login(Usuario usuario)
         {
-            Sesion.Usuario = ServicioUsuario.Login(usuario);
+            Sesion.IdUsuario = ServicioUsuario.Login(usuario);
             return Json("");
         }
 

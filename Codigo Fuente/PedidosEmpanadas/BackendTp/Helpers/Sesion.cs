@@ -10,9 +10,19 @@ namespace BackendTp.Helpers
     public class Sesion
     {
 
-        public static Usuario Usuario
+        public static int? IdUsuario
         {
-            get => HttpContext.Current.Session["Usuario"] as Usuario;
+            get
+            {
+                if (HttpContext.Current.Session["Usuario"] != null)
+                {
+                    return Convert.ToInt32(HttpContext.Current.Session["Usuario"]);
+                }
+                else
+                {
+                    return null;
+                }
+            }
             set => HttpContext.Current.Session["Usuario"] = value;
         }
     }

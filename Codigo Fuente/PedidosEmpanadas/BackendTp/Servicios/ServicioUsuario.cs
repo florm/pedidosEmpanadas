@@ -17,12 +17,12 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
         }
 
-        public Usuario Login(Usuario usuario)
+        public int Login(Usuario usuario)
         {
             var user = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email && u.Password == usuario.Password);
-            if(user == null)
+            if (user == null)
                 throw new UsuarioInvalidoException();
-            return user;
+            return user.IdUsuario;
         }
 
         
