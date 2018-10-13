@@ -18,6 +18,10 @@ namespace BackendTp
             {
                filterContext.Result = AjaxException(filterContext.Exception.Message, filterContext);
             }
+            else
+            {
+                filterContext.Result = new RedirectResult("/");
+            }
         }
 
         private JsonResult AjaxException(string message, ExceptionContext filterContext)

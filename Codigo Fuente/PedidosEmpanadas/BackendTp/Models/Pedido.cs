@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace BackendTp.Models
 {
     using System;
@@ -21,10 +23,14 @@ namespace BackendTp.Models
             this.InvitacionPedidoGustoEmpanadaUsuario = new HashSet<InvitacionPedidoGustoEmpanadaUsuario>();
             this.GustoEmpanada = new HashSet<GustoEmpanada>();
         }
-    
+
         public int IdPedido { get; set; }
         public int IdUsuarioResponsable { get; set; }
+
+        [Required]
+        [StringLength(200, ErrorMessage = "El nombre del negocio no puede superar los 200 caracteres")]
         public string NombreNegocio { get; set; }
+
         public string Descripcion { get; set; }
         public int IdEstadoPedido { get; set; }
         public int PrecioUnidad { get; set; }

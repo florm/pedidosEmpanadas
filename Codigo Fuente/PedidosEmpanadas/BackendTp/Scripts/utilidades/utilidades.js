@@ -17,7 +17,6 @@ function mostrarAlerta(msg, tipoAlerta, hacerFadeOut) {
     var type;
 
     var alertaCustom = "alertacustom" + createGuid();
-    var alerta = "<div id='" + alertaCustom + "' class='alert " + type + " alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='false'>&times;</span></button>" + msg + "</div>";
     var alerta = $("<div>");
     alerta.attr("id", alertaCustom);
     var imgIcon = $("<img>");
