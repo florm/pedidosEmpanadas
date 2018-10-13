@@ -15,19 +15,25 @@ namespace BackendTp.Controllers
 
         public ActionResult Iniciar()
         {
-            ViewBag.Gustos = _servicioGustoEmpanada.GetAll();
-            return View();
+            PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
+            var gustos = _servicioGustoEmpanada.GetAll();
+            foreach(var gusto in gustos)
+            {
+                pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
+
+            }
+            //ViewBag.Gustos = _servicioGustoEmpanada.GetAll();
+            return View(pgeVm);
         }
 
-        public ActionResult Crear(Pedido pedido)
+        public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
-            if (ModelState.IsValid)
-            {
-                var pedidoNuevo = _servicioPedido.Crear(pedido);
-                return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
-            }
+             var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas.Pedido);
+             
+             return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
+            
 
-            return View("Iniciar", pedido);
+            //return View("Iniciar", pedidoGustosEmpanadas);
         }
 
         [HttpGet]

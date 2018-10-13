@@ -39,7 +39,7 @@ namespace BackendTp
 
         public void ValidarUsuarioLogueado()
         {
-            if(Sesion.IdUsuario == null)
+            if(Sesion.IdUsuario == 0)
                 throw new UsuarioDeslogueadoException();
         }
 

@@ -1,4 +1,8 @@
-﻿.div-contenedor-alertas {
+﻿@font-face {
+    font-family: FontAwesome;
+    src: url(fonts/fontawesome-webfont.woff);
+}
+.div-contenedor-alertas {
     position: absolute;
     z-index: 999999;
     display: block;
@@ -249,8 +253,9 @@ tbody {
         content: "";
         display: inline-block;
         position: absolute;
-        width: 14px;
-        height: 14px;
+        top: 3px;
+        width: 16px;
+        height: 15px;
         top: 3px;
         border: 1px solid #cccccc;
         border-radius: 2px;
@@ -264,20 +269,29 @@ tbody {
     .check-column label::after {
         display: inline-block;
         position: absolute;
-        width: 14px;
-        height: 14px;
+        top: 2px;
+        width: 16px;
+        height: 17px;
         font-size: 11px;
-        color: #555555;
+        color: #ffffff;
         cursor: pointer;
+        background-color: blue;
+        border-radius: 2px;
     }
 
 .check-column input[type="checkbox"] {
     opacity: 0;
 }
 
+    .check-column input[type="checkbox"]:checked + input[type="hidden"] + label::after {
+        font-family: 'FontAwesome';
+        content: "\f00c";
+        background-color: #454496;
+    }
     .check-column input[type="checkbox"]:checked + label::after {
         font-family: 'FontAwesome';
         content: "\f00c";
+        background-color: #454496;
     }
 
 .dropdown-content-cols-list {

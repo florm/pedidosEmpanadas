@@ -148,9 +148,12 @@
     <Content Include="Content\bootstrap\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\listapedido.css" />
     <Content Include="Content\pedido.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\portada.jpg" />
     <Content Include="Models\TpModel.Context.tt">
@@ -177,6 +180,11 @@
     <Content Include="Content\bootstrap\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap\bootstrap-grid.css.map" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.min.js" />
@@ -220,6 +228,8 @@
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GustosEmpanadasViewModel.cs" />
+    <Compile Include="Models\PedidoGustosEmpanadasViewModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>

@@ -11,13 +11,7 @@ namespace BackendTp.Models
 {
     using System;
     using System.Collections.Generic;
-
-    public enum EstadosPedido
-    {
-        Abierto = 1,
-        Cerrado = 2
-    }
-
+    
     public partial class EstadoPedido
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
