@@ -18,6 +18,11 @@ namespace BackendTp.Servicios
             return Db.Pedido.ToList();
         }
 
+        public Pedido GetById(int id)
+        {
+            return Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
+        }
+
         public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
         {
             var pedido = pge.Pedido;

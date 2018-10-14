@@ -19,12 +19,11 @@ namespace BackendTp.Controllers
         {
             PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
             var gustos = _servicioGustoEmpanada.GetAll();
-            foreach(var gusto in gustos)
+            foreach (var gusto in gustos)
             {
                 pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
 
             }
-            //ViewBag.Gustos = _servicioGustoEmpanada.GetAll();
             return View(pgeVm);
         }
 
@@ -57,6 +56,16 @@ namespace BackendTp.Controllers
         {
             var pedidos = _servicioPedido.GetAll();
             return View(pedidos);
+        }
+
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            var pedido = _servicioPedido.GetById(id);
+            var gustosModel = _servicioGustoEmpanada.GetAll();
+            var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), gustosModel);
+            
+            return View("Iniciar", pgeVM);
         }
     }
 }
