@@ -3,7 +3,10 @@
     ViewBag.Title = "Iniciado";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
 }
+@section HeadSection{
 
-<h2>Pedido Iniciado Correctamente</h2>
-@Url.Action("Editar","Pedido")
+    <link href="~/Content/pedidoIniciado.css" rel="stylesheet" />
+}
+<h2 class="text-center p-3">Pedido Iniciado Correctamente</h2>
+@Url.Action("Editar", "Pedido")
 

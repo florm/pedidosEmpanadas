@@ -12,6 +12,8 @@ namespace BackendTp.Controllers
     {
         private readonly ServicioPedido _servicioPedido = new ServicioPedido();
         private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
+
 
         public ActionResult Iniciar()
         {
@@ -26,14 +28,18 @@ namespace BackendTp.Controllers
             return View(pgeVm);
         }
 
-        public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
+        public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas, FormCollection invitados)
         {
-             var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas.Pedido);
-             
-             return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
-            
+            if (ModelState.IsValid)
+            {
+                var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
+                _servicioInvitacionPedido.Crear(pedidoNuevo, Request.Form.GetValues("invitados"));
+                return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
-            //return View("Iniciar", pedidoGustosEmpanadas);
+            }
+
+
+            return View("Iniciar", pedidoGustosEmpanadas);
         }
 
         [HttpGet]
