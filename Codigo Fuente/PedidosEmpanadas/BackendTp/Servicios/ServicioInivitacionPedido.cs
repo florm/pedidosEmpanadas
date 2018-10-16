@@ -42,6 +42,13 @@ namespace BackendTp.Servicios
 
             return idUsuarios;
         }
-        
+
+        public List<Usuario> GetByIdPedido(Pedido pedido)
+        {
+            return Db.InvitacionPedido.Where(ip => ip.IdPedido == pedido.IdPedido)
+                .Select(ip=>ip.Usuario).ToList();
+        }
+
+
     }
 }

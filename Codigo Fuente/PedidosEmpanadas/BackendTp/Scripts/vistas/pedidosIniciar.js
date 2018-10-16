@@ -1,6 +1,7 @@
 ﻿var selectAll = $("#selectAll");
 var textValidacionGustos = $("#textValidacionGustos");
 var btnIniciar = $("#btnIniciar");
+var btnEditar = $("#btnEditar");
 var btnDuplicar = $("#btnDuplicar");
 var inputInvitado = $("#inputInvitado");
 var divInvitado = $("#divInvitado");
@@ -42,10 +43,16 @@ function validarSeleccionDeGustos(checkboxes) {
         return true;
 }
 
+var numeroArray = 1
 btnDuplicar.click(function () {
     var modeloInput = inputInvitado.clone();
     modeloInput.removeAttr('hidden');
     modeloInput.removeAttr('id');
+    modeloInput.children().attr('name', 'Invitados[' + numeroArray + '].Email');
+    modeloInput.children().attr('id', 'Invitados_' + numeroArray + '__Email');
+    numeroArray++;
     divInvitado.append(modeloInput);
 
 });
+
+

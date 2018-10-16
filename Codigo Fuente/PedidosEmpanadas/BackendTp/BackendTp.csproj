@@ -157,6 +157,13 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\portada.jpg" />
+    <Content Include="lib\bootstrap-tagsinput\tagsinput.css" />
+    <Content Include="lib\bootstrap-tagsinput\tagsinput.js" />
+    <Content Include="lib\bootstrap-tagsinput\typeahead.bundle.js" />
+    <Content Include="lib\fast-select\fastselect.min.css" />
+    <Content Include="lib\fast-select\fastselect.min.js" />
+    <Content Include="lib\fast-select\fastselect.standalone.js" />
+    <Content Include="lib\fast-select\fastselect.standalone.min.js" />
     <Content Include="Models\TpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TpModel.Context.cs</LastGenOutput>
@@ -186,6 +193,9 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="lib\bootstrap-tagsinput\LICENSE" />
+    <Content Include="lib\bootstrap-tagsinput\package.json" />
+    <Content Include="lib\bootstrap-tagsinput\README.md" />
     <None Include="Scripts\jquery\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.min.js" />
@@ -288,6 +298,7 @@
     <Content Include="Views\Pedido\Iniciar.cshtml" />
     <Content Include="Views\Pedido\Lista.cshtml" />
     <Content Include="Views\Pedido\Iniciado.cshtml" />
+    <Content Include="Views\Shared\Usuario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,10 +4,9 @@
 @{
     ViewBag.Title = "Iniciar";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
-    List<GustoEmpanada> gustos = ViewBag.Gustos as List<GustoEmpanada>;
 
 }
-@section HeadSection{
+@section PaginaHeader{
 
     <link href="~/Content/pedidoIniciar.css" rel="stylesheet" />
 }
@@ -26,7 +25,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*@Html.EditorFor(model => model.Pedido.IdPedido, new { htmlAttributes = new { @class = "form-control" } })*@
-            
+
             <div class="form-group w-100">
                 @Html.LabelFor(model => model.Pedido.NombreNegocio, htmlAttributes: new { @class = "control-label col" }, labelText: "Nombre del Negocio")
                 <div class="col-md-10">
@@ -82,11 +81,8 @@
                         <td>
                             <p> @Model.GustosDisponibles[i].Nombre </p>
                         </td>
-                        @*TODO modificar los checkbox porque no los esta bindeando*@
                         <td class="th-check-column text-default-grid vertical-middle centrar">
                             <div class="check-column">
-                                @*<input type="checkbox" class="checkbox" value="@item.IdGustoEmpanada" name="gustosDisponibles" id="checkbox @item.IdGustoEmpanada">
-                            <label for="checkbox @item.IdGustoEmpanada"></label>*@
                                 @Html.HiddenFor(p => p.GustosDisponibles[i].Id)
                                 @Html.HiddenFor(p => p.GustosDisponibles[i].Nombre)
                                 @Html.CheckBoxFor(p => p.GustosDisponibles[i].IsSelected)
@@ -97,7 +93,6 @@
                     </tr>
 
                 }
-                @Html.ValidationMessageFor(model => model.GustosDisponibles, "", new { @class = "text-danger" })
             </table>
 
         </div>
@@ -105,13 +100,38 @@
             <h4 class="pasos">3. Ingrese email de los invitados</h4>
             <hr />
             <a id="btnDuplicar" class="btn btn-aceptar">Agregar invitados</a>
-            <div id="inputInvitado" class="form-group w-100" hidden>
-                <input class="form-control" name="invitados" type="text" value="" placeholder="ejempl@email.com" />
-            </div>
+
+            @if (!ViewBag.iniciar)
+            {
+                for (int i = 0; i < Model.Invitados.Count; i++)
+                {
+                    <div id="inputInvitado" class="form-group w-100">
+                        @Html.EditorFor(invitado => invitado.Invitados[i].Email, new { @class = "form-control" })
+                    </div>
+                }
+
+            }
+
+            else
+            {
+                <div id="inputInvitado" class="form-group w-100 m-2" hidden>
+                    <input id ="Invitados_0__Email" class="form-control" name="Invitados[0].Email" type="text" value="" placeholder="ejempl@email.com" />
+                </div>
+                @*<div id="inputInvitado" class="form-group w-100">
+                    @Html.EditorFor(invitado => invitado.Invitados, new { @class = "form-control" })
+                </div>*@
+            }
         </div>
         <div class="d-flex justify-content-end w-75 m-5">
             <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-3" />
-            <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
+            @if (ViewBag.iniciar)
+            {
+                <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
+            }
+            else
+            {
+                <input type="submit" value="Editar" id="btnEditar" class="btn btn-aceptar" />
+            }
         </div>
     </div>
 }

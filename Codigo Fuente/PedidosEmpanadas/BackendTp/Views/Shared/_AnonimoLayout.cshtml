@@ -2,11 +2,14 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
-<script>
-    var pathRegistro = '@Url.Action("Registro", "Home")';
-    var pathLogin = '@Url.Action("Login", "Home")';
-    var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
-</script>
+@section HeadSection{
+    
+    <script>
+        var pathRegistro = '@Url.Action("Registro", "Home")';
+        var pathLogin = '@Url.Action("Login", "Home")';
+        var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
+    </script>
+}
 
 <div id="contenedorAlertas" class="div-contenedor-alertas"></div>
 <nav class="navbar navbar-expand-lg navbar-light menu">
