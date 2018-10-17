@@ -32,8 +32,7 @@ namespace BackendTp.Controllers
         {
             if (ModelState.IsValid)
             {
-                //cambiar el collection por los usuatios del view model.
-                //ver como hacer con usuarios que no figuran en los registrados
+                //cambiar el collection por los usuarios del view model.
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
                 _servicioInvitacionPedido.Crear(pedidoNuevo, Request.Form.GetValues("invitados"));
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });

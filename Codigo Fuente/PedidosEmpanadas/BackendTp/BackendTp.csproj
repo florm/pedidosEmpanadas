@@ -156,7 +156,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\favicon.ico" />
     <Content Include="img\portada.jpg" />
+    <Content Include="lib\bootstrap-select\bootstrap-select.js" />
+    <Content Include="lib\bootstrap-select\bootstrap-select.min.css" />
+    <Content Include="lib\bootstrap-tagsinput\index.html" />
     <Content Include="lib\bootstrap-tagsinput\tagsinput.css" />
     <Content Include="lib\bootstrap-tagsinput\tagsinput.js" />
     <Content Include="lib\bootstrap-tagsinput\typeahead.bundle.js" />
@@ -231,6 +235,7 @@
     <Compile Include="Models\GustoEmpanada.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\InvitacionPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
