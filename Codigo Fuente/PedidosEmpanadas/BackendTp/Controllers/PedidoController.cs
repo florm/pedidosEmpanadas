@@ -19,12 +19,12 @@ namespace BackendTp.Controllers
         {
             PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
             var gustos = _servicioGustoEmpanada.GetAll();
-            foreach(var gusto in gustos)
+            foreach (var gusto in gustos)
             {
                 pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
 
             }
-            //ViewBag.Gustos = _servicioGustoEmpanada.GetAll();
+            ViewBag.iniciar = true;
             return View(pgeVm);
         }
 
@@ -32,13 +32,14 @@ namespace BackendTp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //cambiar el collection por los usuarios del view model.
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
                 _servicioInvitacionPedido.Crear(pedidoNuevo, Request.Form.GetValues("invitados"));
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
             }
 
-
+            ViewBag.iniciar = true;
             return View("Iniciar", pedidoGustosEmpanadas);
         }
 
@@ -57,6 +58,18 @@ namespace BackendTp.Controllers
         {
             var pedidos = _servicioPedido.GetAll();
             return View(pedidos);
+        }
+
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            var pedido = _servicioPedido.GetById(id);
+            var gustosModel = _servicioGustoEmpanada.GetAll();
+            var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido);
+            var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
+                gustosModel, invitados);
+            ViewBag.iniciar = false;
+            return View("Iniciar", pgeVM);
         }
     }
 }

@@ -1,0 +1,7 @@
+﻿@model List<BackendTp.Models.Usuario>
+@foreach (var usuario in Model)
+{
+    <label>Hola</label>
+    @Html.TextBoxFor(m => usuario.Email)
+}
+

@@ -18,19 +18,24 @@ namespace BackendTp.Servicios
             return Db.Pedido.ToList();
         }
 
+        public Pedido GetById(int id)
+        {
+            return Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
+        }
+
         public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
         {
             var pedido = pge.Pedido;
             pedido.FechaCreacion = DateTime.Now;
             pedido.IdUsuarioResponsable = Sesion.IdUsuario;
             pedido.IdEstadoPedido = (int)EstadosPedido.Abierto;
-            List<GustoEmpanada> gustos = new List<GustoEmpanada>();
+            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
             foreach (var gusto in pge.GustosDisponibles)
             {
                 if (gusto.IsSelected)
-                    gustos.Add(Db.GustoEmpanada.FirstOrDefault(ge => ge.IdGustoEmpanada == gusto.Id));
+                    gustosSeleccionados.Add(Db.GustoEmpanada.FirstOrDefault(ge => ge.IdGustoEmpanada == gusto.Id));
             }
-            gustos.ForEach(gusto => pedido.GustoEmpanada.Add(gusto));
+            gustosSeleccionados.ForEach(gusto => pedido.GustoEmpanada.Add(gusto));
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
             return pedido;

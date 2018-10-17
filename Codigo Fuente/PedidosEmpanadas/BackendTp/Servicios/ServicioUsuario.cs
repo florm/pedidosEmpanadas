@@ -25,6 +25,10 @@ namespace BackendTp.Servicios
             return user;
         }
 
+        public List<Usuario> GetAll(string email)
+        {
+            return Db.Usuario.Where(u=> String.IsNullOrEmpty(email) || u.Email.Contains(email)).ToList();
+        }
         
     }
 }

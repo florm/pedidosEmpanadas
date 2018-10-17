@@ -2,10 +2,13 @@
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
-@section StylesBase{
-
-    @RenderSection("Styles", required: false)
-
+@section HeadSection{
+    
+    <script>
+        var pathRegistro = '@Url.Action("Registro", "Home")';
+        var pathLogin = '@Url.Action("Login", "Home")';
+        var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
+    </script>
 }
 
 <div id="contenedorAlertas" class="div-contenedor-alertas"></div>
@@ -123,15 +126,3 @@
         </div>
     </div>
 </div>
-
-@section ScriptsBase{
-
-    <script>
-    var pathRegistro = '@Url.Action("Registro", "Home")';
-    var pathLogin = '@Url.Action("Login", "Home")';
-    var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
-    </script>
-
-    @RenderSection("Scripts", required: false)
-
-}
