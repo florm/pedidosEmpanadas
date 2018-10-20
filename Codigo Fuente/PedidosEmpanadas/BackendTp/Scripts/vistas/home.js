@@ -87,3 +87,46 @@ function validarTextRepetir() {
     }
     return validarCampoObligatorio(textRepetirPassword);
 }
+
+
+
+$("#testbtn").click(function () {
+    probandoajax();
+
+});
+
+
+
+
+function probandoajax() {
+
+    //var invocation = new XMLHttpRequest();
+    //var url = 'http://localhost:56230/Api/Pedidos';
+
+    //callOtherDomain();
+
+    //function callOtherDomain() {
+    //    if (invocation) {
+    //        invocation.open('POST', url, true);
+    //        invocation.onreadystatechange = handler;
+    //        invocation.send();
+    //    }
+    //}
+
+    var pedidoRequest = new Object();
+    pedidoRequest.IdUsuario = 5;
+    pedidoRequest.Token = "Ale";
+    llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
+    //llamadaAjax("http://localhost:56230/Api/Pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
+
+    //$.ajax({
+    //    url: 'http://localhost:56230/Api/Pedidos',
+    //    type: 'POST',
+    //    data: JSON.stringify(pedidoRequest),
+    //    contentType: "application/json;charset=utf-8",
+    //    success: function (data) {
+    //        alert("hola");
+    //    }
+    //});
+
+}
