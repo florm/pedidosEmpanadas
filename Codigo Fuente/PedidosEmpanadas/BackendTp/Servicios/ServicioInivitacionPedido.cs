@@ -11,7 +11,7 @@ namespace BackendTp.Servicios
     public class ServicioInvitacionPedido: Servicio
     {
         
-        public void Crear(Pedido pedido, string[] invitados)
+        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados)
         {
             var idUsuarios = GetInvitados(invitados);
             foreach(var id in idUsuarios)
@@ -29,13 +29,13 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
         }
 
-        private List<int> GetInvitados (string[] invitados)
+        private List<int> GetInvitados (List<UsuarioViewModel> invitados)
         {
             List<int> idUsuarios = new List<int>();
             foreach(var invitado in invitados)
             {
                 var usuario = Db.Usuario.FirstOrDefault(u => 
-                string.Equals(u.Email, invitado.Trim()));
+                string.Equals(u.Email, invitado.Email));
                 if(usuario != null)
                     idUsuarios.Add(usuario.IdUsuario);
             }
@@ -43,10 +43,10 @@ namespace BackendTp.Servicios
             return idUsuarios;
         }
 
-        public List<Usuario> GetByIdPedido(Pedido pedido)
+        public List<UsuarioViewModel> GetByIdPedido(Pedido pedido)
         {
             return Db.InvitacionPedido.Where(ip => ip.IdPedido == pedido.IdPedido)
-                .Select(ip=>ip.Usuario).ToList();
+                .Select(ip=>new UsuarioViewModel{Id = ip.Usuario.IdUsuario, Email = ip.Usuario.Email}).ToList();
         }
 
         public InvitacionPedido GetInvitacionPedidoPorPedido(int id, int idUsuario)

@@ -12,17 +12,17 @@ namespace BackendTp.Models
         public Pedido Pedido { get; set; }
         public List<GustosEmpanadasViewModel> GustosDisponibles{ get; set; }
         
-        public List<Usuario> Invitados { get; set; }
+        public List<UsuarioViewModel> Invitados { get; set; }
 
         public PedidoGustosEmpanadasViewModel()
         {
             GustosDisponibles = new List<GustosEmpanadasViewModel>();
-            Invitados = new List<Usuario>();
+            Invitados = new List<UsuarioViewModel>();
             
         }
 
         public PedidoGustosEmpanadasViewModel(Pedido pedido, List<GustoEmpanada> gustosPedido, 
-            List<GustoEmpanada> gustosModel, List<Usuario> invitados)
+            List<GustoEmpanada> gustosModel, List<UsuarioViewModel> invitados)
         {
             Pedido = pedido;
             GustosDisponibles = new List<GustosEmpanadasViewModel>();

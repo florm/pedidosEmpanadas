@@ -7,6 +7,7 @@ var inputInvitados = $("#inputInvitados");
 var divInvitado = $("#divInvitado");
 
 inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
+var inv = divInvitado.find("input");
 
 selectAll.click(function() {
     seleccionarTodos(this);
@@ -48,15 +49,14 @@ function validarSeleccionDeGustos(checkboxes) {
 var numeroArray = 0;
 function armarInvitados(input) {
     $.each(input.tagsinput("items"), function (i, item) {
-        var input = $("<input>");
-        input.attr('name', 'Invitados[' + numeroArray + '].Email');
-        input.attr('id', 'Invitados_' + numeroArray + '__Email');
-        
-        input.val(item.Email);
-        divInvitado.append(input).prop("hidden","true");
+        var nuevoInput = $("<input>");
+        nuevoInput.attr('name', 'Invitados[' + numeroArray + '].Email');
+        nuevoInput.attr('id', 'Invitados_' + numeroArray + '__Email');
+        nuevoInput.addClass("d-none");
+        nuevoInput.val(item.Email);
+        divInvitado.append(nuevoInput);
     numeroArray++;
     });
-    //divInvitado.append(modeloInput);
 
 }
 
@@ -91,4 +91,5 @@ function inicializaSelectTags(url, select, name) {
     select.tagsinput("input").attr("maxlength", 255).addClass("w-100");
     
 }
+
 

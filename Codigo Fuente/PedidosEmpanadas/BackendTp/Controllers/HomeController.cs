@@ -11,7 +11,7 @@ namespace BackendTp.Controllers
 {
     public class HomeController : Controller
     {
-        ServicioUsuario ServicioUsuario = new ServicioUsuario();
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
         
         // GET: Home
         public ActionResult Index()
@@ -22,14 +22,14 @@ namespace BackendTp.Controllers
 
         public JsonResult Registro(Usuario usuario)
         {
-            ServicioUsuario.CrearUsuario(usuario);
+            _servicioUsuario.CrearUsuario(usuario);
             return Json("");
         }
 
 
         public JsonResult LoginOk(Usuario usuario)
         {
-            var usuarioLogueado = ServicioUsuario.Login(usuario);
+            var usuarioLogueado = _servicioUsuario.Login(usuario);
             Sesion.IdUsuario = usuarioLogueado.IdUsuario;
             Sesion.EmailUsuario = usuarioLogueado.Email;
             return Json("");
