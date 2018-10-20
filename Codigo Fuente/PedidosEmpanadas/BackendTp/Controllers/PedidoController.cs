@@ -82,7 +82,7 @@ namespace BackendTp.Controllers
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
             var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
-            return View();
+            return View(invitacionPedido);
         }
     }
 }

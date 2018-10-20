@@ -1,0 +1,29 @@
+﻿@using BackendTp.Models
+@model BackendTp.Models.InvitacionPedido
+
+@{
+    ViewBag.Title = "ElegirGustos";
+    Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+}
+
+<h2>ElegirGustos</h2>
+
+Negocio: @Model.Pedido.NombreNegocio<br />
+Descripcion: @Model.Pedido.Descripcion<br />
+PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
+PrecioDocena: @Model.Pedido.PrecioDocena<br />
+
+@*@Model.Pedido.GustoEmpanada*@
+
+<table>
+    <tr>
+        <td>Nombre</td>
+    </tr>
+    @foreach(GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+    {
+        <tr>
+            <td>@g.Nombre</td>
+        </tr>
+    }
+
+</table>
