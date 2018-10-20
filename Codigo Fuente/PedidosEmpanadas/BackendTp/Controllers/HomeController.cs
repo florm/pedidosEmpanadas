@@ -27,12 +27,17 @@ namespace BackendTp.Controllers
         }
 
 
-        public JsonResult Login(Usuario usuario)
+        public JsonResult LoginOk(Usuario usuario)
         {
             var usuarioLogueado = _servicioUsuario.Login(usuario);
             Sesion.IdUsuario = usuarioLogueado.IdUsuario;
             Sesion.EmailUsuario = usuarioLogueado.Email;
             return Json("");
+        }
+
+        public ActionResult Login()
+        {
+            return View();
         }
 
         public ActionResult LogOut()
