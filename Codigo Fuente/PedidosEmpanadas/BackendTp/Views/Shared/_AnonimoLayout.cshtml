@@ -38,7 +38,7 @@
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#registro">Registrate</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#login">Iniciar Sesión</a>
+                <a class="nav-link" href="@Url.Action("Login", "Home")">Iniciar Sesión</a>
             </li>
         </ul>
     </div>
@@ -93,7 +93,7 @@
         </div>
     </div>
 </div>
-<div class="modal" id="login">
+@*<div class="modal" id="login">
     <div class="modal-dialog">
         <div class="modal-content custom-modal-content">
             <!-- Modal Header -->
@@ -125,4 +125,6 @@
 
         </div>
     </div>
-</div>
+</div>*@
+
+@RenderSection("ScriptsA", false)
