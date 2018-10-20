@@ -305,6 +305,7 @@
     <Content Include="Views\Pedido\Iniciado.cshtml" />
     <Content Include="Views\Shared\Usuario.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Pedido\ElegirGustos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

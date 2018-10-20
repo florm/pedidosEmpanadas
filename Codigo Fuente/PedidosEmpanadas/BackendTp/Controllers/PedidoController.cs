@@ -71,5 +71,12 @@ namespace BackendTp.Controllers
             ViewBag.iniciar = false;
             return View("Iniciar", pgeVM);
         }
+
+        [HttpGet]
+        public ActionResult ElegirGustos(int id)
+        {
+            var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id);
+            return View();
+        }
     }
 }
