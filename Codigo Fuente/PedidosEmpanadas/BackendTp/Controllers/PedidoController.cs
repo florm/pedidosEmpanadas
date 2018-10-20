@@ -28,13 +28,12 @@ namespace BackendTp.Controllers
             return View(pgeVm);
         }
 
-        public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas, FormCollection invitados)
+        public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
             if (ModelState.IsValid)
             {
-                //cambiar el collection por los usuarios del view model.
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Crear(pedidoNuevo, Request.Form.GetValues("invitados"));
+                _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados);
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
             }
