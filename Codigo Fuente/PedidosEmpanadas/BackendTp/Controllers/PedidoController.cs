@@ -72,10 +72,17 @@ namespace BackendTp.Controllers
             return View("Iniciar", pgeVM);
         }
 
+        //[Route("ElegirGustos/{id}")]
+        //public ActionResult ElegirGustos(int id, int usuarioId)
+        //{
+        //    var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id);
+        //    return View();
+        //}
+
         [HttpGet]
-        public ActionResult ElegirGustos(int id)
+        public ActionResult ElegirGustos(int id, int usuarioId)
         {
-            var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id);
+            var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
             return View();
         }
     }

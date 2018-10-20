@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BackendTp.Models.Pedido>
-
+@using BackendTp.Helpers
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
@@ -39,7 +39,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FechaModificacion)
         </th>
-        <th></th>
+        <th>
+            Boton
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -76,6 +78,7 @@
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                @Html.ActionLink("ElegirGusto", "ElegirGustos",  new { Id = item.IdPedido, UsuarioId = Sesion.IdUsuario })
             </td>
         </tr>
     }

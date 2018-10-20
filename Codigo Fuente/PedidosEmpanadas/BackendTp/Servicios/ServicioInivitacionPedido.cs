@@ -49,9 +49,9 @@ namespace BackendTp.Servicios
                 .Select(ip=>ip.Usuario).ToList();
         }
 
-        public InvitacionPedido GetInvitacionPedidoPorPedido(int id)
+        public InvitacionPedido GetInvitacionPedidoPorPedido(int id, int idUsuario)
         {
-            return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id);
+            return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
         }
     }
 }
