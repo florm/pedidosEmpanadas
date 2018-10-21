@@ -51,15 +51,22 @@ namespace BackendTp.Servicios
             return pedido;
         }
 
-        public List<Pedido> Lista(int IdUsuario)
+        public List<Pedido> Lista(int idUsuario)
         {
             List<Pedido> pedidosQuery = new List<Pedido>();
 
+//            pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
+//                            join InvitacionPedido i in Db.InvitacionPedido
+//                            on p.IdPedido equals i.IdPedido
+//                            where i.IdUsuario == IdUsuario
+//                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
+            
             pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
-                            join InvitacionPedido i in Db.InvitacionPedido
-                            on p.IdPedido equals i.IdPedido
-                            where i.IdUsuario == IdUsuario
-                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
+                join InvitacionPedido i in Db.InvitacionPedido
+                    on p.IdPedido equals i.IdPedido
+                where (i.IdUsuario == idUsuario || p.IdUsuarioResponsable == idUsuario)
+                
+                select p).OrderByDescending(p => p.FechaCreacion).Distinct().ToList();
 
             if (pedidosQuery == null)
             {

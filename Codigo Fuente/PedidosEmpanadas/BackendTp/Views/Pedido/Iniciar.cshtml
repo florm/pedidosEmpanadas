@@ -9,12 +9,6 @@
 @section PaginaHeader{
     <link href="@Url.Content("~/lib/bootstrap-tagsinput/tagsinput.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/pedidoIniciar.css")" rel="stylesheet" />
-    <script>
-        var usuarioController = "@Url.Action("Consultar","Usuario")";
-    </script>
-    <script src="@Url.Content("~/lib/bootstrap-tagsinput/typeahead.bundle.js")"></script>
-    <script src="@Url.Content("~/lib/bootstrap-tagsinput/tagsinput.js")"></script>
-    <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidos.js")"></script>
 }
 
 <div class="row m-5">
@@ -42,8 +36,21 @@
         <div class="d-flex justify-content-end w-75 m-5">
             <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-3" />
             <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
-            <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosIniciar.js")"></script>
-
         </div>
     </div>
+}
+
+@section custom_js_libraries
+{
+    <script src="@Url.Content("~/lib/bootstrap-tagsinput/typeahead.bundle.js")"></script>
+    <script src="@Url.Content("~/lib/bootstrap-tagsinput/tagsinput.js")"></script>
+}
+
+@section custom_js_code
+{
+    <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidos.js")"></script>
+    <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosIniciar.js")"></script>
+    <script>
+        var usuarioController = "@Url.Action("Consultar","Usuario")";
+    </script>
 }

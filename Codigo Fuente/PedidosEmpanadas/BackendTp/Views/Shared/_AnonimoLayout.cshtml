@@ -3,25 +3,19 @@
 }
 
 @section HeadSection{
-    
-    <script>
-        var pathRegistro = '@Url.Action("Registro", "Home")';
-        var pathLogin = '@Url.Action("Login", "Home")';
-        var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
-    </script>
 }
 
-<div id="contenedorAlertas" class="div-contenedor-alertas"></div>
-<nav class="navbar navbar-expand-lg navbar-light menu">
-    <a class="navbar-brand" href="@Url.Action("Home","Index")">ArmaTuPedido!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+@section Navbar{
+    <nav class="navbar navbar-expand-lg navbar-light menu">
+        <a class="navbar-brand" href="@Url.Action("Home", "Index")">ArmaTuPedido!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            @*ejemplo de dropdown*@
-            @*<li class="nav-item dropdown">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @*ejemplo de dropdown*@
+                @*<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown
                 </a>
@@ -32,26 +26,18 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>*@
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#registro">Registrate</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Login", "Home")">Iniciar Sesión</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#registro">Registrate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Login", "Home")">Iniciar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+}
 
 @RenderBody()
-
-<div class="row">
-    <footer class="footer">
-        <div class="container d-flex justify-content-center">
-            <span class="text-muted pr-3"><i class="fas fa-utensils"></i> ArmaTuPedido! </span>
-            <span class="text-muted pr-3">&copy; @DateTime.Now.Year</span>
-        </div>
-    </footer>
-</div>
 
 @*modals*@
 <div class="modal" id="registro">
@@ -62,21 +48,20 @@
                 <h4 class="modal-title">Registro</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="pt-2" style="word-break: break-word;">
+                <div class="pt-2">
                     <div class="form-group col">
                         <label for="textEmail">Email</label>
-                        <input class="form-control col-12" id="textEmail" type="email" name="email" value="" placeholder="Ingrese su email" />
+                        <input class="form-control col-12" id="textEmail" type="email" name="email" value="" placeholder="Ingrese su email"/>
                     </div>
                     <div class="form-group col">
                         <label for="textPassword">Contraseña</label>
-                        <input class="form-control col-12" id="textPassword" type="password" name="password" value="" placeholder="Ingrese una contraseña" />
+                        <input class="form-control col-12" id="textPassword" type="password" name="password" value="" placeholder="Ingrese una contraseña"/>
                     </div>
                     <div class="form-group col">
                         <label for="textRepetirPassword">Repetir contraseña</label>
-                        <input class="form-control col-12" id="textRepetirPassword" type="password" name="password" value="" placeholder="Repita la contraseña" />
+                        <input class="form-control col-12" id="textRepetirPassword" type="password" name="password" value="" placeholder="Repita la contraseña"/>
                     </div>
 
                 </div>
@@ -124,5 +109,11 @@
         </div>
     </div>
 </div>*@
-
-@RenderSection("ScriptsA", false)
+@section custom_js_code{
+    <script>
+        var pathRegistro = '@Url.Action("Registro", "Home")';
+        var pathLogin = '@Url.Action("Login", "Home")';
+        var pathListaPedidos = '@Url.Action("Lista", "Pedido")';
+    </script>
+    @RenderSection("custom_js_code", false)
+}
