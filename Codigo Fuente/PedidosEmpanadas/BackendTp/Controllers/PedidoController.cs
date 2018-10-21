@@ -94,5 +94,10 @@ namespace BackendTp.Controllers
             return View(pedidos.ToPagedList(pag ?? 1, 4));
         }
 
+        public ActionResult Detalle(int id)
+        {
+            Pedido pedido = _servicioPedido.GetById(id);
+            return View(pedido);
+        }
     }
 }

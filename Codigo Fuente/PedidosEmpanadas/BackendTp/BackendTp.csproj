@@ -328,6 +328,8 @@
     <Content Include="Views\Shared\Usuario.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Pedido\ElegirGustos.cshtml" />
+    <Content Include="Views\Pedido\Detalle.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -29,60 +29,63 @@
 else
 {
     <table class="table">
-        <tr>
-            <th>
-                Fecha de Inicio
-            </th>
-            <th>
-                Nombre del negocio
-            </th>
-            <th>
-                Estado del Pedido
-            </th>
-            <th>
-                Rol
-            </th>
-            <th>Acciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreNegocio)
-                </td>
-                <td>
-                    <p>@item.EstadoPedido.Nombre</p>
-                </td>
-                <td>
-                    @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
-                    {
-                        <p>Responsable</p>
-                    }
-                    else
-                    {
-                        <p>Invitado</p>
-                    }
-                </td>
-                <td>
-                    @if (item.EstadoPedido.Nombre == "Abierto")
-                    {
-                        @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id=item.IdPedido, usuarioId=Sesion.IdUsuario })<br />
-                        if (item.IdUsuarioResponsable == Sesion.IdUsuario)
-                        {
-                            @Html.ActionLink("Editar", "Editar", new {  id=item.IdPedido }) <br />
-                            @Html.ActionLink("Eliminar", "Eliminar", new {  id=item.IdPedido })<br />
-                        }
-                    }
-
-                </td>
+                <th>
+                    Fecha de Inicio
+                </th>
+                <th>
+                    Nombre del negocio
+                </th>
+                <th>
+                    Estado del Pedido
+                </th>
+                <th>
+                    Rol
+                </th>
+                <th>Acciones</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCreacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreNegocio)
+                    </td>
+                    <td>
+                        <p>@item.EstadoPedido.Nombre</p>
+                    </td>
+                    <td>
+                        @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                        {
+                            <p>Responsable</p>
+                        }
+                        else
+                        {
+                            <p>Invitado</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver Detalles", "Detalle", new { id = item.IdPedido }) <br />
+                        @if (item.EstadoPedido.Nombre == "Abierto")
+                        {
+                            @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id = item.IdPedido, usuarioId = Sesion.IdUsuario })<br />
+                            if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                            {
+                                @Html.ActionLink("Editar", "Editar", new { id = item.IdPedido }) <br />
+                                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.IdPedido })<br />
+                            }
+                        }
 
-    </table>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
 
     @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new { pag }))
 

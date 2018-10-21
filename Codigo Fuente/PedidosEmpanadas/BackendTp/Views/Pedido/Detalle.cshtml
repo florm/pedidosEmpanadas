@@ -1,0 +1,90 @@
+﻿@model BackendTp.Models.Pedido
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+}
+<hr />
+<h2>Detalles del Pedido N° @Html.DisplayFor(model => model.IdPedido)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Fecha de Creación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            Usuario Responsable
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Email)
+        </dd>
+
+        <dt>
+            Descripción del Pedido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Estado del Pedido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoPedido.Nombre)
+        </dd>
+
+        <dt>
+            Nombre del Negocio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreNegocio)
+        </dd>
+
+        <dt>
+            Precio por Unidad
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.PrecioUnidad)
+        </dd>
+
+        <dt>
+            Precio por Docena
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.PrecioDocena)
+        </dd>
+
+        <dt>
+            Fecha de Modificación
+        </dt>
+
+        @if (Model.FechaModificacion != null)
+        {
+            <dd>
+                @Html.DisplayFor(model => model.FechaModificacion)
+            </dd>
+        }else
+        {
+            <dd>
+                No se realizaron modificaciones.
+            </dd>
+        }
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver a Mis Pedidos", "Lista")
+</p>

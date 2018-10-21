@@ -20,7 +20,7 @@ namespace BackendTp
             }
             else
             {
-                filterContext.Result = new RedirectResult("/");
+                //filterContext.Result = new RedirectResult("/");
             }
         }
 
