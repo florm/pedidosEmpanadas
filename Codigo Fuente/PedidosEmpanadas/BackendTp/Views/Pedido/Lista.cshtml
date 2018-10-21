@@ -1,86 +1,89 @@
-﻿@model IEnumerable<BackendTp.Models.Pedido>
-@using BackendTp.Helpers
+﻿@using BackendTp.Helpers
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<BackendTp.Models.Pedido>
+
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+
 }
+
 @section PaginaHeader{
 
     <link href="~/Content/listapedido.css" rel="stylesheet" />
 }
-<h2>Lista</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdPedido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdUsuarioResponsable)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreNegocio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdEstadoPedido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecioUnidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrecioDocena)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaModificacion)
-        </th>
-        <th>
-            Boton
-        </th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+
+<h2>Tus Pedidos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Nuevo")
+</p>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No hay registros de pedidos.</p>
+}
+else
+{
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuarioResponsable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreNegocio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdEstadoPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioUnidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioDocena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaModificacion)
-            </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                @Html.ActionLink("ElegirGusto", "ElegirGustos",  new { Id = item.IdPedido, UsuarioId = Sesion.IdUsuario })
-            </td>
+            <th>
+                Fecha de Inicio
+            </th>
+            <th>
+                Nombre del negocio
+            </th>
+            <th>
+                Estado del Pedido
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>Acciones</th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreNegocio)
+                </td>
+                <td>
+                    <p>@item.EstadoPedido.Nombre</p>
+                </td>
+                <td>
+                    @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                    {
+                        <p>Responsable</p>
+                    }
+                    else
+                    {
+                        <p>Invitado</p>
+                    }
+                </td>
+                <td>
+                    @if (item.EstadoPedido.Nombre == "Abierto")
+                    {
+                        @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id=item.IdPedido, usuarioId=Sesion.IdUsuario })<br />
+                        if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                        {
+                            @Html.ActionLink("Editar", "Editar", new {  id=item.IdPedido }) <br />
+                            @Html.ActionLink("Eliminar", "Eliminar", new {  id=item.IdPedido })<br />
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new { pag }))
+
+}

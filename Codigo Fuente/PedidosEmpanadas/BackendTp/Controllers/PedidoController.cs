@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BackendTp.Models;
 using BackendTp.Servicios;
+using BackendTp.Helpers;
+using PagedList;
 
 namespace BackendTp.Controllers
 {
@@ -53,7 +55,7 @@ namespace BackendTp.Controllers
             return View(gustos);
         }
 
-        public ActionResult Lista()
+        public ActionResult ListaPedidosTotal()
         {
             var pedidos = _servicioPedido.GetAll();
             return View(pedidos);
@@ -84,5 +86,13 @@ namespace BackendTp.Controllers
             var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
             return View(invitacionPedido);
         }
+
+        public ActionResult Lista(int? pag)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+            pedidos = _servicioPedido.Lista(Sesion.IdUsuario);
+            return View(pedidos.ToPagedList(pag ?? 1, 4));
+        }
+
     }
 }
