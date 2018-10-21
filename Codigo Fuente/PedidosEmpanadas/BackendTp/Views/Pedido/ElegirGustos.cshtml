@@ -1,5 +1,6 @@
 ﻿@using BackendTp.Models
 @model BackendTp.Models.InvitacionPedido
+@*@model Api.Models.PedidoRequest*@
 
 @{
     ViewBag.Title = "ElegirGustos";
@@ -19,7 +20,7 @@ PrecioDocena: @Model.Pedido.PrecioDocena<br />
     <tr>
         <td>Nombre</td>
     </tr>
-    @foreach(GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
     {
         <tr>
             <td>@g.Nombre</td>
@@ -28,23 +29,45 @@ PrecioDocena: @Model.Pedido.PrecioDocena<br />
 
 </table>
 
+@*<div>
+    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+    {
+       <label for="@g.IdGustoEmpanada">@g.Nombre</label>
+       <input id="@g.IdGustoEmpanada" type="number"/>
+    }
+</div>*@
+
+@*<table>
+    <tr>
+        <td>Nombre</td>
+    </tr>
+    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+    {
+        <tr>
+            <td>@g.Nombre</td>
+        </tr>
+    }
+
+</table>*@
+
+
 <form>
     <input type="text" placeholder="palabra" id="palabraprueba" />
     <input type="text" placeholder="numero" id="numeroprueba" />
-    
+
 </form><br /><br />
-             <button id="testbtn">Lala</button>
+<button id="testbtn">Lala</button>
 <div id="divResult"></div>
 
 @*<script>
-    var pedidoRequest = new Object();
+        var pedidoRequest = new Object();
 
-    function probandoajax() {
+        function probandoajax() {
 
-        pedidoRequest.IdUsuario = 5;
-        pedidoRequest.Token = "Ale";
-        llamadaAjax("http://localhost:56230/Api/Pedidos/ConfirmarGustos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
+            pedidoRequest.IdUsuario = 5;
+            pedidoRequest.Token = "Ale";
+            llamadaAjax("http://localhost:56230/Api/Pedidos/ConfirmarGustos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
 
-    }
+        }
 
-</script>*@
+    </script>*@
