@@ -49,6 +49,9 @@ namespace BackendTp.Servicios
                 .Select(ip=>new UsuarioViewModel{Id = ip.Usuario.IdUsuario, Email = ip.Usuario.Email}).ToList();
         }
 
-
+        public InvitacionPedido GetInvitacionPedidoPorPedido(int id, int idUsuario)
+        {
+            return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
+        }
     }
 }
