@@ -1,14 +1,10 @@
-﻿var selectAll = $("#selectAll");
-var textValidacionGustos = $("#textValidacionGustos");
+﻿var textValidacionGustos = $("#textValidacionGustos");
 var btnIniciar = $("#btnIniciar");
 var inputInvitados = $("#inputInvitados");
 var divInvitado = $("#divInvitado");
 
 
 
-selectAll.click(function() {
-    seleccionarTodos(this);
-});
 
 function seleccionarTodos(source) {
     var checkboxes = $("form input:checkbox");

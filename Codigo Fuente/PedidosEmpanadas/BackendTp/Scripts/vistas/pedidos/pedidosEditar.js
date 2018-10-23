@@ -11,6 +11,9 @@ var inv = divInvitado.find("input");
 var btnEditar = $("#btnEditar");
 agregarTag(inputInvitados, invitadosEditar);
 
+selectAll.click(function () {
+    seleccionarTodos(this);
+});
 
 
 btnEditar.click(function (e) {

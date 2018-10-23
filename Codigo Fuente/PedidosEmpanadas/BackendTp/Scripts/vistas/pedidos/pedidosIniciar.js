@@ -10,6 +10,9 @@ inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
 if(invitadosEditar != null || invitadosEditar != undefined)
     agregarTag(inputInvitados, invitadosEditar);
 
+selectAll.click(function () {
+    seleccionarTodos(this);
+});
 
 btnIniciar.click(function (e) {
     validacionYEnvio(e);
