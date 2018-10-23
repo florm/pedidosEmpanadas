@@ -69,7 +69,7 @@ namespace BackendTp.Controllers
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
                 gustosModel, invitados);
             ViewBag.iniciar = false;
-            return View("Iniciar", pgeVM);
+            return View("Editar", pgeVM);
         }
 
         //[Route("ElegirGustos/{id}")]
@@ -84,6 +84,21 @@ namespace BackendTp.Controllers
         {
             var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
             return View(invitacionPedido);
+        }
+
+        public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
+        {
+            //todo Esto es de crear. Hacer logica para modificacion del pedido
+            //if (ModelState.IsValid)
+            //{
+            //    var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
+            //    _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados);
+            //    return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
+
+            //}
+            pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
+            ViewBag.iniciar = false;
+            return View("Editar", pedidoGustosEmpanadas);
         }
     }
 }
