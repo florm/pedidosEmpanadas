@@ -224,7 +224,9 @@
     <Content Include="Scripts\popper\popper.js" />
     <Content Include="Scripts\popper\popper.min.js" />
     <Content Include="Scripts\utilidades\utilidades.js" />
-    <Content Include="Scripts\vistas\pedidosIniciar.js" />
+    <Content Include="Scripts\vistas\pedidos\pedidos.js" />
+    <Content Include="Scripts\vistas\pedidos\pedidosEditar.js" />
+    <Content Include="Scripts\vistas\pedidos\pedidosIniciar.js" />
     <Content Include="Scripts\vistas\home.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -321,6 +323,8 @@
     <Content Include="Views\Shared\Usuario.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Pedido\ElegirGustos.cshtml" />
+    <Content Include="Views\Pedido\Editar.cshtml" />
+    <Content Include="Views\Pedido\_pedidoFormulario.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

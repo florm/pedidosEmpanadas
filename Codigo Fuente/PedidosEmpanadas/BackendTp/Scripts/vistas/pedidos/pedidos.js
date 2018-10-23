@@ -1,13 +1,10 @@
 ﻿var selectAll = $("#selectAll");
 var textValidacionGustos = $("#textValidacionGustos");
 var btnIniciar = $("#btnIniciar");
-var btnEditar = $("#btnEditar");
-var btnDuplicar = $("#btnDuplicar");
 var inputInvitados = $("#inputInvitados");
 var divInvitado = $("#divInvitado");
 
-inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
-var inv = divInvitado.find("input");
+
 
 selectAll.click(function() {
     seleccionarTodos(this);
@@ -21,7 +18,9 @@ function seleccionarTodos(source) {
 }
 
 
-btnIniciar.click(function (e) {
+
+function validacionYEnvio(e)
+{
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
     armarInvitados(inputInvitados);
@@ -32,8 +31,7 @@ btnIniciar.click(function (e) {
         textValidacionGustos.removeClass("d-none");
         textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
     }
-});
-
+}
 function validarSeleccionDeGustos(checkboxes) {
     var validacion = 0;
     for (var i = 0, n = checkboxes.length; i < n; i++) {
@@ -52,7 +50,7 @@ function armarInvitados(input) {
         var nuevoInput = $("<input>");
         nuevoInput.attr('name', 'Invitados[' + numeroArray + '].Email');
         nuevoInput.attr('id', 'Invitados_' + numeroArray + '__Email');
-        nuevoInput.addClass("d-none");
+        nuevoInput.addClass("d-none invitadosEditar");
         nuevoInput.val(item.Email);
         divInvitado.append(nuevoInput);
     numeroArray++;
@@ -91,5 +89,14 @@ function inicializaSelectTags(url, select, name) {
     select.tagsinput("input").attr("maxlength", 255).addClass("w-100");
     
 }
+
+function agregarTag(select, array) {
+    $.each(array,
+        function (i, item) {
+            select.tagsinput("add", { Id: item.id, Email: item.defaultValue });
+        });
+}
+
+
 
 

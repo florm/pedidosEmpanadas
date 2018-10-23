@@ -13,6 +13,7 @@ namespace BackendTp.Controllers
         private readonly ServicioPedido _servicioPedido = new ServicioPedido();
         private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
         private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
 
 
         public ActionResult Iniciar()
@@ -37,8 +38,8 @@ namespace BackendTp.Controllers
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
             }
-
-            ViewBag.iniciar = true;
+            pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
+            ViewBag.iniciar = false;
             return View("Iniciar", pedidoGustosEmpanadas);
         }
 
