@@ -9,6 +9,7 @@ namespace Api.Models
     {
         public List<GustoEmpanadasCantidad> GustoEmpanadasCantidad { get; set; }
         public int IdUsuario { get; set; }
+        public int IdPedido { get; set; }
         public string Token { get; set; }
     }
 }

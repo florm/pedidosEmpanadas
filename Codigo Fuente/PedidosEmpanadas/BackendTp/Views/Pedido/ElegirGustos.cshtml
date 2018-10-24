@@ -1,5 +1,6 @@
-﻿@model BackendTp.Models.PedidoGustosEmpanadasViewModel
+﻿@model BackendTp.Models.GustosPedidoUsuarioViewModel
 @using BackendTp.Models
+@using BackendTp.Helpers
 @{
     ViewBag.Title = "ElegirGustos";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
@@ -12,40 +13,17 @@ Descripcion: @Model.Pedido.Descripcion<br />
 PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
 PrecioDocena: @Model.Pedido.PrecioDocena<br />
 
-@*@foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
-    {
-        <input type="text" value="@g.Nombre" />
-    }*@
-
 @if (ViewBag.elegirPrimero)
 {
 
     using (Html.BeginForm(FormMethod.Post))
     {
-        @Html.TextBox("numTest")
-        @Html.TextBox("palTest")
 
-        @*<div id="gustosTest">
-                        @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
-                        {
-                            <label for="listTest">@g.Id</label>
-                            <input id="listTest"/>
-                        }
-                    </div>
-                    <button id="testbtn" type="button" class="btn btn-primary">Submit</button>
-                }
-            }
-            <br />
+        @Html.TextBox("idUsuario", Sesion.IdUsuario)
+        @Html.TextBox("tokenUsuario", "token")
+        @Html.TextBox("idPedido", Model.Pedido.IdPedido)
 
-                    <div id="gustosTest">
-                        @foreach (InvitacionPedidoGustoEmpanadaUsuario g in Model.GustosElegidosUsuario)
-                        {
-                            <label >@g.IdGustoEmpanada</label>
-
-                        }
-                    </div>*@
-
-        <div id="gustosTest">
+        <div id="listaGustos">
             @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
             {
                 <div>
@@ -53,24 +31,19 @@ PrecioDocena: @Model.Pedido.PrecioDocena<br />
                     {
                         if (gu.IdGustoEmpanada == g.Id)
                         {
-                            <label for="listTest">@g.Nombre</label>
-                            <input id="listTest" value="@gu.Cantidad" />
+                            <label for="@g.Id">@g.Nombre</label>
+                            <input id="@g.Id" value="@gu.Cantidad" class="gustosUsuario" />
                         }
                     }
 
-                    @if (g.Id == 3)
-                    {
-                        <label for="listTest">@g.Nombre</label>
-                        <input id="listTest" value="0" />
-                    }
-
+                    @*@if ()
+                        {
+                            <label for="@g.Id">@g.Nombre</label>
+                            <input id="@g.Id" value="0" class="gustosUsuario" />
+                        }*@
                 </div>
             }
         </div>
+        <button id="testbtn" type="button" class="btn btn-primary">Submit</button>
     }
 }
-@*@for (int i = 0; i < Model.GustosDisponibles.Count; i++)
-    {
-
-        Model.Pedido.GustoEmpanada[i].Nombre;
-    }*@

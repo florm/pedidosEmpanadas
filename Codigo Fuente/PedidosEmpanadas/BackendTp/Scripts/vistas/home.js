@@ -98,17 +98,20 @@ $("#testbtn").click(function () {
 function probandoajax() {
 
     var pedidoRequest = new Object();
-    pedidoRequest.IdUsuario = $("#numTest").val();
-    pedidoRequest.Token = $("#palTest").val();
+    pedidoRequest.IdUsuario = $("#idUsuario").val();
+    pedidoRequest.IdPedido = $("#idPedido").val();
+    pedidoRequest.Token = $("#tokenUsuario").val();
 
-    var GustoEmpanadasCantidad = $("#gustosTest input").map(function () {
+    var GustoEmpanadasCantidad = $("#listaGustos input").map(function () {
         var GustoEmpanadasCantidad = new Object();
         //GustoEmpanadasCantidad.Nombre = $("#listTest").val();
         //GustoEmpanadasCantidad.IdGustoEmpanada = $(this).data("id");
         //GustoEmpanadasCantidad.Nombre = $(this).val();
 
         //GustoEmpanadasCantidad.Nombre = $(this).data("name");
-        GustoEmpanadasCantidad.Cantidad = $("#listTest").val();
+        GustoEmpanadasCantidad.Cantidad = $(this).val();
+        GustoEmpanadasCantidad.IdGustoEmpanada = $(this).attr('id');
+
         //GustoEmpanadasCantidad.IdGustoEmpanada = $("input").data("id")
 
         //GustoEmpanadasCantidad.IdGustoEmpanada = $("#testAle").val();
