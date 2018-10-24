@@ -95,38 +95,34 @@ $("#testbtn").click(function () {
 
 });
 
-
-
-
 function probandoajax() {
 
-    //var invocation = new XMLHttpRequest();
-    //var url = 'http://localhost:56230/Api/Pedidos';
-
-    //callOtherDomain();
-
-    //function callOtherDomain() {
-    //    if (invocation) {
-    //        invocation.open('POST', url, true);
-    //        invocation.onreadystatechange = handler;
-    //        invocation.send();
-    //    }
-    //}
-
     var pedidoRequest = new Object();
-    pedidoRequest.IdUsuario = 5;
-    pedidoRequest.Token = "Ale";
-    llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
-    //llamadaAjax("http://localhost:56230/Api/Pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
+    pedidoRequest.IdUsuario = $("#idUsuario").val();
+    pedidoRequest.IdPedido = $("#idPedido").val();
+    pedidoRequest.Token = $("#tokenUsuario").val();
 
-    //$.ajax({
-    //    url: 'http://localhost:56230/Api/Pedidos',
-    //    type: 'POST',
-    //    data: JSON.stringify(pedidoRequest),
-    //    contentType: "application/json;charset=utf-8",
-    //    success: function (data) {
-    //        alert("hola");
-    //    }
-    //});
+    var GustoEmpanadasCantidad = $("#listaGustos input").map(function () {
+        var GustoEmpanadasCantidad = new Object();
+        //GustoEmpanadasCantidad.Nombre = $("#listTest").val();
+        //GustoEmpanadasCantidad.IdGustoEmpanada = $(this).data("id");
+        //GustoEmpanadasCantidad.Nombre = $(this).val();
+
+        //GustoEmpanadasCantidad.Nombre = $(this).data("name");
+        GustoEmpanadasCantidad.Cantidad = $(this).val();
+        GustoEmpanadasCantidad.IdGustoEmpanada = $(this).attr('id');
+
+        //GustoEmpanadasCantidad.IdGustoEmpanada = $("input").data("id")
+
+        //GustoEmpanadasCantidad.IdGustoEmpanada = $("#testAle").val();
+        //return JSON.stringify(GustoEmpanadasCantidad);
+        return GustoEmpanadasCantidad;
+    }).get();
+
+    pedidoRequest.GustoEmpanadasCantidad = GustoEmpanadasCantidad;
+
+    //pedidoRequest.IdUsuario = $("#IdTest").val();
+    //pedidoRequest.Token = $("#TokenTest").val();
+    llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
 
 }
