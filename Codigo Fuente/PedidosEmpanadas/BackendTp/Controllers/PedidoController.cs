@@ -87,17 +87,17 @@ namespace BackendTp.Controllers
             //return View(invi);
 
 
-            PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
+            GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
             var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
-            pgeVm.Pedido = _servicioPedido.GetById(id);
-            pgeVm.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
+            gpu.Pedido = _servicioPedido.GetById(id);
+            gpu.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
             foreach (var gusto in gustos)
             {
-                pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
+                gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
 
             }
             ViewBag.elegirPrimero = true;
-            return View(pgeVm);
+            return View(gpu);
         }
 
         public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)

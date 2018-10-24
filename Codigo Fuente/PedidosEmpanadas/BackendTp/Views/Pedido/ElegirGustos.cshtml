@@ -1,7 +1,5 @@
-﻿@using BackendTp.Models
-@model BackendTp.Models.InvitacionPedido
-@*@model Api.Models.PedidoRequest*@
-
+﻿@model BackendTp.Models.PedidoGustosEmpanadasViewModel
+@using BackendTp.Models
 @{
     ViewBag.Title = "ElegirGustos";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
@@ -14,60 +12,65 @@ Descripcion: @Model.Pedido.Descripcion<br />
 PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
 PrecioDocena: @Model.Pedido.PrecioDocena<br />
 
-@*@Model.Pedido.GustoEmpanada*@
-
-<table>
-    <tr>
-        <td>Nombre</td>
-    </tr>
-    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+@*@foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
     {
-        <tr>
-            <td>@g.Nombre</td>
-        </tr>
-    }
+        <input type="text" value="@g.Nombre" />
+    }*@
 
-</table>
+@if (ViewBag.elegirPrimero)
+{
 
-@*<div>
-    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+    using (Html.BeginForm(FormMethod.Post))
     {
-       <label for="@g.IdGustoEmpanada">@g.Nombre</label>
-       <input id="@g.IdGustoEmpanada" type="number"/>
-    }
-</div>*@
+        @Html.TextBox("numTest")
+        @Html.TextBox("palTest")
 
-@*<table>
-    <tr>
-        <td>Nombre</td>
-    </tr>
-    @foreach (GustoEmpanada g in @Model.Pedido.GustoEmpanada)
+        @*<div id="gustosTest">
+                        @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
+                        {
+                            <label for="listTest">@g.Id</label>
+                            <input id="listTest"/>
+                        }
+                    </div>
+                    <button id="testbtn" type="button" class="btn btn-primary">Submit</button>
+                }
+            }
+            <br />
+
+                    <div id="gustosTest">
+                        @foreach (InvitacionPedidoGustoEmpanadaUsuario g in Model.GustosElegidosUsuario)
+                        {
+                            <label >@g.IdGustoEmpanada</label>
+
+                        }
+                    </div>*@
+
+        <div id="gustosTest">
+            @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
+            {
+                <div>
+                    @foreach (InvitacionPedidoGustoEmpanadaUsuario gu in Model.GustosElegidosUsuario)
+                    {
+                        if (gu.IdGustoEmpanada == g.Id)
+                        {
+                            <label for="listTest">@g.Nombre</label>
+                            <input id="listTest" value="@gu.Cantidad" />
+                        }
+                    }
+
+                    @if (g.Id == 3)
+                    {
+                        <label for="listTest">@g.Nombre</label>
+                        <input id="listTest" value="0" />
+                    }
+
+                </div>
+            }
+        </div>
+    }
+}
+@*@for (int i = 0; i < Model.GustosDisponibles.Count; i++)
     {
-        <tr>
-            <td>@g.Nombre</td>
-        </tr>
-    }
 
-</table>*@
-
-
-<form>
-    <input type="text" placeholder="palabra" id="palabraprueba" />
-    <input type="text" placeholder="numero" id="numeroprueba" />
-
-</form><br /><br />
-<button id="testbtn">Lala</button>
-<div id="divResult"></div>
-
-@*<script>
-        var pedidoRequest = new Object();
-
-        function probandoajax() {
-
-            pedidoRequest.IdUsuario = 5;
-            pedidoRequest.Token = "Ale";
-            llamadaAjax("http://localhost:56230/Api/Pedidos/ConfirmarGustos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
-
-        }
-
-    </script>*@
+        Model.Pedido.GustoEmpanada[i].Nombre;
+    }*@
