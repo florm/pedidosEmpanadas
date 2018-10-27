@@ -23,7 +23,7 @@ namespace BackendTp.App_Start
 
             bundles.Add(new StyleBundle("~/css").Include(
                           "~/Content/bootstrap/bootstrap.min.css",
-                          //"~/css/fontawesome/css/all.min.css",
+                          "~/Content/font-awesome.min.css",
                           "~/Content/Site.css"));
 
         }

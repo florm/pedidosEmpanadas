@@ -46,7 +46,7 @@ namespace BackendTp.Servicios
         public List<UsuarioViewModel> GetByIdPedido(Pedido pedido)
         {
             return Db.InvitacionPedido.Where(ip => ip.IdPedido == pedido.IdPedido)
-                .Select(ip=>new UsuarioViewModel{Id = ip.Usuario.IdUsuario, Email = ip.Usuario.Email}).ToList();
+                .Select(ip=>new UsuarioViewModel{Id = ip.Usuario.IdUsuario, Email = ip.Usuario.Email, CompletoPedido = ip.Completado}).ToList();
         }
 
         public InvitacionPedido GetInvitacionPedidoPorPedido(int id, int idUsuario)

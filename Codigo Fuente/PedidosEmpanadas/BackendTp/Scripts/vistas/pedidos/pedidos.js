@@ -15,12 +15,12 @@ function seleccionarTodos(source) {
 
 
 
-function validacionYEnvio(e)
+function validacionYEnvio(e, arrayViejos)
 {
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
-    armarInvitados(inputInvitados);
     if (validarSeleccionDeGustos(checkboxes)) {
+        armarInvitados(inputInvitados, arrayViejos);
         $("form").submit();
     }
     else {
@@ -41,8 +41,8 @@ function validarSeleccionDeGustos(checkboxes) {
 }
 
 var numeroArray = 0;
-function armarInvitados(input) {
-    $.each(input.tagsinput("items"), function (i, item) {
+function armarInvitados(nuevosInput, arrayViejos) {
+    $.each(nuevosInput.tagsinput("items"), function (i, item) {
         var nuevoInput = $("<input>");
         nuevoInput.attr('name', 'Invitados[' + numeroArray + '].Email');
         nuevoInput.attr('id', 'Invitados_' + numeroArray + '__Email');
@@ -51,6 +51,26 @@ function armarInvitados(input) {
         divInvitado.append(nuevoInput);
     numeroArray++;
     });
+    if (arrayViejos !== null || arrayViejos !== undefined) {
+        $.each(arrayViejos, function (i, item) {
+            var viejosEmail = $("<input>");
+            var viejosCompletoPedido = $("<input>");
+
+            viejosEmail.attr('name', 'Invitados[' + numeroArray + '].Email');
+            viejosEmail.attr('id', 'Invitados_' + numeroArray + '__Email');
+            viejosEmail.addClass("d-none invitadosEditar");
+            viejosEmail.val(item.id);
+
+            viejosCompletoPedido.attr('name', 'Invitados[' + numeroArray + '].CompletoPedido');
+            viejosCompletoPedido.attr('id', 'Invitados_' + numeroArray + '__CompletoPedido');
+            viejosCompletoPedido.addClass("d-none invitadosEditar");
+            viejosCompletoPedido.val(item.completoPedido);
+            divInvitado.append(viejosEmail);
+            divInvitado.append(viejosCompletoPedido);
+        numeroArray++;
+        });
+    }
+
 
 }
 

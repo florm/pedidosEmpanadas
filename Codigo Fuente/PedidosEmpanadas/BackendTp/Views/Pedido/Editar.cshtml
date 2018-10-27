@@ -7,8 +7,8 @@
 
 }
 @section PaginaHeader{
-    <link href="~/lib/bootstrap-tagsinput/tagsinput.css" rel="stylesheet" />
-    <link href="~/Content/pedidoIniciar.css" rel="stylesheet" />
+    <link href="@Url.Content("~/lib/bootstrap-tagsinput/tagsinput.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/pedidoEditar.css")" rel="stylesheet" />
     <script>
         var usuarioController = "@Url.Action("Consultar","Usuario")";
     </script>
@@ -24,14 +24,58 @@
 @using (Html.BeginForm("Modificar", "Pedido"))
 {
     @Html.AntiForgeryToken()
+    <div class="row">
+        @Html.Partial("_pedidoFormulario")
+        <div id="divInvitado" class="col-4 d-flex flex-column">
+            <h4 class="pasos">3. Ingrese email de los invitados</h4>
+            <hr />
+            <table id="tablaInvitados">
+                <tr>
+                    <td>Invitado</td>
+                    <td>Completó su pedido</td>
+                    <td>Eliminar</td>
+                </tr>
+                @foreach(var invitado in Model.Invitados)
+                {
+                    <tr>
+                        <td>@invitado.Email</td>
+                        <td>@(invitado.CompletoPedido ? "Si" : "No")</td>
+                        <td>
+                            @if (!invitado.CompletoPedido)
+                            {
+                                <i class="fas fa-user-times iconoEliminarInvitado" id="@invitado.Email" completoPedido ="@invitado.CompletoPedido" eliminado="false"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido ="@invitado.CompletoPedido" eliminado="false"></i>
+                            }
 
-    @Html.Partial("_pedidoFormulario")
+                        </td>
+                    </tr>
+                }
+            </table>
+            <span>Agregar invitados</span>
+            <div id="divInvitado" class="form-group w-100">
+                <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
+            </div>
 
-    <div class="d-flex justify-content-end w-75 m-5">
-        <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-3" />
-        <input type="submit" value="Editar" id="btnEditar" class="btn btn-aceptar" />
-        <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosEditar.js")"></script>
-        
+            <span>Enviar Email</span>
+            <select>
+                @foreach(var accion in ViewBag.emailAcciones)
+                {
+                    <option value="@accion.Id">@accion.Nombre</option>
+                }
+            </select>
+        </div>
     </div>
-         
+
+        <div class="d-flex justify-content-end w-75 m-5">
+            <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-3" />
+            <input type="submit" value="Guardar" id="btnEditar" class="btn btn-aceptar" />
+           
+
+        </div>
+
 }
+
+<script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosEditar.js")"></script>

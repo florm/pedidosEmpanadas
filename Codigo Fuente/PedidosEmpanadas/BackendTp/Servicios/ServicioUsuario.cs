@@ -32,11 +32,11 @@ namespace BackendTp.Servicios
             return Db.Usuario.Where(u=> String.IsNullOrEmpty(email) || u.Email.Contains(email)).ToList();
         }
 
-        public UsuarioViewModel GetByEmail(string email)
+        public UsuarioViewModel GetByEmail(string email, bool completoPedido)
         {
             var usuario = Db.Usuario.FirstOrDefault(u => u.Email == email);
             if(usuario!=null)
-            return new UsuarioViewModel(usuario.IdUsuario, usuario.Email);
+            return new UsuarioViewModel(usuario.IdUsuario, usuario.Email, completoPedido);
             return null;
         }
         public List<UsuarioViewModel> GetAllByEmail(List<UsuarioViewModel> usuarioVm)
@@ -44,7 +44,7 @@ namespace BackendTp.Servicios
             List<UsuarioViewModel> lista = new List<UsuarioViewModel>();
             foreach (var usuario in usuarioVm)
             {
-                lista.Add(GetByEmail(usuario.Email));
+                lista.Add(GetByEmail(usuario.Email, usuario.CompletoPedido));
             }
 
             return lista;
