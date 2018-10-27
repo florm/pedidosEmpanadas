@@ -1,0 +1,18 @@
+﻿.pasos {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-group {
+    width: 50%;
+}
+
+#tablaInvitados{
+    border: 1px solid black;
+}
+
+.deshabilitado{
+    color: darkgrey;
+}

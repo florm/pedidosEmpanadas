@@ -1,11 +1,10 @@
 ﻿@using BackendTp.Models
 @model BackendTp.Models.PedidoGustosEmpanadasViewModel
-<div class="row">
+
     <div class="col-4 d-flex flex-column align-items-center">
         <h4 class="pasos">1. Complete los datos del Pedido</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*@Html.EditorFor(model => model.Pedido.IdPedido, new { htmlAttributes = new { @class = "form-control" } })*@
 
         <div class="form-group w-100">
             @Html.LabelFor(model => model.Pedido.NombreNegocio, htmlAttributes: new { @class = "control-label col" }, labelText: "Nombre del Negocio")
@@ -77,28 +76,5 @@
         </table>
 
     </div>
-    <div id="divInvitado" class="col-4 d-flex flex-column">
-        <h4 class="pasos">3. Ingrese email de los invitados</h4>
-        <hr />
-        @if (!ViewBag.iniciar)
-        {
-            for (int i = 0; i < Model.Invitados.Count; i++)
-            {
-                <input class="invitadosEditar" id="@Model.Invitados[i].Id" value="@Model.Invitados[i].Email" hidden="" />
-            }
-            <div id="divInvitado" class="form-group w-100">
-                <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
-            </div>
-
-        }
-
-        else
-        {
-            <div id="divInvitado" class="form-group w-100">
-                <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
-            </div>
-
-        }
-    </div>
     
-</div>
+

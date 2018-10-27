@@ -50,6 +50,24 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
             return pedido;
         }
-        
+
+        public List<Pedido> Lista(int IdUsuario)
+        {
+            List<Pedido> pedidosQuery = new List<Pedido>();
+
+            pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
+                            join InvitacionPedido i in Db.InvitacionPedido
+                            on p.IdPedido equals i.IdPedido
+                            where i.IdUsuario == IdUsuario
+                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
+
+            if (pedidosQuery == null)
+            {
+                return null;
+            }
+
+            return pedidosQuery;
+        }
+
     }
 }

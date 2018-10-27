@@ -9,7 +9,7 @@ namespace Exceptions
     {
         public UsuarioDeslogueadoException()
         {
-            PathRedirect = "~/Home/Index";
+            PathRedirect = "~/Home/Login";
         }
 
         public override string Message => "No se ha iniciado sesion.";

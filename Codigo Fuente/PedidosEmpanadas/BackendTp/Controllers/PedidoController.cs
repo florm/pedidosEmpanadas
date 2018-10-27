@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BackendTp.Enums;
 using BackendTp.Models;
 using BackendTp.Servicios;
+using BackendTp.Helpers;
+using PagedList;
 
 namespace BackendTp.Controllers
 {
@@ -14,7 +17,7 @@ namespace BackendTp.Controllers
         private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
         private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
         private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
-
+        private readonly ServicioEmail _servicioEmail= new ServicioEmail();
 
         public ActionResult Iniciar()
         {
@@ -54,7 +57,7 @@ namespace BackendTp.Controllers
             return View(gustos);
         }
 
-        public ActionResult Lista()
+        public ActionResult ListaPedidosTotal()
         {
             var pedidos = _servicioPedido.GetAll();
             return View(pedidos);
@@ -63,12 +66,19 @@ namespace BackendTp.Controllers
         [HttpGet]
         public ActionResult Editar(int id)
         {
+
             var pedido = _servicioPedido.GetById(id);
+            if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
+            {
+                //todo
+                //RedirectToAction("Detalle");
+            }
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido);
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
                 gustosModel, invitados);
             ViewBag.iniciar = false;
+            ViewBag.emailAcciones = _servicioEmail.GetAcciones();
             return View("Editar", pgeVM);
         }
 
@@ -115,6 +125,14 @@ namespace BackendTp.Controllers
             return View(gpu);
         }
 
+        public ActionResult Lista(int? pag)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+            pedidos = _servicioPedido.Lista(Sesion.IdUsuario);
+            return View(pedidos.ToPagedList(pag ?? 1, 4));
+        }
+
+
         public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
             //todo Esto es de crear. Hacer logica para modificacion del pedido
@@ -127,6 +145,7 @@ namespace BackendTp.Controllers
             //}
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             ViewBag.iniciar = false;
+            ViewBag.emailAcciones = _servicioEmail.GetAcciones();
             return View("Editar", pedidoGustosEmpanadas);
         }
     }
