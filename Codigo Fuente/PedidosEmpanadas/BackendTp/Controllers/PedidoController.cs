@@ -92,8 +92,37 @@ namespace BackendTp.Controllers
         [HttpGet]
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
-            var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
-            return View(invitacionPedido);
+            //var invi = _servicioInvitacionPedido.GetInvitacionGustosPedidoPorPedido(id, usuarioId);
+            //var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
+            //return View(invi);
+
+
+            GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
+            var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
+            gpu.Pedido = _servicioPedido.GetById(id);
+            gpu.InvitacionPedido = _servicioPedido.GetInvitacion(id, usuarioId);
+            gpu.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
+            foreach (var gusto in gustos)
+            {
+                gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
+
+            }
+
+            if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count())
+            {
+                foreach(InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario) { 
+                    foreach(GustosEmpanadasViewModel g in gpu.GustosDisponibles)
+                    {
+                        if(gu.IdGustoEmpanada == g.Id)
+                        {
+                            g.IsSelected = true;
+                        }
+                    }
+                }
+            }
+
+            ViewBag.elegirPrimero = true;
+            return View(gpu);
         }
 
         public ActionResult Lista(int? pag)

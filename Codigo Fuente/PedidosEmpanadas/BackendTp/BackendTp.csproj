@@ -260,6 +260,7 @@
     <Compile Include="Models\GustoEmpanada.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GustosPedidoUsuarioViewModel.cs" />
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />

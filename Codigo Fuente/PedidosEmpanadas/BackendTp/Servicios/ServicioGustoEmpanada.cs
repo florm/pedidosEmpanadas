@@ -16,6 +16,18 @@ namespace BackendTp.Servicios
             return Db.GustoEmpanada.ToList();
         }
 
-        
+        public List<GustoEmpanada> GetGustosEnPedido(int idPedido)
+        {
+            //return Db.GustoEmpanada.Where(ip => ip == idPedido).ToList();
+            var pedido = Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == idPedido);
+            return pedido.GustoEmpanada.ToList();
+        }
+
+        public List<InvitacionPedidoGustoEmpanadaUsuario> GetGustosDeUsuario(int idPedido, int idUsuario)
+        {
+            //var pedido = Db.InvitacionPedidoGustoEmpanadaUsuario.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == idPedido && p.IdUsuario == idUsuario);
+            //return pedido.InvitacionPedidoGustoEmpanadaUsuario.ToList();
+            return Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == idPedido && ip.IdUsuario == idUsuario).ToList();
+        }
     }
 }
