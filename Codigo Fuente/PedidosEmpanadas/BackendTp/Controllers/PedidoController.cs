@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BackendTp.Enums;
 using BackendTp.Models;
 using BackendTp.Servicios;
 
@@ -63,7 +64,13 @@ namespace BackendTp.Controllers
         [HttpGet]
         public ActionResult Editar(int id)
         {
+
             var pedido = _servicioPedido.GetById(id);
+            if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
+            {
+                //todo
+                //RedirectToAction("Detalle");
+            }
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido);
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
