@@ -17,20 +17,20 @@ namespace Api.Controllers
     {
 
         //private readonly ServicioPedido _servicioPedido = new ServicioPedido();
-        PedidoRequest pedido = new PedidoRequest();
-        //[HttpPost]
-        //public JsonResult ConfirmarGustos([FromBody] JsonResult pedido)
-        //{
+        //PedidoRequest pedido = new PedidoRequest();
+        ////[HttpPost]
+        ////public JsonResult ConfirmarGustos([FromBody] JsonResult pedido)
+        ////{
 
+
+        ////    return null;
+        ////}
+
+        //[HttpPost]
+        //public PedidoRequest ConfirmarGustos([FromBody] PedidoRequest pedido)
+        //{
 
         //    return null;
         //}
-
-        [HttpPost]
-        public PedidoRequest ConfirmarGustos([FromBody] PedidoRequest pedido)
-        {
-
-            return null;
-        }
     }
 }
