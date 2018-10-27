@@ -8,5 +8,6 @@ namespace BackendTp.Models
     public class GustosPedidoUsuarioViewModel : PedidoGustosEmpanadasViewModel
     {
         public List<InvitacionPedidoGustoEmpanadaUsuario> GustosElegidosUsuario { get; set; }
+        public InvitacionPedido InvitacionPedido { get; set; }
     }
 }

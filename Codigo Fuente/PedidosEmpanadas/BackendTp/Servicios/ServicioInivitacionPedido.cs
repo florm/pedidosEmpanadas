@@ -29,6 +29,11 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
         }
 
+        public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()
+        {
+            return null;
+        }
+
         private List<int> GetInvitados (List<UsuarioViewModel> invitados)
         {
             List<int> idUsuarios = new List<int>();
