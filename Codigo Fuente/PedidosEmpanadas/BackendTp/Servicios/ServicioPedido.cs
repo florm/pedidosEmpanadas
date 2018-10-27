@@ -23,7 +23,17 @@ namespace BackendTp.Servicios
             return Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
         }
 
-        public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
+        public InvitacionPedido GetInvitacion(int idPedido, int idUsuario)
+        {
+            return Db.InvitacionPedido.FirstOrDefault(p => p.IdPedido == idPedido && p.IdUsuario == idUsuario);
+        }
+
+        //public string GetToken(int idPedido, int idUsuario)
+        //{
+        //    return Db.InvitacionPedido.Where(i => i.IdPedido == idPedido).Where(i => i.IdUsuario == idUsuario).Select(i => i.Token).ToString();
+        //}
+
+    public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
         {
             var pedido = pge.Pedido;
             pedido.FechaCreacion = DateTime.Now;

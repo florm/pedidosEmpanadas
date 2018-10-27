@@ -109,6 +109,12 @@ function probandoajax() {
         //GustoEmpanadasCantidad.Nombre = $(this).val();
 
         //GustoEmpanadasCantidad.Nombre = $(this).data("name");
+        
+
+        //if ($(this).val() != 0) {
+        //    GustoEmpanadasCantidad.Cantidad = $(this).val();
+        //    GustoEmpanadasCantidad.IdGustoEmpanada = $(this).attr('id');
+        //}
         GustoEmpanadasCantidad.Cantidad = $(this).val();
         GustoEmpanadasCantidad.IdGustoEmpanada = $(this).attr('id');
 
