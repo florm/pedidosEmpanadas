@@ -11,9 +11,9 @@ namespace BackendTp.Servicios
     public class ServicioInvitacionPedido: Servicio
     {
         
-        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados)
+        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {
-            var idUsuarios = GetInvitados(invitados);
+            var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
             foreach(var id in idUsuarios)
             {
                 Db.InvitacionPedido.Add(new InvitacionPedido
@@ -34,7 +34,7 @@ namespace BackendTp.Servicios
             return null;
         }
 
-        private List<int> GetInvitados (List<UsuarioViewModel> invitados)
+        private List<int> GetInvitados (List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {
             List<int> idUsuarios = new List<int>();
             foreach(var invitado in invitados)
@@ -44,13 +44,14 @@ namespace BackendTp.Servicios
                 if(usuario != null)
                     idUsuarios.Add(usuario.IdUsuario);
             }
-
+            //se agrega tambien como invitado al usuario que realizo inicio el pedido
+            idUsuarios.Add(idUsuarioResponsable);
             return idUsuarios;
         }
 
-        public List<UsuarioViewModel> GetByIdPedido(Pedido pedido)
+        public List<UsuarioViewModel> GetByIdPedido(Pedido pedido, int usuarioSesion)
         {
-            return Db.InvitacionPedido.Where(ip => ip.IdPedido == pedido.IdPedido)
+            return Db.InvitacionPedido.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario != usuarioSesion)
                 .Select(ip=>new UsuarioViewModel{Id = ip.Usuario.IdUsuario, Email = ip.Usuario.Email, CompletoPedido = ip.Completado}).ToList();
         }
 
