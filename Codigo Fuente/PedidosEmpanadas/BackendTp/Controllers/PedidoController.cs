@@ -37,7 +37,7 @@ namespace BackendTp.Controllers
             if (ModelState.IsValid)
             {
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados);
+                _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
             }
@@ -74,7 +74,7 @@ namespace BackendTp.Controllers
                 //RedirectToAction("Detalle");
             }
             var gustosModel = _servicioGustoEmpanada.GetAll();
-            var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido);
+            var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
                 gustosModel, invitados);
             ViewBag.iniciar = false;
