@@ -4,6 +4,7 @@
 }
 html, body{
     height: 100%;
+    background-color: #f3f3f4;
 }
 .div-contenedor-alertas {
     position: absolute;
@@ -30,12 +31,6 @@ html, body{
     height: calc(100% - 116px);
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 .navbar-brand{
     color: #ffffff !important;
 }
@@ -207,15 +202,6 @@ input[type="checkbox"]:checked + label:before {
     border: solid 1px #e4eaec;
 }
 
-table {
-    /*width: 50% !important;*/
-    margin: 0 auto !important;
-}
-
-.table td, .table th {
-    border-left: 1px solid #dee2e6 !important;
-}
-
 tbody {
     border-bottom: 1px solid #dee2e6 !important;
 }
@@ -229,11 +215,13 @@ tbody {
 
 .th-check-column {
     background: #f1f4f5;
-    width: 3rem;
 }
 
 .check-column {
     position: relative;
+    max-width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .check-column input[type="checkbox"] + label::before {
     box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -386,10 +374,6 @@ tbody {
         background: #fafafa;
     }
 
-table th.resizing {
-    cursor: col-resize;
-}
-
 .col-resizable {
     height: 24px;
     width: 2%;
@@ -490,7 +474,6 @@ table th.resizing {
     margin: 10px 15px;
 }
 .login-form {
-    box-shadow: 0px 0px 9px -2px;
     padding: 10px 15px;
     margin-top: 40px;
 }
@@ -499,4 +482,42 @@ table th.resizing {
 }
 .no-padding{
     padding: 0!important;
+}
+.page-heading {
+    border-top: 0;
+    /*padding: 0 10px 20px 10px;*/
+}
+.title {
+    margin: 20px 0 30px 0;
+}
+.box-shadow {
+    box-shadow: 0px 0px 9px -5px;
+}
+.page-heading h2{
+    padding: 0 10px 15px 10px;
+    margin-top: 19px;
+    font-size: 24px;
+    color: #495057;
+}
+.page-heading .action_buttons{
+    margin-top: 15px;
+}
+.page-heading .action_buttons a{
+    float: right;
+    margin-left: 5px;
+}
+.bg-white{
+    background-color: #FFF;
+}
+.recuadro {
+    padding: 10px 20px 20px 20px;
+}
+.btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.action_item{
+    margin-left: 5px;
 }

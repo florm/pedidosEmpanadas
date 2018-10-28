@@ -1,5 +1,4 @@
-﻿$(document).ready(function () {
-    var MSGCAMPOOBLIGATORIO = "Este campo es obligatorio";
+﻿    var MSGCAMPOOBLIGATORIO = "Este campo es obligatorio";
     var MSGCAMPOEMAILERRONEO = "Ingrese un email válido";
 
 //div contenedor de alertas
@@ -527,4 +526,3 @@
 
     function dummy() {
     }
-});

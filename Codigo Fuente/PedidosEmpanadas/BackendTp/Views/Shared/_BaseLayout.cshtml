@@ -10,17 +10,17 @@
     @RenderSection("HeadSection", false)
 </head>
 <body>
-@RenderSection("Navbar")
-<div class="container-fluid body-content">
-    <div class="row full-height">
+    @RenderSection("Navbar")
+    <div class="container-fluid body-content">
+        <div class="row full-height">
             <div id="contenedorAlertas" class="div-contenedor-alertas"></div>
             @RenderBody()
+        </div>
+        @Html.Partial("Footer")
     </div>
-    @Html.Partial("Footer")
-</div>
-@Scripts.Render("~/bundles/scripts")
-@RenderSection("custom_js_libraries", required: false)
-@Scripts.Render("~/bundles/scriptsPropios")
-@RenderSection("custom_js_code", required: false)
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("custom_js_libraries", required: false)
+    @Scripts.Render("~/bundles/scriptsPropios")
+    @RenderSection("custom_js_code", required: false)
 </body>
 </html>

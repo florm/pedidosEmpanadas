@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿// $(document).ready(function () {
     var textEmail = $("#textEmail");
     var textPassword = $("#textPassword");
     var textRepetirPassword = $("#textRepetirPassword");
@@ -128,4 +128,4 @@
         llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
 
     }
-});
+// });

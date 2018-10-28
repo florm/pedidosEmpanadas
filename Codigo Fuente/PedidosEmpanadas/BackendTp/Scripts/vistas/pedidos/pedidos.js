@@ -1,7 +1,10 @@
-﻿var textValidacionGustos = $("#textValidacionGustos");
-var btnIniciar = $("#btnIniciar");
-var inputInvitados = $("#inputInvitados");
-var divInvitado = $("#divInvitado");
+﻿$(document).ready(function () {
+    var textValidacionGustos = $("#textValidacionGustos");
+    var btnIniciar = $("#btnIniciar");
+    var inputInvitados = $("#inputInvitados");
+    var divInvitado = $("#divInvitado");
+});
+
 
 function seleccionarTodos(source) {
     var checkboxes = $("form input:checkbox");

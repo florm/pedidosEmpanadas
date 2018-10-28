@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿// $(document).ready(function () {
     var selectAll = $("#selectAll");
     var textValidacionGustos = $("#textValidacionGustos");
     var btnIniciar = $("#btnIniciar");
@@ -18,7 +18,7 @@
     btnIniciar.click(function (e) {
         validacionYEnvio(e);
     });
-});
+// });
 
 
 

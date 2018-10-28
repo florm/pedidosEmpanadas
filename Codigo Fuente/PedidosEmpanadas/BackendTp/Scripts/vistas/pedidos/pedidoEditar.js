@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿// $(document).ready(function () {
     var eliminarInvitado = $(".eliminarInvitado");
     var cambio = false;
 
@@ -14,4 +14,4 @@
             $(this).attr("eliminado", "true");
         }
     });
-});
+// });
