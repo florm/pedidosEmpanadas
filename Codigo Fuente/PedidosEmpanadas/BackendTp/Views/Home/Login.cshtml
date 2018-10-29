@@ -5,23 +5,26 @@
 }
 
 @*<div id="contenedorAlertas" class="div-contenedor-alertas" style=""></div>*@
-<div class="pt-2" style="word-break: break-word;">
-    <div class="form-group col">
-        <label for="loginEmail">Email</label>
-        <input class="form-control col-12" id="loginEmail" type="email" name="email" value="" placeholder="Ingrese su email" />
+<div class="col-lg-4 offset-lg-4 margin-bottom">
+    <div class="pt-2">
+        <div class="login-form bg-white box-shadow">
+            <h3 class="text-center">Iniciar Sesión</h3>
+            <hr/>
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input class="form-control col-12" id="loginEmail" type="email" name="email" value="" placeholder="Ingrese su email"/>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Contraseña</label>
+                <input class="form-control col-12" id="loginPassword" type="password" name="password" value="" placeholder="Ingrese contraseña"/>
+            </div>
+            <button type="button" class="btn btn-aceptar" id="btnAceptarLogin">Aceptar</button>
+        </div>
     </div>
-    <div class="form-group col">
-        <label for="loginPassword">Contraseña</label>
-        <input class="form-control col-12" id="loginPassword" type="password" name="password" value="" placeholder="Ingrese contraseña" />
-    </div>
-    <button type="button" class="btn btn-aceptar" id="btnAceptarLogin">Aceptar</button>
 </div>
 
-@section ScriptsA{
-
+@section custom_js_code{
     <script>
-
-    var pathLogin = '@Url.Action("LoginOk", "Home")';
-
+        var pathLogin = '@Url.Action("LoginOk", "Home")';
     </script>
 }

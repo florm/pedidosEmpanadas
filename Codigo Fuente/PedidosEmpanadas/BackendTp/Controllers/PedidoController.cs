@@ -129,7 +129,7 @@ namespace BackendTp.Controllers
         {
             List<Pedido> pedidos = new List<Pedido>();
             pedidos = _servicioPedido.Lista(Sesion.IdUsuario);
-            return View(pedidos.ToPagedList(pag ?? 1, 4));
+            return View(pedidos.ToPagedList(pag ?? 1, 10));
         }
 
 

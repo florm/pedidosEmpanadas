@@ -1,9 +1,9 @@
-﻿var textValidacionGustos = $("#textValidacionGustos");
-var btnIniciar = $("#btnIniciar");
-var inputInvitados = $("#inputInvitados");
-var divInvitado = $("#divInvitado");
-
-
+﻿$(document).ready(function () {
+    var textValidacionGustos = $("#textValidacionGustos");
+    var btnIniciar = $("#btnIniciar");
+    var inputInvitados = $("#inputInvitados");
+    var divInvitado = $("#divInvitado");
+});
 
 
 function seleccionarTodos(source) {
@@ -12,8 +12,6 @@ function seleccionarTodos(source) {
         checkboxes[i].checked = source.checked;
     }
 }
-
-
 
 function validacionYEnvio(e, arrayViejos)
 {
@@ -28,6 +26,7 @@ function validacionYEnvio(e, arrayViejos)
         textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
     }
 }
+
 function validarSeleccionDeGustos(checkboxes) {
     var validacion = 0;
     for (var i = 0, n = checkboxes.length; i < n; i++) {
@@ -70,10 +69,7 @@ function armarInvitados(nuevosInput, arrayViejos) {
         numeroArray++;
         });
     }
-
-
 }
-
 
 function inicializaSelectTags(url, select, name) {
     select.tagsinput({
@@ -103,7 +99,6 @@ function inicializaSelectTags(url, select, name) {
         confirmKeys: 13
     });
     select.tagsinput("input").attr("maxlength", 255).addClass("w-100");
-    
 }
 
 function agregarTag(select, array) {

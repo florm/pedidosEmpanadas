@@ -6,86 +6,128 @@
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
-
 }
 
 @section PaginaHeader{
-
-    <link href="@Url.Content("~/Content/listaPedido.css")" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Scripts/datatables/datatables.min.css")"/>
     <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
-
 }
 
+<div class="col-lg-12">
+    <div class="row wrapper title box-shadow page-heading bg-white">
+        <div class="col-10">
+            <h2>Pedidos</h2>
+        </div>
+        <div class="col-2 action_buttons">
+            @Html.ActionLink("Iniciar Pedido", "Iniciar",null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+    @if (Model == null || !Model.Any())
+    {
+        <p>No hay registros de pedidos.</p>
+    }
+    else
+    {
+        <div class="bg-white box-shadow recuadro">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Fecha de Inicio</th>
+                        <th>Nombre del negocio</th>
+                        <th>Estado del Pedido</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaCreacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreNegocio)
+                            </td>
+                            <td>
+                                @item.EstadoPedido.Nombre
+                            </td>
+                            <td>
+                                @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                                {
+                                    <text>Responsable</text>
+                                }
+                                else
+                                {
+                                    <text>Invitado</text>
+                                }
+                            </td>
+                            <td>
+                                <div class="d-flex flex-row">
+                                    @if (item.EstadoPedido.Nombre == "Abierto")
+                                    {
+                                        <a href="@Url.Action("ElegirGustos", "Pedido", new {id = item.IdPedido, usuarioId = Sesion.IdUsuario})" class="action_item btn btn-xs btn-success" title="Elegir Gustos">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
+                                        if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                                        {
+                                            <a href="@Url.Action("Editar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-info" title="Editar">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-danger" title="Eliminar">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    <tbody>
+                </table>
+            </div>
+            @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new {pag}))
+        </div>
+    }
+</div>
 
-
-<h2>Tus Pedidos</h2>
-
-<p>
-    @Html.ActionLink("Iniciar", "Iniciar")
-</p>
-
-@if (Model == null || !Model.Any())
+@section custom_js_libraries
 {
-    <p>No hay registros de pedidos.</p>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/datatables/datatables.min.js")"></script>
 }
-else
-{
-    <table class="table">
-        <tr>
-            <th>
-                Fecha de Inicio
-            </th>
-            <th>
-                Nombre del negocio
-            </th>
-            <th>
-                Estado del Pedido
-            </th>
-            <th>
-                Rol
-            </th>
-            <th>Acciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreNegocio)
-                </td>
-                <td>
-                    <p>@item.EstadoPedido.Nombre</p>
-                </td>
-                <td>
-                    @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
-                    {
-                        <p>Responsable</p>
-                    }
-                    else
-                    {
-                        <p>Invitado</p>
-                    }
-                </td>
-                <td>
-                    @if (item.EstadoPedido.Nombre == "Abierto")
-                    {
-                        @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id = item.IdPedido, usuarioId = Sesion.IdUsuario })<br />
-                        if (item.IdUsuarioResponsable == Sesion.IdUsuario)
-                        {
-                            @Html.ActionLink("Editar", "Editar", new { id = item.IdPedido }) <br />
-                            @Html.ActionLink("Eliminar", "Eliminar", new { id = item.IdPedido })<br />
-                        }
-                    }
-
-                </td>
-            </tr>
-        }
-
-    </table>
-
-    @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new { pag }))
-
-}
+@section custom_js_code
+ {
+    <script>
+        $(document).ready(function() {
+            $(".table").DataTable({
+                responsive: true,
+                autoWidth: false, 
+                "paging":   false,
+                "ordering": false,
+                "info":     false,
+                "searching": false,
+                "columnDefs": [ {
+                        "targets": -1,
+                        "orderable": false,
+                        "width":"50px"
+                    },
+                ],
+                "language": {
+                    "lengthMenu": "Mostrando _MENU_ registros",
+                    "search": "Buscar",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Mostrando _START_ de _END_ sobre un total de _TOTAL_ elementos",
+                    "infoFiltered":   "(filtrados de un total de _MAX_ total registros)",
+                    "processing": "<i class='fa fa-refresh fa-spin'></i>",
+                    "paginate": {
+                        "first":      "Primera",
+                        "last":       "Ultima",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                },
+            });
+        });
+    </script>
+ }
