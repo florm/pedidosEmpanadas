@@ -49,11 +49,11 @@
                                     <td>
                                         @if (!invitado.CompletoPedido)
                                         {
-                                            <i class="fas fa-user-times iconoEliminarInvitado" id="@invitado.Email" completoPedido="@invitado.CompletoPedido" eliminado="false"></i>
+                                            <i class="fas fa-user-times iconoEliminarInvitado" id="@invitado.Email" completoPedido="False" eliminado="false"></i>
                                         }
                                         else
                                         {
-                                            <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido="@invitado.CompletoPedido" eliminado="false"></i>
+                                            <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido="True" eliminado="false"></i>
                                         }
     
                                     </td>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group w-100 mt-2" id="divInvitado">
                         <label for="inputInvitados">Agregar invitados</label>
-                        <input id="inputInvitados" type="email" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
+                        <input id="inputInvitados" type="text" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
                     </div>
                     <div class="form-group w-100 mt-2" id="divInvitado">
                         <label for="inputInvitados">Enviar Email</label>
@@ -80,7 +80,7 @@
         </div>
         <div class="col-12 text-right">
             <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
+            <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
         </div>
     }
 </div>

@@ -20,7 +20,7 @@
         validacionYEnvio(e, buscarInvitadosNoEliminados());
     });
 
-    var iconoEliminarInvitado = $(".iconoEliminarInvitado");
+    var iconoEliminarInvitado = $(".iconoEliminarInvitado:not(.deshabilitado)");
     var cambio = false;
 
     iconoEliminarInvitado.click(function () {

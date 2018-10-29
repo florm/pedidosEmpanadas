@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     var textValidacionGustos = $("#textValidacionGustos");
-    var btnIniciar = $("#btnIniciar");
+    //var btnIniciar = $("#btnIniciar");
     var inputInvitados = $("#inputInvitados");
     var divInvitado = $("#divInvitado");
 });
