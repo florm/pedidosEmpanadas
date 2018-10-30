@@ -1,52 +1,44 @@
 ﻿@using BackendTp.Models
 @model BackendTp.Models.PedidoGustosEmpanadasViewModel
 
-    <div class="col-4 d-flex flex-column align-items-center">
-        <h4 class="pasos">1. Complete los datos del Pedido</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+<div class="col-md-4">
+    <div class="recuadro box-shadow bg-white">
+        <h5>1. Complete los datos del Pedido</h5>
+        <hr/>
+        @Html.HiddenFor(p=>p.Pedido.IdPedido)
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         <div class="form-group w-100">
-            @Html.LabelFor(model => model.Pedido.NombreNegocio, htmlAttributes: new { @class = "control-label col" }, labelText: "Nombre del Negocio")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pedido.NombreNegocio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pedido.NombreNegocio, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Pedido.NombreNegocio, "Nombre del Negocio")
+            @Html.EditorFor(model => model.Pedido.NombreNegocio, new {htmlAttributes = new {@class = "form-control"}})
+            <small>@Html.ValidationMessageFor(model => model.Pedido.NombreNegocio, "", new {@class = "text-danger"})</small>
         </div>
 
         <div class="form-group w-100">
-            @Html.LabelFor(model => model.Pedido.Descripcion, htmlAttributes: new { @class = "control-label col" }, labelText: "Descripción del Pedido")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pedido.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pedido.Descripcion, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Pedido.Descripcion, "Descripción del Pedido")
+            @Html.EditorFor(model => model.Pedido.Descripcion, new {htmlAttributes = new {@class = "form-control"}})
+            <small> @Html.ValidationMessageFor(model => model.Pedido.Descripcion, "", new {@class = "text-danger"})</small>
         </div>
 
         <div class="form-group w-100">
-            @Html.LabelFor(model => model.Pedido.PrecioUnidad, htmlAttributes: new { @class = "control-label col" }, labelText: "Precio por Unidad")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pedido.PrecioUnidad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pedido.PrecioUnidad, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Pedido.PrecioUnidad, "Precio por Unidad")
+            @Html.EditorFor(model => model.Pedido.PrecioUnidad, new {htmlAttributes = new {@class = "form-control"}})
+            <small>@Html.ValidationMessageFor(model => model.Pedido.PrecioUnidad, "", new {@class = "text-danger"})</small>
         </div>
 
         <div class="form-group w-100">
-            @Html.LabelFor(model => model.Pedido.PrecioDocena, htmlAttributes: new { @class = "control-label col" }, labelText: "Precio por Docena")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pedido.PrecioDocena, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pedido.PrecioDocena, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(model => model.Pedido.PrecioDocena, "Precio por Docena")
+            @Html.EditorFor(model => model.Pedido.PrecioDocena, new {htmlAttributes = new {@class = "form-control"}})
+            <small>@Html.ValidationMessageFor(model => model.Pedido.PrecioDocena, "", new {@class = "text-danger"})</small>
         </div>
     </div>
-    <div class="col-4 d-flex flex-column">
-        <h4 class="pasos">2. Seleccione los gustos que podrán elegirse</h4>
-        <hr />
-        <span id="textValidacionGustos" class="field-validation-error text-danger text-center d-none"></span>
+</div>
+<div class="col-md-4">
+    <div class="recuadro box-shadow bg-white">
+        <h5>2. Seleccione los gustos que podrán elegirse</h5>
+        <hr/>
         <table class="table m-0 w-100">
             <tr>
-                <th>
-                    Gusto
-                </th>
+                <th>Gusto</th>
                 <th class="th-check-column text-default-grid vertical-middle centrar">
                     <div class="check-column">
                         <input type="checkbox" id="selectAll">
@@ -54,7 +46,6 @@
                     </div>
                 </th>
             </tr>
-
             @for (int i = 0; i < Model.GustosDisponibles.Count; i++)
             {
                 <tr>
@@ -67,14 +58,14 @@
                             @Html.HiddenFor(p => p.GustosDisponibles[i].Nombre)
                             @Html.CheckBoxFor(p => p.GustosDisponibles[i].IsSelected)
                             @Html.LabelFor(p => p.GustosDisponibles[i].IsSelected, " ")
-
                         </div>
                     </td>
                 </tr>
-
             }
         </table>
-
+        <span id="textValidacionGustos" class="field-validation-error text-danger text-center d-none mt-2 d-inline-block"></span>
     </div>
-    
+</div>
+       
+
 

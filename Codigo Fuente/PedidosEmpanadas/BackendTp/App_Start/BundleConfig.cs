@@ -11,8 +11,8 @@ namespace BackendTp.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                        "~/Scripts/modernizr/modernizr-2.8.3.js",
                         "~/Scripts/jquery/jquery-3.3.1.min.js",
+                        "~/Scripts/modernizr/modernizr-2.8.3.js",
                         "~/Scripts/boostrap/bootstrap.min.js"
                         ));
 

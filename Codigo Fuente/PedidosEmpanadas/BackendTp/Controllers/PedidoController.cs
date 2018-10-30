@@ -7,6 +7,7 @@ using BackendTp.Enums;
 using BackendTp.Models;
 using BackendTp.Servicios;
 using BackendTp.Helpers;
+using Exceptions;
 using PagedList;
 
 namespace BackendTp.Controllers
@@ -66,8 +67,9 @@ namespace BackendTp.Controllers
         [HttpGet]
         public ActionResult Editar(int id)
         {
-
             var pedido = _servicioPedido.GetById(id);
+            if (pedido.IdEstadoPedido == (int)EstadosPedido.Cerrado)
+                throw new PedidoCerradoException();
             if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
             {
                 //todo
@@ -129,20 +131,20 @@ namespace BackendTp.Controllers
         {
             List<Pedido> pedidos = new List<Pedido>();
             pedidos = _servicioPedido.Lista(Sesion.IdUsuario);
-            return View(pedidos.ToPagedList(pag ?? 1, 4));
+            return View(pedidos.ToPagedList(pag ?? 1, 10));
         }
 
 
         public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
             //todo Esto es de crear. Hacer logica para modificacion del pedido
-            //if (ModelState.IsValid)
-            //{
-            //    var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-            //    _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados);
-            //    return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
+            if (ModelState.IsValid)
+            {
+                var pedidoId = _servicioPedido.Modificar(pedidoGustosEmpanadas);
+                _servicioInvitacionPedido.Modificar(pedidoId, pedidoGustosEmpanadas.Invitados);
+                return RedirectToAction("Lista");
 
-            //}
+            }
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();

@@ -7,6 +7,7 @@ using System.Web;
 using BackendTp.Helpers;
 using Exceptions;
 using BackendTp.Enums;
+using Exceptions.Enums;
 
 namespace BackendTp.Servicios
 {
@@ -20,7 +21,10 @@ namespace BackendTp.Servicios
 
         public Pedido GetById(int id)
         {
-            return Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
+            var pedido = Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
+            if (pedido == null)
+                throw new IdNoEncontradoException(Genero.Masculino, "Pedido");
+            return pedido;
         }
 
         public InvitacionPedido GetInvitacion(int idPedido, int idUsuario)
@@ -33,7 +37,7 @@ namespace BackendTp.Servicios
         //    return Db.InvitacionPedido.Where(i => i.IdPedido == idPedido).Where(i => i.IdUsuario == idUsuario).Select(i => i.Token).ToString();
         //}
 
-    public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
+        public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
         {
             var pedido = pge.Pedido;
             pedido.FechaCreacion = DateTime.Now;
@@ -45,28 +49,50 @@ namespace BackendTp.Servicios
                 if (gusto.IsSelected)
                     gustosSeleccionados.Add(Db.GustoEmpanada.FirstOrDefault(ge => ge.IdGustoEmpanada == gusto.Id));
             }
-            gustosSeleccionados.ForEach(gusto => pedido.GustoEmpanada.Add(gusto));
+            //gustosSeleccionados.ForEach(gusto => pedido.GustoEmpanada.Add(gusto));
+            pedido.GustoEmpanada = gustosSeleccionados;
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
             return pedido;
         }
 
-        public List<Pedido> Lista(int IdUsuario)
+        public List<Pedido> Lista(int idUsuario)
         {
-            List<Pedido> pedidosQuery = new List<Pedido>();
+            //List<Pedido> pedidosQuery = new List<Pedido>();
 
-            pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
-                            join InvitacionPedido i in Db.InvitacionPedido
-                            on p.IdPedido equals i.IdPedido
-                            where i.IdUsuario == IdUsuario
-                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
-
-            if (pedidosQuery == null)
-            {
-                return null;
-            }
+//            pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
+//                            join InvitacionPedido i in Db.InvitacionPedido
+//                            on p.IdPedido equals i.IdPedido
+//                            where i.IdUsuario == IdUsuario
+//                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
+            
+            var pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
+                join InvitacionPedido i in Db.InvitacionPedido
+                    on p.IdPedido equals i.IdPedido
+                where (i.IdUsuario == idUsuario || p.IdUsuarioResponsable == idUsuario)
+                
+                select p).OrderByDescending(p => p.FechaCreacion).Distinct().ToList();
 
             return pedidosQuery;
+        }
+
+        public int Modificar(PedidoGustosEmpanadasViewModel pge)
+        {
+            if(pge.Pedido == null)
+                throw new IdNoEncontradoException(Genero.Masculino, "Pedido");
+            var pedido = GetById(pge.Pedido.IdPedido);
+            pedido.FechaModificacion = DateTime.Now;
+            pedido.IdEstadoPedido = (int)EstadosPedido.Cerrado;
+            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
+            foreach (var gusto in pge.GustosDisponibles)
+            {
+                if (gusto.IsSelected)
+                    gustosSeleccionados.Add(Db.GustoEmpanada.FirstOrDefault(ge => ge.IdGustoEmpanada == gusto.Id));
+            }
+
+            pedido.GustoEmpanada = gustosSeleccionados;
+            Db.SaveChanges();
+            return pedido.IdPedido;
         }
 
     }

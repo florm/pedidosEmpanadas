@@ -3,43 +3,26 @@
 }
 
 @section HeadSection{
+    @RenderSection("PaginaHeader", false)
+}
+
+@section Navbar{
+    @Html.Partial("NavBar")
+}
+
+@RenderBody()
+
+@section custom_js_libraries
+{
+    @RenderSection("custom_js_libraries", required: false)
+}
+
+@section custom_js_code
+{
     <script>
         var pathPedidos = '@Url.Action("Lista", "Pedido")';
     </script>
+    @RenderSection("custom_js_code", required: false)
 }
-@RenderSection("PaginaHeader", false)
 
-<div id="contenedorAlertas" class="div-contenedor-alertas"></div>
-<nav class="navbar navbar-expand-lg navbar-light menu">
-    <a class="navbar-brand" href="#">ArmaTuPedido!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Lista", "Pedido")">Lista de Pedidos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Iniciar", "Pedido")">Iniciar Pedido</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("LogOut", "Home")">Cerrar Sesión</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="container-fluid mb-5">
-    @RenderBody()
-</div>
-
-<div class="row">
-    <footer class="footer">
-        <div class="container d-flex justify-content-center">
-            <span class="text-muted pr-3"><i class="fas fa-utensils"></i> ArmaTuPedido! </span>
-            <span class="text-muted pr-3">&copy; @DateTime.Now.Year</span>
-        </div>
-    </footer>
-</div>
 

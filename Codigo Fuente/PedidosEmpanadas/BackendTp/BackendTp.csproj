@@ -237,6 +237,8 @@
     <Content Include="Scripts\vistas\pedidos\pedidosEditar.js" />
     <Content Include="Scripts\vistas\pedidos\pedidosIniciar.js" />
     <Content Include="Scripts\vistas\home.js" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
@@ -347,6 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\datatables\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>

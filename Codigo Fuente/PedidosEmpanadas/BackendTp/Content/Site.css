@@ -2,6 +2,10 @@
     font-family: FontAwesome;
     src: url(fonts/fontawesome-webfont.woff);
 }
+html, body{
+    height: 100%;
+    background-color: #f3f3f4;
+}
 .div-contenedor-alertas {
     position: absolute;
     z-index: 999999;
@@ -18,22 +22,15 @@
        
     }
 
-.row{
-    margin-right: 0px !important;
-}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
+    height: calc(100% - 116px);
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 .navbar-brand{
     color: #ffffff !important;
 }
@@ -46,17 +43,23 @@ textarea {
     }
 
 #portada {
-    background-image: url(http://locosxlaparrilla.com/wp-content/uploads/2015/02/Receta-recetas-locos-x-la-parrilla-locosxlaparrilla-receta-empanadas-pollo-empanadas-pollo-receta-empanadas-empanadas-2.jpg);
-    height: 460px;
-    max-width: 100%;
-    filter: brightness(0.4);
+    background-image: url(https://s3.amazonaws.com/ucdim/wp-content/uploads/20180404093705/Recipe-Baked-Empanadas_wp-header.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+    filter: brightness(0.5);
 }
 
-.lista-portada{
+.lista-portada {
     position: absolute;
-    top:100px;
-    left: 35%;
+    top: 100px;
+    left: 0;
+    right: 0;
+    max-width: 530px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px 0 10px;
 }
     .lista-portada i{
         font-size: 40px;
@@ -82,9 +85,9 @@ textarea {
     color: #ffffff;
 }
 .footer {
-    width: 100%;
     line-height: 60px;
-    background-color: #f5f5f5;
+    background-color: #343a40;
+    color: #FFF!important;
 }
 
 .checkbox input[type="checkbox"] + label:before {
@@ -200,15 +203,6 @@ input[type="checkbox"]:checked + label:before {
     border: solid 1px #e4eaec;
 }
 
-table {
-    /*width: 50% !important;*/
-    margin: 0 auto !important;
-}
-
-.table td, .table th {
-    border-left: 1px solid #dee2e6 !important;
-}
-
 tbody {
     border-bottom: 1px solid #dee2e6 !important;
 }
@@ -222,11 +216,13 @@ tbody {
 
 .th-check-column {
     background: #f1f4f5;
-    width: 3rem;
 }
 
 .check-column {
     position: relative;
+    max-width: 50px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .check-column input[type="checkbox"] + label::before {
     box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -379,10 +375,6 @@ tbody {
         background: #fafafa;
     }
 
-table th.resizing {
-    cursor: col-resize;
-}
-
 .col-resizable {
     height: 24px;
     width: 2%;
@@ -466,3 +458,68 @@ table th.resizing {
         outline: 0;
         background-color: #454496;
     }
+
+.margin-top {
+    margin-top: 10px;
+}
+.margin-left {
+    margin-left: 10px;
+}
+.margin-right {
+    margin-right: 10px;
+}
+.margin-bottom {
+    margin-bottom: 10px;
+}
+.margin-all{
+    margin: 10px 15px;
+}
+.login-form {
+    padding: 10px 15px;
+    margin-top: 40px;
+}
+.full-height{
+    height: 100%;
+    overflow: auto;
+}
+.no-padding{
+    padding: 0!important;
+}
+.page-heading {
+    border-top: 0;
+    /*padding: 0 10px 20px 10px;*/
+}
+.title {
+    margin: 20px 0 30px 0;
+}
+.box-shadow {
+    box-shadow: 0px 0px 9px -5px;
+}
+.page-heading h2{
+    padding: 0 10px 15px 10px;
+    margin-top: 19px;
+    font-size: 24px;
+    color: #495057;
+}
+.page-heading .action_buttons{
+    margin-top: 15px;
+}
+.page-heading .action_buttons a{
+    float: right;
+    margin-left: 5px;
+}
+.bg-white{
+    background-color: #FFF;
+}
+.recuadro {
+    padding: 10px 20px 20px 20px;
+}
+.btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.action_item{
+    margin-left: 5px;
+}

@@ -35,6 +35,10 @@ namespace BackendTp
             {
                 filterContext.Result = AjaxException(filterContext.Exception.Message, filterContext);
             }
+            else
+            {
+                ArmarMsgRespuestaError(filterContext, filterContext.Exception.Message);
+            }
         }
 
         public void ValidarUsuarioLogueado()
@@ -58,6 +62,17 @@ namespace BackendTp
                 Data = new { ErrorMessage = message },
                 ContentEncoding = Encoding.UTF8,
             };
+        }
+
+        public static void ArmarMsgRespuestaError(ExceptionContext context, string msgError)
+        {
+            context.ExceptionHandled = true;
+            context.RouteData.Values.Add("Error", msgError);
+            //context.Result = new RedirectResult("~/Home/Error");
+            var response = context.HttpContext.Response;
+            response.ContentType = "text/plain";
+            response.StatusCode = 400;
+            response.Write(msgError);
         }
     }
 }
