@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using BackendTp.Helpers;
 using Exceptions;
 
 namespace BackendTp.Servicios
@@ -58,6 +59,31 @@ namespace BackendTp.Servicios
         public InvitacionPedido GetInvitacionPedidoPorPedido(int id, int idUsuario)
         {
             return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
+        }
+
+        public void Modificar(int idPedido, List<UsuarioViewModel> invitados)
+        {
+            var invitacionPedidoModel = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido).ToList();
+            var invitadosModel = GetInvitados(invitados, Sesion.IdUsuario);
+            foreach (var invitacionPedido in invitacionPedidoModel)
+            {
+                if (!invitadosModel.Contains(invitacionPedido.IdUsuario))
+                    Db.InvitacionPedido.Remove(invitacionPedido);
+            }
+
+            foreach (var invitado in invitadosModel)
+            {
+                if (!invitacionPedidoModel.Select(ip => ip.IdUsuario).Contains(invitado))
+                {
+                    var nuevaInvitacionPedido = new InvitacionPedido
+                    {
+                        IdUsuario = invitado,
+                        IdPedido = idPedido
+                    };
+                    Db.InvitacionPedido.Add(nuevaInvitacionPedido);
+                }
+            }
+            Db.SaveChanges();
         }
     }
 }

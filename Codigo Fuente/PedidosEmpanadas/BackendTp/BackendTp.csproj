@@ -349,7 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\datatables" />
+    <Folder Include="Scripts\datatables\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>

@@ -46,7 +46,11 @@ namespace BackendTp.Controllers
             return RedirectToAction("Index");
         }
 
-
+        public ActionResult Error()
+        {
+            ViewBag.MensajeDeError = RouteData.Values["Error"];
+            return View();
+        }
 
 
     }
