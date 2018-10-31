@@ -1,4 +1,5 @@
 ﻿using Api.Models;
+using BackendTp.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,26 +12,19 @@ using System.Web.Http.Results;
 
 namespace Api.Controllers
 {
-    //[Route("api/[controller]")]
-    //[EnableCors(origins: "http://localhost:57162/", headers: "*", methods: "*")]
+  
     public class PedidosController : ApiController
     {
-
-        //private readonly ServicioPedido _servicioPedido = new ServicioPedido();
-        //PedidoRequest pedido = new PedidoRequest();
         ////[HttpPost]
-        ////public JsonResult ConfirmarGustos([FromBody] JsonResult pedido)
-        ////{
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
 
+        public JsonResult<PedidoRequest> ConfirmarGustos([FromBody] PedidoRequest pedido)
+        {
+            var test = _servicioInvitacionPedido.ConfirmarGustos(pedido);
 
-        ////    return null;
-        ////}
+            var a = 5;
+            return null;
+        }
 
-        //[HttpPost]
-        //public PedidoRequest ConfirmarGustos([FromBody] PedidoRequest pedido)
-        //{
-
-        //    return null;
-        //}
     }
 }

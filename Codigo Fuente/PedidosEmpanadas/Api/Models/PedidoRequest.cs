@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Api.Models
 {
-    public class JsonResult
+    public class PedidoRequest
     {
         public List<GustoEmpanadasCantidad> GustoEmpanadasCantidad { get; set; }
         public int IdUsuario { get; set; }
