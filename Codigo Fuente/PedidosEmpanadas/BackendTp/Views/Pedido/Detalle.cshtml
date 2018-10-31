@@ -1,14 +1,17 @@
 ﻿@model BackendTp.Models.Pedido
+@using BackendTp.Helpers
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "Detalle";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
 }
-<hr />
-<h2>Detalles del Pedido N° @Html.DisplayFor(model => model.IdPedido)</h2>
 
+<hr />
+<h4 class="pasos">Detalles del Pedido N° @Html.DisplayFor(model => model.IdPedido)</h4>
+<hr />
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             Fecha de Creación
@@ -65,26 +68,65 @@
         <dd>
             $ @Html.DisplayFor(model => model.PrecioDocena)
         </dd>
+    <dt>
+        Fecha de Modificación
+    </dt>
 
-        <dt>
-            Fecha de Modificación
-        </dt>
+    @if (Model.FechaModificacion != null)
+    {
+        <dd>
+            @Html.DisplayFor(model => model.FechaModificacion)
+        </dd>
+    }
+    else
+    {
+        <dd>
+            No se realizaron modificaciones.
+        </dd>
+    }
 
-        @if (Model.FechaModificacion != null)
+    <dt>
+        Gustos de Empanadas
+    </dt>
+
+    @if (Model.GustoEmpanada.FirstOrDefault() != null)
+    {
+        foreach (var m in Model.GustoEmpanada)
         {
             <dd>
-                @Html.DisplayFor(model => model.FechaModificacion)
-            </dd>
-        }else
-        {
-            <dd>
-                No se realizaron modificaciones.
+                @(m.Nombre)
             </dd>
         }
-        
+    }
+    else
+    {
+        <dd>
+            No hay gustos disponibles.
+        </dd>
+    }
 
+
+    <dt>
+        Invitados
+    </dt>
+    @if (Model.InvitacionPedido.FirstOrDefault() != null)
+    {
+        foreach (var m in Model.InvitacionPedido)
+
+        {
+            <dd>
+                @(m.Usuario.Email)
+            </dd>
+        }
+    }
+    else
+    {
+        <dd>
+            No hay invitados en este pedido.
+        </dd>
+    }
     </dl>
+    <p>
+        @Html.ActionLink("Volver a Mis Pedidos", "Lista")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Volver a Mis Pedidos", "Lista")
-</p>

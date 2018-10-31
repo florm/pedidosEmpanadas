@@ -59,5 +59,21 @@ namespace BackendTp.Servicios
             return pedidosQuery;
         }
 
+        public Pedido Detalle(Pedido pedido)
+        {
+            Pedido pedidoDetalle = new Pedido();
+
+            pedidoDetalle = (from Pedido p in Db.Pedido.Include("EstadoPedido").Include("GustoEmpanada").Include("InvitacionPedido").Include("Usuario")
+                            where p.IdPedido == pedido.IdPedido
+                            select p).FirstOrDefault();
+
+            if (pedidoDetalle == null)
+            {
+                return null;
+            }
+
+            return pedidoDetalle;
+        }
+
     }
 }

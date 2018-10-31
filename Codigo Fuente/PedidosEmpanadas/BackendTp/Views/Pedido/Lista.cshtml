@@ -70,7 +70,7 @@ else
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Ver Detalles", "Detalle", new { id = item.IdPedido }) <br />
+
                         @if (item.EstadoPedido.Nombre == "Abierto")
                         {
                             @Html.ActionLink("Elegir Gustos", "ElegirGustos", new { id = item.IdPedido, usuarioId = Sesion.IdUsuario })<br />
@@ -79,6 +79,13 @@ else
                                 @Html.ActionLink("Editar", "Editar", new { id = item.IdPedido }) <br />
                                 @Html.ActionLink("Eliminar", "Eliminar", new { id = item.IdPedido })<br />
                             }
+                            else
+                            {
+                                @Html.ActionLink("Ver Detalles", "Detalle", new { id = item.IdPedido }) <br />
+                            }
+                        }else
+                        {
+                            @Html.ActionLink("Ver Detalles", "Detalle", new { id = item.IdPedido })
                         }
 
                     </td>

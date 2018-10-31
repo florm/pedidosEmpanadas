@@ -96,7 +96,8 @@ namespace BackendTp.Controllers
 
         public ActionResult Detalle(int id)
         {
-            Pedido pedido = _servicioPedido.GetById(id);
+            Pedido pedidoElegido = _servicioPedido.GetById(id);
+            Pedido pedido = _servicioPedido.Detalle(pedidoElegido);
             return View(pedido);
         }
     }
