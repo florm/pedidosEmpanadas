@@ -20,7 +20,7 @@ namespace Api.Controllers
 
         public JsonResult<PedidoRequest> ConfirmarGustos([FromBody] PedidoRequest pedido)
         {
-            var test = _servicioInvitacionPedido.ConfirmarGustos(pedido);
+            var resp = _servicioInvitacionPedido.ConfirmarGustos(pedido);
 
             var a = 5;
             return null;
