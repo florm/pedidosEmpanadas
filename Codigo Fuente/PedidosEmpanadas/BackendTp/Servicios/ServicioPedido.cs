@@ -81,6 +81,10 @@ namespace BackendTp.Servicios
             if(pge.Pedido == null)
                 throw new IdNoEncontradoException(Genero.Masculino, "Pedido");
             var pedido = GetById(pge.Pedido.IdPedido);
+            pedido.NombreNegocio = pge.Pedido.NombreNegocio;
+            pedido.Descripcion = pge.Pedido.Descripcion;
+            pedido.PrecioUnidad = pge.Pedido.PrecioUnidad;
+            pedido.PrecioDocena = pge.Pedido.PrecioDocena;
             pedido.FechaModificacion = DateTime.Now;
             pedido.IdEstadoPedido = (int)EstadosPedido.Cerrado;
             List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();

@@ -5,7 +5,7 @@
     <div class="recuadro box-shadow bg-white">
         <h5>1. Complete los datos del Pedido</h5>
         <hr/>
-        @Html.HiddenFor(p=>p.Pedido.IdPedido)
+        @*@Html.HiddenFor(p=>p.Pedido.IdPedido)*@
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
         <div class="form-group w-100">
             @Html.LabelFor(model => model.Pedido.NombreNegocio, "Nombre del Negocio")
