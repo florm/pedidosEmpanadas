@@ -350,6 +350,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\datatables\" />
+    <Folder Include="Scripts\toastr" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>

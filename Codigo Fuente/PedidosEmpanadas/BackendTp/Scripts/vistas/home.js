@@ -128,4 +128,22 @@
         llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
 
     }
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "preventDuplicates": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "4000",
+        "hideDuration": "10000",
+        "timeOut": "7000",
+        "extendedTimeOut": "10000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
 // });

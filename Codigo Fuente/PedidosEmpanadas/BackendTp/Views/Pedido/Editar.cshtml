@@ -20,8 +20,6 @@
          
         </div>
     </div>
-
-
     @using (Html.BeginForm("Modificar", "Pedido"))
     {
         @Html.AntiForgeryToken()
@@ -78,9 +76,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 text-right">
-            <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
+        <div class="row">  
+            <div class="col-12 text-right mt-3">
+                <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
+                <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
+            </div>
         </div>
     }
 </div>

@@ -75,9 +75,11 @@
                                             <a href="@Url.Action("Editar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-info" title="Editar">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </a>
-                                            <a href="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-danger" title="Eliminar">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </a>
+                                            <form action="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" method="post" title="Borrar">
+                                                <button type="button" class="action_item btn btn-xs btn-danger delete" title="Eliminar">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
                                         }
                                     }
                                 </div>
@@ -95,11 +97,37 @@
 @section custom_js_libraries
 {
     <script type="text/javascript" src="@Url.Content("~/Scripts/datatables/datatables.min.js")"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 }
 @section custom_js_code
  {
     <script>
         $(document).ready(function() {
+            $('button.delete').on('click',function(e){
+                e.preventDefault();
+                var form = $(this).parents('form');
+                swal({
+                    title: "Esta seguro?",
+                    text: "No se podrá recuperar el pedido elminiado",
+                    icon: "warning",
+                    buttons:  ["Cancelar", "Aceptar"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.post( form.attr('action'))
+                        .done(function(data) {
+                            toastr.success("El pedido fue borrado exitosamente.");
+                        })
+                        .fail(function(error) {
+                            console.log(error);
+                            toastr.error("Se produjo un error.");
+                        });
+                        //form.submit();
+                    }
+                });
+            });
+
             $(".table").DataTable({
                 responsive: true,
                 autoWidth: false, 
