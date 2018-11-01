@@ -132,7 +132,6 @@ namespace BackendTp.Controllers
 
             }
 
-            ViewBag.elegirPrimero = true;
             return View(gpu);
         }
 

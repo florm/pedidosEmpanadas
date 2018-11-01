@@ -87,55 +87,34 @@ namespace BackendTp.Servicios
             Db.SaveChanges();
         }
 
-        public List<InvitacionPedidoGustoEmpanadaUsuario> ConfirmarGustos(PedidoRequest pedido)
+        public bool ConfirmarGustos(PedidoRequest pedido)
         {
-            //ServicioGustoEmpanada _ServicioGustoEmpanada = new ServicioGustoEmpanada();
+            var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
+                
+            foreach(InvitacionPedidoGustoEmpanadaUsuario inv in listaDeGustosPorUsuario)
+            {
+                Db.InvitacionPedidoGustoEmpanadaUsuario.Remove(inv);
+            }    
 
-            //var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
-            //return listaDeGustosPorUsuario;
-            //var listaDeGustosPorUsuario = _ServicioGustoEmpanada.GetGustosDeUsuario(pedido.IdPedido, pedido.IdUsuario);
+            foreach (GustoEmpanadasCantidad g in pedido.GustoEmpanadasCantidad)
+            {
 
-            //if (listaDeGustosPorUsuario == null)
-            //{
-                foreach (GustoEmpanadasCantidad g in pedido.GustoEmpanadasCantidad)
+                if (g.Cantidad > 0)
                 {
-
-                    //if (listaDeGustosPorUsuario == null)
-                    //{
-                        if (g.Cantidad > 0)
+                        Db.InvitacionPedidoGustoEmpanadaUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario
                         {
-                            Db.InvitacionPedidoGustoEmpanadaUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario
-                            {
-                                Cantidad = g.Cantidad,
-                                IdGustoEmpanada = g.IdGustoEmpanada,
-                                IdPedido = pedido.IdPedido,
-                                IdUsuario = pedido.IdUsuario,
-                            });
-                        }
-                    //}
-                    //else
-                    //{
-                    //    foreach (InvitacionPedidoGustoEmpanadaUsuario i in listaDeGustosPorUsuario)
-                    //    {
-                    //        if (g.Cantidad != 0)
-                    //        {
-                    //            i.Cantidad = g.Cantidad;
-                    //            i.IdGustoEmpanada = g.IdGustoEmpanada;
-                    //        }
-                    //        else
-                    //        {
-                    //            Db.InvitacionPedidoGustoEmpanadaUsuario.Remove(i);
-                    //        }
-                    //    }
-                    //}
+                            Cantidad = g.Cantidad,
+                            IdGustoEmpanada = g.IdGustoEmpanada,
+                            IdPedido = pedido.IdPedido,
+                            IdUsuario = pedido.IdUsuario,
+                        });
                 }
 
-                //Db.SaveChanges();
+            }
 
-            //}
             Db.SaveChanges();
-            var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
-            return listaDeGustosPorUsuario;
+            
+            return true;
         }
     }
 }

@@ -13,10 +13,8 @@ Descripcion: @Model.Pedido.Descripcion<br />
 PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
 PrecioDocena: @Model.Pedido.PrecioDocena<br />
 
-@if (ViewBag.elegirPrimero)
-{
 
-    using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm(FormMethod.Post))
     {
 
         @Html.TextBox("idUsuario", Sesion.IdUsuario)
@@ -51,4 +49,3 @@ PrecioDocena: @Model.Pedido.PrecioDocena<br />
         </div>
         <button id="testbtn" type="button" class="btn btn-primary">Submit</button>
     }
-}
