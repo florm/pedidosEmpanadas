@@ -94,10 +94,6 @@ namespace BackendTp.Controllers
         [HttpGet]
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
-            //var invi = _servicioInvitacionPedido.GetInvitacionGustosPedidoPorPedido(id, usuarioId);
-            //var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id, usuarioId);
-            //return View(invi);
-
 
             GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
             var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
@@ -110,20 +106,32 @@ namespace BackendTp.Controllers
 
             }
 
-            if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count())
+            if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count() )
             {
-                foreach(InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario) { 
-                    foreach(GustosEmpanadasViewModel g in gpu.GustosDisponibles)
+                var dif = gpu.GustosDisponibles.Count() - gpu.GustosElegidosUsuario.Count();
+                for(int i = 0 ; i < dif ; i++)
+                {
+                    gpu.GustosElegidosUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario { });
+                }
+
+                foreach(GustosEmpanadasViewModel g in gpu.GustosDisponibles)
+                { 
+                    foreach(InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario)
                     {
                         if(gu.IdGustoEmpanada == g.Id)
                         {
                             g.IsSelected = true;
+                        } else if(g.IsSelected == false && gu.IdGustoEmpanada == 0)
+                        {
+                            gu.Cantidad = 0;
+                            gu.IdGustoEmpanada = g.Id;
+                            g.IsSelected = true;
                         }
                     }
                 }
+
             }
 
-            ViewBag.elegirPrimero = true;
             return View(gpu);
         }
 
