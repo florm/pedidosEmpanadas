@@ -125,7 +125,10 @@
 
         //pedidoRequest.IdUsuario = $("#IdTest").val();
         //pedidoRequest.Token = $("#TokenTest").val();
-        llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
-
+        llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "gustosOk", "mostrarMensajeDeError");
     }
+
+function gustosOk(data) {
+    mostrarMsgExito(data.Data.Mensaje);
+}
 // });

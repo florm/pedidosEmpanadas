@@ -6,20 +6,26 @@
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
 }
 
-<h2>ElegirGustos</h2>
+<div id="contenedorAlertas" class="div-contenedor-alertas"></div>
+<div>
+    <h2>ElegirGustos</h2>
+</div>
 
-Negocio: @Model.Pedido.NombreNegocio<br />
-Descripcion: @Model.Pedido.Descripcion<br />
-PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
-PrecioDocena: @Model.Pedido.PrecioDocena<br />
+<div>
 
+    Negocio: @Model.Pedido.NombreNegocio<br />
+    Descripcion: @Model.Pedido.Descripcion<br />
+    PrecioUnidad: @Model.Pedido.PrecioUnidad<br />
+    PrecioDocena: @Model.Pedido.PrecioDocena<br />
+
+</div>
 
     @using (Html.BeginForm(FormMethod.Post))
     {
 
-        @Html.TextBox("idUsuario", Sesion.IdUsuario)
-        @Html.TextBox("tokenUsuario", Model.InvitacionPedido.Token)
-        @Html.TextBox("idPedido", Model.Pedido.IdPedido)
+        @Html.Hidden("idUsuario", Sesion.IdUsuario)
+        @Html.Hidden("tokenUsuario", Model.InvitacionPedido.Token)
+        @Html.Hidden("idPedido", Model.Pedido.IdPedido)
 
         <div id="listaGustos">
             @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
@@ -33,17 +39,6 @@ PrecioDocena: @Model.Pedido.PrecioDocena<br />
                             <input id="@g.Id" value="@gu.Cantidad" class="gustosUsuario" />
                         }
                     }
-
-                    @*@if (g.IsSelected == false)
-                    {
-                        <label for="@g.Id">@g.Nombre</label>
-                            <input id="@g.Id" value="" class="gustosUsuario" />
-                    }*@
-                    @*@if ()
-                        {
-                            <label for="@g.Id">@g.Nombre</label>
-                            <input id="@g.Id" value="0" class="gustosUsuario" />
-                        }*@
                 </div>
             }
         </div>

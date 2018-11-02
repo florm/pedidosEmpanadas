@@ -89,18 +89,20 @@ namespace BackendTp.Servicios
 
         public bool ConfirmarGustos(PedidoRequest pedido)
         {
-            var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
-                
-            foreach(InvitacionPedidoGustoEmpanadaUsuario inv in listaDeGustosPorUsuario)
+            try
             {
-                Db.InvitacionPedidoGustoEmpanadaUsuario.Remove(inv);
-            }    
+                var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
 
-            foreach (GustoEmpanadasCantidad g in pedido.GustoEmpanadasCantidad)
-            {
-
-                if (g.Cantidad > 0)
+                foreach (InvitacionPedidoGustoEmpanadaUsuario inv in listaDeGustosPorUsuario)
                 {
+                    Db.InvitacionPedidoGustoEmpanadaUsuario.Remove(inv);
+                }
+
+                foreach (GustoEmpanadasCantidad g in pedido.GustoEmpanadasCantidad)
+                {
+
+                    if (g.Cantidad > 0)
+                    {
                         Db.InvitacionPedidoGustoEmpanadaUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario
                         {
                             Cantidad = g.Cantidad,
@@ -108,13 +110,18 @@ namespace BackendTp.Servicios
                             IdPedido = pedido.IdPedido,
                             IdUsuario = pedido.IdUsuario,
                         });
+                    }
+
                 }
 
-            }
+                Db.SaveChanges();
 
-            Db.SaveChanges();
-            
-            return true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
