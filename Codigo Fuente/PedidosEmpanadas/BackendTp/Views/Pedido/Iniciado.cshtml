@@ -1,19 +1,26 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Iniciado";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
 }
-@section PaginaHeader{
 
-    <link href="~/Content/pedidoIniciado.css" rel="stylesheet" />
+@section PaginaHeader{
+    
 }
-<div class="row">
-    <div class="col-12">
-        <h2 class="text-center p-3">Pedido Iniciado Correctamente</h2>
+<div class="col-md-12 col-lg-6 offset-lg-3">
+    <div class="row wrapper title box-shadow page-heading bg-white">
+        <div class="col-12">
+            <h2>Pedido Iniciado Correctamente</h2>
+        </div>
     </div>
-    <div class="col-12 text-center">
-        <span class="pr-1">Si desea modificar el pedido haga click</span>
-        <a href="@Url.Action("Editar", "Pedido", new { id = Url.RequestContext.RouteData.Values["id"] })">aquí</a>
-    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="recuadro box-shadow bg-white">
+                <span class="pr-1">Si desea modificar el pedido haga click</span>
+                <a href="@Url.Action("Editar", "Pedido", new {id = Url.RequestContext.RouteData.Values["id"]})">aquí</a>
+            </div>
+        </div>
+    </div>    
 </div>
+
+
 

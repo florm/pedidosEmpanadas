@@ -1,24 +1,27 @@
-﻿// $(document).ready(function () {
-    var selectAll = $("#selectAll");
-    var textValidacionGustos = $("#textValidacionGustos");
-    var btnIniciar = $("#btnIniciar");
-    var inputInvitados = $("#inputInvitados");
-    var divInvitado = $("#divInvitado");
+﻿var selectAll = $("#selectAll");
+var textValidacionGustos = $("#textValidacionGustos");
+var btnIniciar = $("#btnIniciar");
+var inputInvitados = $("#inputInvitados");
+var divInvitado = $("#divInvitado");
 
-   var btnIniciar = $("#btnIniciar");
-    var invitadosEditar = $(".invitadosEditar");
-    inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
-    if(invitadosEditar != null || invitadosEditar != undefined)
-        agregarTag(inputInvitados, invitadosEditar);
+var btnIniciar = $("#btnIniciar");
+var invitadosEditar = $(".invitadosEditar");
+inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
+if(invitadosEditar != null || invitadosEditar != undefined)
+    agregarTag(inputInvitados, invitadosEditar);
 
-    selectAll.click(function () {
-        seleccionarTodos(this);
-    });
+selectAll.click(function () {
+    seleccionarTodos(this);
+});
 
-    btnIniciar.click(function (e) {
-        validacionYEnvio(e);
-    });
-// });
+btnIniciar.click(function (e) {
+    validacionYEnvio(e);
+});
+
+var btnCancelar = $("#btnCancelar");
+btnCancelar.on('click', function () {
+    history.go(-1);
+});
 
 
 
