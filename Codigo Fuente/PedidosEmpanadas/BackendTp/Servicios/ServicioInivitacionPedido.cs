@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using BackendTp.Helpers;
 using Exceptions;
+using Api.Models;
 
 namespace BackendTp.Servicios
 {
@@ -84,6 +85,43 @@ namespace BackendTp.Servicios
                 }
             }
             Db.SaveChanges();
+        }
+
+        public bool ConfirmarGustos(PedidoRequest pedido)
+        {
+            try
+            {
+                var listaDeGustosPorUsuario = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == pedido.IdPedido && ip.IdUsuario == pedido.IdUsuario).ToList();
+
+                foreach (InvitacionPedidoGustoEmpanadaUsuario inv in listaDeGustosPorUsuario)
+                {
+                    Db.InvitacionPedidoGustoEmpanadaUsuario.Remove(inv);
+                }
+
+                foreach (GustoEmpanadasCantidad g in pedido.GustoEmpanadasCantidad)
+                {
+
+                    if (g.Cantidad > 0)
+                    {
+                        Db.InvitacionPedidoGustoEmpanadaUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario
+                        {
+                            Cantidad = g.Cantidad,
+                            IdGustoEmpanada = g.IdGustoEmpanada,
+                            IdPedido = pedido.IdPedido,
+                            IdUsuario = pedido.IdUsuario,
+                        });
+                    }
+
+                }
+
+                Db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
