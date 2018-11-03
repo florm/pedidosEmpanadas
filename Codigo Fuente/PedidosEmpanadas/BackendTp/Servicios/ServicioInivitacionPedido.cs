@@ -7,6 +7,8 @@ using System.Web;
 using BackendTp.Helpers;
 using Exceptions;
 using Api.Models;
+using GustoEmpanadasCantidad = BackendTp.Models.GustoEmpanadasCantidad;
+using PedidoRequest = BackendTp.Models.PedidoRequest;
 
 namespace BackendTp.Servicios
 {

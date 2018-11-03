@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTp", "BackendTp\Back
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{5768A01D-A777-472C-8B9A-192AB1B75C9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{06759AB0-7673-43B2-9C61-B31E14D97DD7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06759AB0-7673-43B2-9C61-B31E14D97DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06759AB0-7673-43B2-9C61-B31E14D97DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06759AB0-7673-43B2-9C61-B31E14D97DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06759AB0-7673-43B2-9C61-B31E14D97DD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
