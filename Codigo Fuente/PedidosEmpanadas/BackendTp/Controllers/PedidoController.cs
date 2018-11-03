@@ -104,7 +104,6 @@ namespace BackendTp.Controllers
             foreach (var gusto in gustos)
             {
                 gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-
             }
 
             if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count() )

@@ -22,76 +22,76 @@
             @Html.ActionLink("Iniciar Pedido", "Iniciar",null, new { @class = "btn btn-primary"})
         </div>
     </div>
+    <div class="bg-white box-shadow recuadro">
     @if (Model == null || !Model.Any())
     {
-        <p>No hay registros de pedidos.</p>
+        <span>No se encuentran pedidos registrados actualmente.</span>
     }
     else
     {
-        <div class="bg-white box-shadow recuadro">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Fecha de Inicio</th>
+                    <th>Nombre del negocio</th>
+                    <th>Estado del Pedido</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>Fecha de Inicio</th>
-                        <th>Nombre del negocio</th>
-                        <th>Estado del Pedido</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FechaCreacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NombreNegocio)
-                            </td>
-                            <td>
-                                @item.EstadoPedido.Nombre
-                            </td>
-                            <td>
-                                @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaCreacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreNegocio)
+                        </td>
+                        <td>
+                            @item.EstadoPedido.Nombre
+                        </td>
+                        <td>
+                            @if (item.IdUsuarioResponsable == Sesion.IdUsuario)
+                            {
+                                <text>Responsable</text>
+                            }
+                            else
+                            {
+                                <text>Invitado</text>
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row">
+                                @if (item.EstadoPedido.Nombre == "Abierto")
                                 {
-                                    <text>Responsable</text>
-                                }
-                                else
-                                {
-                                    <text>Invitado</text>
-                                }
-                            </td>
-                            <td>
-                                <div class="d-flex flex-row">
-                                    @if (item.EstadoPedido.Nombre == "Abierto")
+                                    <a href="@Url.Action("ElegirGustos", "Pedido", new {id = item.IdPedido, usuarioId = Sesion.IdUsuario})" class="action_item btn btn-xs btn-success" title="Elegir Gustos">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </a>
+                                    if (item.IdUsuarioResponsable == Sesion.IdUsuario)
                                     {
-                                        <a href="@Url.Action("ElegirGustos", "Pedido", new {id = item.IdPedido, usuarioId = Sesion.IdUsuario})" class="action_item btn btn-xs btn-success" title="Elegir Gustos">
-                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        <a href="@Url.Action("Editar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-info" title="Editar">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
-                                        if (item.IdUsuarioResponsable == Sesion.IdUsuario)
-                                        {
-                                            <a href="@Url.Action("Editar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-info" title="Editar">
-                                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
-                                            <form action="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" method="post" title="Borrar">
-                                                <button type="button" class="action_item btn btn-xs btn-danger delete" title="Eliminar">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </button>
-                                            </form>
-                                        }
+                                        <form action="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" method="post" title="Borrar">
+                                            <button type="button" class="action_item btn btn-xs btn-danger delete" title="Eliminar">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
                                     }
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                    <tbody>
-                </table>
-            </div>
-            @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new {pag}))
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tbody>
+            </table>
         </div>
+        @Html.PagedListPager(Model, pag => Url.Action("Lista", "Pedido", new {pag}))
     }
+    </div>
 </div>
 
 @section custom_js_libraries

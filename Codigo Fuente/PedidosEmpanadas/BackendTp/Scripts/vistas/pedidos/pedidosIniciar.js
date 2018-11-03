@@ -18,11 +18,6 @@ btnIniciar.click(function (e) {
     validacionYEnvio(e);
 });
 
-var btnCancelar = $("#btnCancelar");
-btnCancelar.on('click', function () {
-    history.go(-1);
-});
-
 
 
 

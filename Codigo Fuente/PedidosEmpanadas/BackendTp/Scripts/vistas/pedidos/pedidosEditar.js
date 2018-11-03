@@ -48,9 +48,4 @@ function buscarInvitadosNoEliminados() {
     return invitadosConfirmados;
 }
 
-var btnCancelar = $("#btnCancelar");
-btnCancelar.on('click', function () {
-    history.go(-1);
-});
-
 

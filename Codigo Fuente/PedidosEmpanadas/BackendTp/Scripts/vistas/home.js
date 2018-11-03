@@ -132,6 +132,11 @@ function gustosOk(data) {
     mostrarMsgExito(data.Data.Mensaje);
 }
 
+var btnCancelar = $("#btnCancelar");
+btnCancelar.on('click', function () {
+    history.go(-1);
+});
+
 toastr.options = {
     "closeButton": true,
     "debug": false,
