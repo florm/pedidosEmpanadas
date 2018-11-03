@@ -96,8 +96,10 @@
 
 @section custom_js_libraries
 {
-    <script type="text/javascript" src="@Url.Content("~/Scripts/datatables/datatables.min.js")"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="@Url.Content("~/Scripts/datatables/datatables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/sweetalert/sweetalert.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment/moment-with-locales.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment/datetime-moment.js")"></script>
 }
 @section custom_js_code
  {
@@ -127,32 +129,37 @@
                     }
                 });
             });
-
+           
+            $.fn.dataTable.moment( 'D/M/YYYY H:mm:ss' );//para que se pueda ordenar por fecha
             $(".table").DataTable({
                 responsive: true,
                 autoWidth: false, 
-                "paging":   false,
-                "ordering": false,
-                "info":     false,
-                "searching": false,
-                "columnDefs": [ {
-                        "targets": -1,
-                        "orderable": false,
-                        "width":"50px"
-                    },
+                paging:   false,
+                ordering: true,
+                info:     false,
+                searching: false,
+                columnDefs: [ {
+                        targets: -1,
+                        orderable: false,
+                        width:"50px"
+                    },{
+                        targets: 0,
+                        width:"180px"
+                    }
                 ],
-                "language": {
-                    "lengthMenu": "Mostrando _MENU_ registros",
-                    "search": "Buscar",
-                    "zeroRecords": "No se encontraron registros",
-                    "info": "Mostrando _START_ de _END_ sobre un total de _TOTAL_ elementos",
-                    "infoFiltered":   "(filtrados de un total de _MAX_ total registros)",
-                    "processing": "<i class='fa fa-refresh fa-spin'></i>",
-                    "paginate": {
-                        "first":      "Primera",
-                        "last":       "Ultima",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
+                order: [[ 0, "desc" ]],
+                language: {
+                    lengthMenu: "Mostrando _MENU_ registros",
+                    search: "Buscar",
+                    zeroRecords: "No se encontraron registros",
+                    info: "Mostrando _START_ de _END_ sobre un total de _TOTAL_ elementos",
+                    infoFiltered:   "(filtrados de un total de _MAX_ total registros)",
+                    processing: "<i class='fa fa-refresh fa-spin'></i>",
+                    paginate: {
+                        first:      "Primera",
+                        last:       "Ultima",
+                        next:       "Siguiente",
+                        previous:   "Anterior"
                     },
                 },
             });

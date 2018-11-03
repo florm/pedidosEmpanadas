@@ -88,6 +88,7 @@ html, body{
     line-height: 60px;
     background-color: #343a40;
     color: #FFF!important;
+    
 }
 
 .checkbox input[type="checkbox"] + label:before {
@@ -458,7 +459,9 @@ tbody {
         outline: 0;
         background-color: #454496;
     }
-
+.container{
+    padding-bottom: 15px;
+}
 .margin-top {
     margin-top: 10px;
 }
@@ -481,7 +484,6 @@ tbody {
 .full-height{
     min-height: 100%;
     overflow: auto;
-    padding-bottom: 15px;
 }
 .no-padding{
     padding: 0!important;
