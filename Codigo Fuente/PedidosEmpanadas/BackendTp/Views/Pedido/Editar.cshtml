@@ -20,27 +20,26 @@
          
         </div>
     </div>
-
-
     @using (Html.BeginForm("Modificar", "Pedido"))
     {
         @Html.AntiForgeryToken()
-        <div class="row">
-            @Html.Partial("_pedidoFormulario")
-            <div class="col-md-4">
-                <div class="recuadro box-shadow bg-white">
-                    <h5>3. Ingrese email de los invitados</h5>
-                    <hr />
-                    <div class="table-responsive table-hover">
-                        <table id="tablaInvitados" class="table">
-                            <thead>
+    <div class="row">
+        @Html.HiddenFor(p => p.Pedido.IdPedido)
+        @Html.Partial("_pedidoFormulario")
+        <div class="col-md-4">
+            <div class="recuadro box-shadow bg-white">
+                <h5>3. Ingrese email de los invitados</h5>
+                <hr />
+                <div class="table-responsive table-hover">
+                    <table id="tablaInvitados" class="table">
+                        <thead>
                             <tr>
                                 <th>Invitado</th>
                                 <th>Completó su pedido</th>
                                 <th>Eliminar</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             @foreach (var invitado in Model.Invitados)
                             {
                                 <tr>
@@ -55,7 +54,7 @@
                                         {
                                             <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido="True" eliminado="false"></i>
                                         }
-    
+
                                     </td>
                                 </tr>
                             }       
@@ -78,9 +77,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 text-right">
-            <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
+        <div class="row">  
+            <div class="col-12 text-right mt-3">
+                <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
+                <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
+            </div>
         </div>
     }
 </div>

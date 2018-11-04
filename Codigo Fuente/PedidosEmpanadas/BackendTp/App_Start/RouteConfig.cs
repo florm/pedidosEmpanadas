@@ -18,6 +18,12 @@ namespace BackendTp
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "DefaultApi",
+            //    url: "api/{controller}/{controller}/{id}",
+            //    defaults: new { controller = "home", action = "index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

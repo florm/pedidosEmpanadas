@@ -13,7 +13,8 @@ namespace BackendTp.App_Start
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                         "~/Scripts/jquery/jquery-3.3.1.min.js",
                         "~/Scripts/modernizr/modernizr-2.8.3.js",
-                        "~/Scripts/boostrap/bootstrap.min.js"
+                        "~/Scripts/boostrap/bootstrap.min.js",
+                        "~/Scripts/toastr/toastr.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/scriptsPropios").Include(
@@ -24,6 +25,7 @@ namespace BackendTp.App_Start
             bundles.Add(new StyleBundle("~/css").Include(
                           "~/Content/bootstrap/bootstrap.min.css",
                           "~/Content/font-awesome.min.css",
+                          "~/Scripts/toastr/toastr.min.css",
                           "~/Content/Site.css"));
 
         }

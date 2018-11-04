@@ -52,6 +52,7 @@ namespace BackendTp.Controllers
         {
             return View();
         }
+        
         public ActionResult Elegir()
         {
             var gustos = _servicioGustoEmpanada.GetAll();
@@ -103,7 +104,6 @@ namespace BackendTp.Controllers
             foreach (var gusto in gustos)
             {
                 gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-
             }
 
             if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count() )
@@ -142,7 +142,6 @@ namespace BackendTp.Controllers
             return View(pedidos.ToPagedList(pag ?? 1, 10));
         }
 
-
         public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
             //todo Esto es de crear. Hacer logica para modificacion del pedido
@@ -157,6 +156,12 @@ namespace BackendTp.Controllers
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();
             return View("Editar", pedidoGustosEmpanadas);
+        }
+
+        [HttpPost]
+        public void Eliminar(int id)
+        {
+            _servicioPedido.Eliminar(id);   
         }
     }
 }

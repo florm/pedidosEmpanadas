@@ -51,7 +51,7 @@ namespace BackendTp
         {
             if (string.IsNullOrEmpty(message))
             {
-                message = "Server error";   //TODO: Replace with better message
+                message = "Server error";
             }
 
             filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -68,7 +68,7 @@ namespace BackendTp
         {
             context.ExceptionHandled = true;
             context.RouteData.Values.Add("Error", msgError);
-            //context.Result = new RedirectResult("~/Home/Error");
+            context.Result = new RedirectResult("~/Home/Error");
             var response = context.HttpContext.Response;
             response.ContentType = "text/plain";
             response.StatusCode = 400;

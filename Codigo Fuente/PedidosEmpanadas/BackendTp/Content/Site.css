@@ -88,6 +88,7 @@ html, body{
     line-height: 60px;
     background-color: #343a40;
     color: #FFF!important;
+    
 }
 
 .checkbox input[type="checkbox"] + label:before {
@@ -458,7 +459,9 @@ tbody {
         outline: 0;
         background-color: #454496;
     }
-
+.container{
+    padding-bottom: 15px;
+}
 .margin-top {
     margin-top: 10px;
 }
@@ -479,7 +482,7 @@ tbody {
     margin-top: 40px;
 }
 .full-height{
-    height: 100%;
+    min-height: 100%;
     overflow: auto;
 }
 .no-padding{
@@ -512,7 +515,7 @@ tbody {
     background-color: #FFF;
 }
 .recuadro {
-    padding: 10px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
 }
 .btn-group-xs>.btn, .btn-xs {
     padding: 1px 5px;
@@ -522,4 +525,46 @@ tbody {
 }
 .action_item{
     margin-left: 5px;
+}
+#toast-container > .toast {
+    background-image: none !important;
+}
+
+#toast-container > .toast:before {
+    position: fixed;
+    font-family: FontAwesome;
+    font-size: 24px;
+    line-height: 18px;
+    float: left;
+    color: #FFF;
+    padding-right: 0.5em;
+    margin: auto 0.5em auto -1.5em;
+}
+#toast-container > .toast-warning:before {
+    content: "\f071";
+    margin-top: 3px;
+}
+#toast-container > .toast-error:before {
+    content: "\f12a";
+    margin-top: 3px;
+}
+#toast-container > .toast-info:before {
+    content: "\f129";
+    margin-top: 3px;
+}
+#toast-container > .toast-success:before {
+    content: "\f00c";
+    margin-top: 3px;
+}
+.toast-success {
+    background-color: #1ab394;
+}
+.toast-info {
+    background-color: #23c6c8;
+}
+.toast-warning {
+    background-color: #f8ac59;
+}
+.toast-error {
+    background-color: #ed5565;
 }
