@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-lg-6 offset-lg-3">
             <div class="recuadro box-shadow bg-white">
                 <div>
                     <label class="font-weight-bold">Negocio:</label> @Model.Pedido.NombreNegocio<br />
@@ -21,34 +21,34 @@
                     <label class="font-weight-bold">Unidad:</label> $@Model.Pedido.PrecioUnidad<br />
                     <label class="font-weight-bold">Docena:</label> $@Model.Pedido.PrecioDocena<br />
                 </div>
-
-                @using (Html.BeginForm(FormMethod.Post))
+                <hr/>
+                <span class="text-black-50">Elige cuantas empanadas quieres de cada gusto.</span><br /><br />
+                
+                @using (Html.BeginForm("ConfirmarGustos", "Pedidos",FormMethod.Post, new { @class="form-horizontal" }))
                 {
             
                     @Html.Hidden("idUsuario", Sesion.IdUsuario)
                     @Html.Hidden("tokenUsuario", Model.InvitacionPedido.Token)
                     @Html.Hidden("idPedido", Model.Pedido.IdPedido)
             
-                    <div id="listaGustos">
-                        @foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
+                    foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
+                    {
+                        foreach (InvitacionPedidoGustoEmpanadaUsuario gu in Model.GustosElegidosUsuario)
                         {
-                            <div>
-                                @foreach (InvitacionPedidoGustoEmpanadaUsuario gu in Model.GustosElegidosUsuario)
-                                {
-                                    if (gu.IdGustoEmpanada == g.Id)
-                                    {
-                                        <label for="@g.Id">@g.Nombre</label>
-                                        <input id="@g.Id" value="@gu.Cantidad" class="gustosUsuario" />
-                                    }
-                                }
-                            </div>
+                            if (gu.IdGustoEmpanada == g.Id)
+                            {
+                                <div class="form-group w-100">
+                                    <label for="@g.Id" class="control-label">@g.Nombre</label>
+                                    <input id="@g.Id" value="@gu.Cantidad" class="form-control gustosUsuario" />
+                                </div>
+                            }
                         }
-                    </div>
+                    }
                 }
             </div>
         </div>
         <div class="col-12 text-right mt-3">
-            <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
+            <input type="reset" value="Volver" id="btnCancelar" class="btn btn-cancelar mr-1" />
             <button id="testbtn" type="button" class="btn btn-primary">Aceptar</button>
         </div>
     </div>
