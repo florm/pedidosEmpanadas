@@ -131,6 +131,7 @@
                 }
                 else if (e.readyState == 0) {
                     // Network error
+                    console.log(e);
                     return mostrarMsgError("No se ha podido establecer la conexión con el servidor. Revise si tiene acceso a internet y vuelva a intentar la operación nuevamente");
                 }
 
