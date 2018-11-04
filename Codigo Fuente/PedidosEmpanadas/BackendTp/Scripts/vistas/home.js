@@ -93,7 +93,6 @@ function validarTextRepetir() {
 
 $("#testbtn").click(function () {
     probandoajax();
-
 });
 
 function probandoajax() {
@@ -103,7 +102,7 @@ function probandoajax() {
     pedidoRequest.IdPedido = $("#idPedido").val();
     pedidoRequest.Token = $("#tokenUsuario").val();
 
-    var GustoEmpanadasCantidad = $("#listaGustos input").map(function () {
+    var GustoEmpanadasCantidad = $("#listaGustos input.gustosUsuario").map(function () {
         var GustoEmpanadasCantidad = new Object();
         //GustoEmpanadasCantidad.Nombre = $("#listTest").val();
         //GustoEmpanadasCantidad.IdGustoEmpanada = $(this).data("id");

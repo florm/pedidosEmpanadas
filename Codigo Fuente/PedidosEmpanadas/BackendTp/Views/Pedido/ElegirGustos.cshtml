@@ -24,7 +24,7 @@
                 <hr/>
                 <span class="text-black-50">Elige cuantas empanadas quieres de cada gusto.</span><br /><br />
                 
-                @using (Html.BeginForm("ConfirmarGustos", "Pedidos",FormMethod.Post, new { @class="form-horizontal" }))
+                @using (Html.BeginForm("ConfirmarGustos", "Pedidos",FormMethod.Post, new { @id="listaGustos" }))
                 {
             
                     @Html.Hidden("idUsuario", Sesion.IdUsuario)
