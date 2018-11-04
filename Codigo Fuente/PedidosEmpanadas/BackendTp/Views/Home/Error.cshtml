@@ -97,22 +97,32 @@
         .notfound a:hover {
             opacity: 0.8;
         }
+        
+        .footer{
+             margin-top: 0!important; 
+        }
     </style>
 }
 
-
-    <div class="col-12">
-        <div id="notfound">
-            <div class="notfound">
-                <div class="notfound-404">
-                    <h1>@ViewBag.code</h1>
-                </div>
-                <h2>Oops! se produjo un error.</h2>
-                <p>@ViewBag.Description</p>
-                <a href="/">Ir al Inicio</a>
+<div class="col-12">
+    <div id="notfound">
+        <div class="notfound">
+            <div class="notfound-404">
+                <h1>@ViewBag.code</h1>
             </div>
+            <h2>Oops! se produjo un error.</h2>
+            <p>@ViewBag.Description</p>
+            @if (Sesion.IdUsuario == 0)
+            {
+                @Html.ActionLink("Vuelve al Inicio", "Index", "Home")
+            }
+            else
+            {
+                @Html.ActionLink("Vuelve a Tus Pedidos", "Lista", "Pedido")
+            }
         </div>
     </div>
+</div>
 
 
 

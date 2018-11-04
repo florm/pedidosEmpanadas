@@ -16,16 +16,14 @@ namespace BackendTp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return Sesion.IdUsuario != 0 ? (ActionResult) RedirectToAction("Lista","Pedido") : View();
         }
-
 
         public JsonResult Registro(Usuario usuario)
         {
             _servicioUsuario.CrearUsuario(usuario);
             return Json("");
         }
-
 
         public JsonResult LoginOk(Usuario usuario)
         {
