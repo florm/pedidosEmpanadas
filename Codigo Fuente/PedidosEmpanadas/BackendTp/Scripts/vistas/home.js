@@ -124,7 +124,7 @@ function probandoajax() {
 
     //pedidoRequest.IdUsuario = $("#IdTest").val();
     //pedidoRequest.Token = $("#TokenTest").val();
-    llamadaAjax("http://localhost:56230/api/pedidos", JSON.stringify(pedidoRequest), true, "pedidoOk", "mostrarMensajeDeError");
+    llamadaAjax("/api/pedidos/confirmargustos", JSON.stringify(pedidoRequest), true, "gustosOk", "mostrarMensajeDeError");
 
 }
 

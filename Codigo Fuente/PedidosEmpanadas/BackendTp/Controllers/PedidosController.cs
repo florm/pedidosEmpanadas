@@ -10,16 +10,17 @@ using System.Web.Http.Cors;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using BackendTp.Models;
-
+using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace BackendTp.Controllers
 {
-  
+    
     public class PedidosController : ApiController
     {
         ////[HttpPost]
         private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
 
+        //[Route("api/pedidos/confirmargustos")]
         public JsonResult ConfirmarGustos([FromBody] PedidoRequest pedido)
         {
             var resp = _servicioInvitacionPedido.ConfirmarGustos(pedido);
