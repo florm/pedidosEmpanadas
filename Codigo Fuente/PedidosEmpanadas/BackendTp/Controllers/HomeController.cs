@@ -54,6 +54,15 @@ namespace BackendTp.Controllers
         
         public ActionResult Error(int error = 0)
         {
+            if (error == 0)
+            {
+                ViewBag.code = "505";
+            }
+            else
+            {
+                ViewBag.code = error;
+            }
+                
             switch (error)
             {
                 case 505:
@@ -63,12 +72,12 @@ namespace BackendTp.Controllers
 
                 case 404:
                     ViewBag.Title = "PÁGINA NO ENCONTRADA";
-                    ViewBag.Description = "¡Lo sentimos! Esta página no está disponible, no existe o no se puede encontrar.";
+                    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
                     break;
 
                 default:
                     ViewBag.Title = "PÁGINA NO ENCONTRADA";
-                    ViewBag.Description = "¡Lo sentimos! Esta página no está disponible, no existe o no se puede encontrar.";
+                    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
                     break;
             }
 
