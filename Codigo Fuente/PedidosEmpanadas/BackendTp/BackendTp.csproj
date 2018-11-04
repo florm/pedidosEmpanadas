@@ -345,6 +345,8 @@
     <Content Include="Views\Pedido\Editar.cshtml" />
     <Content Include="Views\Pedido\_pedidoFormulario.cshtml" />
     <Content Include="Views\Pedido\_invitados.cshtml" />
+    <Content Include="Views\Pedido\Detalle.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

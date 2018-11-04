@@ -46,12 +46,34 @@ namespace BackendTp.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Error()
+//        public ActionResult Error()
+//        {
+//            ViewBag.MensajeDeError = RouteData.Values["Error"];
+//            return View();
+//        }
+        
+        public ActionResult Error(int error = 0)
         {
-            ViewBag.MensajeDeError = RouteData.Values["Error"];
+            switch (error)
+            {
+                case 505:
+                    ViewBag.Title = "ERROR EN EL SERVIDOR";
+                    ViewBag.Description = "Ocurrió un error inesperado, esperamos que no vuelva a pasar.";
+                    break;
+
+                case 404:
+                    ViewBag.Title = "PÁGINA NO ENCONTRADA";
+                    ViewBag.Description = "¡Lo sentimos! Esta página no está disponible, no existe o no se puede encontrar.";
+                    break;
+
+                default:
+                    ViewBag.Title = "PÁGINA NO ENCONTRADA";
+                    ViewBag.Description = "¡Lo sentimos! Esta página no está disponible, no existe o no se puede encontrar.";
+                    break;
+            }
+
             return View();
         }
-
-
+        
     }
 }

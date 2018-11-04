@@ -1,0 +1,132 @@
+﻿@model BackendTp.Models.Pedido
+@using BackendTp.Helpers
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+}
+
+<hr />
+<h4 class="pasos">Detalles del Pedido N° @Html.DisplayFor(model => model.IdPedido)</h4>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Fecha de Creación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            Usuario Responsable
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Email)
+        </dd>
+
+        <dt>
+            Descripción del Pedido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Estado del Pedido
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoPedido.Nombre)
+        </dd>
+
+        <dt>
+            Nombre del Negocio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreNegocio)
+        </dd>
+
+        <dt>
+            Precio por Unidad
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.PrecioUnidad)
+        </dd>
+
+        <dt>
+            Precio por Docena
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.PrecioDocena)
+        </dd>
+    <dt>
+        Fecha de Modificación
+    </dt>
+
+    @if (Model.FechaModificacion != null)
+    {
+        <dd>
+            @Html.DisplayFor(model => model.FechaModificacion)
+        </dd>
+    }
+    else
+    {
+        <dd>
+            No se realizaron modificaciones.
+        </dd>
+    }
+
+    <dt>
+        Gustos de Empanadas
+    </dt>
+
+    @if (Model.GustoEmpanada.FirstOrDefault() != null)
+    {
+        foreach (var m in Model.GustoEmpanada)
+        {
+            <dd>
+                @(m.Nombre)
+            </dd>
+        }
+    }
+    else
+    {
+        <dd>
+            No hay gustos disponibles.
+        </dd>
+    }
+
+
+    <dt>
+        Invitados
+    </dt>
+    @if (Model.InvitacionPedido.FirstOrDefault() != null)
+    {
+        foreach (var m in Model.InvitacionPedido)
+
+        {
+            <dd>
+                @(m.Usuario.Email)
+            </dd>
+        }
+    }
+    else
+    {
+        <dd>
+            No hay invitados en este pedido.
+        </dd>
+    }
+    </dl>
+    <p>
+        @Html.ActionLink("Volver a Mis Pedidos", "Lista")
+    </p>
+</div>
