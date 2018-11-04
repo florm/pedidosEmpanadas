@@ -83,10 +83,11 @@
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("Ver Detalles", "Detalle", new {id = item.IdPedido})" class="action_item btn btn-xs btn-info" title="Ver Detalles">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <a href="@Url.Action("Detalle", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-primary" title="Ver Detalles">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     }
+                                }
                             </div>
                         </td>
                     </tr>
