@@ -62,6 +62,9 @@
       <HintPath>..\..\..\..\..\Users\usuario\.nuget\packages\microsoft.aspnetcore.http.features\2.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MimeKit">
+      <HintPath>..\..\..\..\..\Users\Globons\.nuget\packages\mimekit\2.0.6\lib\netstandard2.0\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -189,6 +192,7 @@
     <Content Include="lib\fast-select\fastselect.min.js" />
     <Content Include="lib\fast-select\fastselect.standalone.js" />
     <Content Include="lib\fast-select\fastselect.standalone.min.js" />
+    <Content Include="MailBody.txt" />
     <Content Include="Models\TpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TpModel.Context.cs</LastGenOutput>
@@ -249,9 +253,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enums\EstadosPedido.cs" />
+    <Compile Include="Helpers\MailingHelper.cs" />
     <Compile Include="Helpers\EmailAcciones.cs" />
     <Compile Include="ManejadorExceptionFilter.cs" />
     <Compile Include="CustomExceptionFilter .cs" />
@@ -259,6 +265,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Sesion.cs" />
+    <Compile Include="Models\EmailViewModel.cs" />
     <Compile Include="Models\EstadoPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
@@ -267,9 +274,11 @@
     </Compile>
     <Compile Include="Models\GustoEmpanadasCantidad.cs" />
     <Compile Include="Models\GustosPedidoUsuarioViewModel.cs" />
+    <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\PedidoRequest.cs" />
+    <Compile Include="Models\UsuarioMail.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\InvitacionPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
@@ -359,6 +368,7 @@
     <Folder Include="Scripts\datatables\" />
     <Folder Include="Scripts\toastr\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Mail\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
   <ItemGroup>

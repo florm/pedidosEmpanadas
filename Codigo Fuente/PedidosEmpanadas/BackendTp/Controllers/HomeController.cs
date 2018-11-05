@@ -44,15 +44,16 @@ namespace BackendTp.Controllers
             return RedirectToAction("Index");
         }
 
-//        public ActionResult Error()
-//        {
-//            ViewBag.MensajeDeError = RouteData.Values["Error"];
-//            return View();
-//        }
+        //        public ActionResult Error()
+        //        {
+        //            ViewBag.MensajeDeError = RouteData.Values["Error"];
+        //            return View();
+        //        }
+
         
-        public ActionResult Error(int error = 0)
+        public ActionResult Error(int? error, string mensaje)
         {
-            if (error == 0)
+            if (error == null)
             {
                 ViewBag.code = "505";
             }
@@ -72,7 +73,10 @@ namespace BackendTp.Controllers
                     ViewBag.Title = "PÁGINA NO ENCONTRADA";
                     ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
                     break;
-
+                case 405:
+                    ViewBag.Title = "Acción no permitida";
+                    ViewBag.Description = mensaje;
+                    break;
                 default:
                     ViewBag.Title = "PÁGINA NO ENCONTRADA";
                     ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
