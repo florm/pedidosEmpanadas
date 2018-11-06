@@ -251,6 +251,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Enums\EstadosPedido.cs" />
     <Compile Include="Helpers\EmailAcciones.cs" />
     <Compile Include="ManejadorExceptionFilter.cs" />
