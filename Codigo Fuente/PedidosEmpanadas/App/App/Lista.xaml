@@ -11,10 +11,10 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout>
-                                    <!--<Label Text="{Binding FechaCreacion}"></Label>-->
+                                    <Label Text="{Binding FechaCreacion}"></Label>
                                     <Label Text="{Binding NombreNegocio}"></Label>
-                                    <!--<Label Text="{Binding EstadoS}"></Label>
-                                    <Label Text="{Binding RolS}"></Label>-->
+                                    <Label Text="{Binding EstadoS}"></Label>
+                                    <Label Text="{Binding RolS}"></Label>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

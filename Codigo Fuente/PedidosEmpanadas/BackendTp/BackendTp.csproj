@@ -271,6 +271,7 @@
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\PedidoRequest.cs" />
+    <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\InvitacionPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>

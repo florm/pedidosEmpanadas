@@ -35,8 +35,7 @@ namespace App
 
                 string url = string.Format("/api/Usuarios/GetMobileUser/{0}/{1}", Correo.Text, Pass.Text);
 
-                string url2 = "http://192.168.0.6:45457" + url;
-                var ii = 0;
+                string url2 = "http://192.168.0.6:45455" + url;
 
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
