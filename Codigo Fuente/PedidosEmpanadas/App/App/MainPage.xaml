@@ -4,11 +4,30 @@
              xmlns:local="clr-namespace:App"
              x:Class="App.MainPage">
 
-    <StackLayout>
+    <!--<StackLayout>
         <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
         <Entry Placeholder="Correo" x:Name="Correo"></Entry>
         <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"></Entry>
         <Button Clicked="Button_Clicked" Text="IniciarSesion" x:Name="Boton"></Button>
-    </StackLayout>
+    </StackLayout>-->
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="portada.jpg" Aspect="AspectFill"/>
+            <BoxView Color="#6d97c9" Opacity="0.8"/>
+            <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="1" Padding="20,200,20,0">
+                    <Entry Placeholder="Correo electrónico" x:Name="Correo"/>
+                    <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"/>
+                    <Button Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
 
 </ContentPage>

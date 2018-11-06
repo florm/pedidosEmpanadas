@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>ZTE A2017U</SelectedDevice>
     <DefaultDevice>Android_Accelerated_x86_Oreo</DefaultDevice>
+    <AndroidDesignerPreferredTheme>Theme.DeviceDefault.NoActionBar.Fullscreen</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

@@ -19,7 +19,7 @@ namespace App
         public Lista (DeviceUser deviceUser)
 		{
 			InitializeComponent ();
-            EmailUser.Text = string.Format("Bienvenido {0}", deviceUser.Email);
+            //EmailUser.Text = string.Format("Bienvenido {0}", deviceUser.Email);
             this.cargarPedidos(deviceUser.IdUsuario);
         }
 

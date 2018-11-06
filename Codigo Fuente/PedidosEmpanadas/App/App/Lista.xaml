@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Lista">
     <ContentPage.Content>
-        <StackLayout>
+        <!--<StackLayout>
             <Label x:Name="EmailUser" />
             <ListView x:Name="ListaPruebaAle">
                 <ListView.ItemTemplate>
@@ -21,7 +21,47 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+        </StackLayout>-->
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Spacing="0" Grid.Row="0">
+                <!--<BoxView BackgroundColor="#414143" HeightRequest="3"></BoxView>-->
+                <StackLayout BackgroundColor="#6d97c9" HeightRequest="60" Orientation="Horizontal" Padding="10,0,0,0">
+                    <Label FontAttributes="Bold" Text="Mis pedidos" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                </StackLayout>
+
+            </StackLayout>
+            <ScrollView Grid.Row="1" BackgroundColor="#e8e8e8">
+                <ListView x:Name="ListaPruebaAle" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Padding="15" Margin="20">
+                                            <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                            <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                            <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                            <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                                        </StackLayout>
+                                    </Grid>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+        </Grid>
 
     </ContentPage.Content>
 </ContentPage>
