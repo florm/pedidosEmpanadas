@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTp", "BackendTp\Back
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{5768A01D-A777-472C-8B9A-192AB1B75C9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Android", "App\App.Android\App.Android.csproj", "{BD54A758-607B-402A-BCC0-761CF7CD7876}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App\App.csproj", "{E67C3EEB-300E-4779-B952-63B7B35EAD93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,16 @@ Global
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5768A01D-A777-472C-8B9A-192AB1B75C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD54A758-607B-402A-BCC0-761CF7CD7876}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E67C3EEB-300E-4779-B952-63B7B35EAD93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E67C3EEB-300E-4779-B952-63B7B35EAD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E67C3EEB-300E-4779-B952-63B7B35EAD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E67C3EEB-300E-4779-B952-63B7B35EAD93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
