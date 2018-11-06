@@ -5,10 +5,10 @@
              x:Class="App.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
+        <Entry Placeholder="Correo" x:Name="Correo"></Entry>
+        <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"></Entry>
+        <Button Clicked="Button_Clicked" Text="IniciarSesion" x:Name="Boton"></Button>
     </StackLayout>
 
 </ContentPage>
