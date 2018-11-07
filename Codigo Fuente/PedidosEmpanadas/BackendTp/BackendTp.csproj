@@ -192,7 +192,6 @@
     <Content Include="lib\fast-select\fastselect.min.js" />
     <Content Include="lib\fast-select\fastselect.standalone.js" />
     <Content Include="lib\fast-select\fastselect.standalone.min.js" />
-    <Content Include="MailBody.txt" />
     <Content Include="Models\TpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TpModel.Context.cs</LastGenOutput>
@@ -275,6 +274,7 @@
     <Compile Include="Models\GustoEmpanadasCantidad.cs" />
     <Compile Include="Models\GustosPedidoUsuarioViewModel.cs" />
     <Compile Include="Models\Mail.cs" />
+    <Compile Include="Models\Metadata\GustoEmpanada.cs" />
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\PedidoRequest.cs" />

@@ -19,6 +19,7 @@ namespace BackendTp
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute("Error - 404", "NotFound", new { controller = "Home", action = "Error404" });
             //routes.MapRoute(
             //    name: "DefaultApi",
             //    url: "api/{controller}/{controller}/{id}",

@@ -7,13 +7,16 @@ namespace BackendTp.Models
 {
     public class Mail
     {
-        public Mail(string htmlMsg, string subject)
-        {
-            HtmlMsg = htmlMsg;
-            Subject = subject;
-        }
+        public string Email { get; set; }
+        public List<GustoEmpanada> GustosEmpanadas { get; set; }
+        public int CantidadTotal { get; set; }
+        public decimal PrecioTotal { get; set; }
 
-        public string HtmlMsg { get; set; }
-        public string Subject { get; set; }
+        public Mail()
+        {
+            GustosEmpanadas = new List<GustoEmpanada>();
+        }
     }
+
+    
 }

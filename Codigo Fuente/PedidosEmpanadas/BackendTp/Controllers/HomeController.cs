@@ -69,10 +69,10 @@ namespace BackendTp.Controllers
                     ViewBag.Description = "Ocurrió un error inesperado, esperamos que no vuelva a pasar.";
                     break;
 
-                case 404:
-                    ViewBag.Title = "PÁGINA NO ENCONTRADA";
-                    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
-                    break;
+                //case 404:
+                //    ViewBag.Title = "PÁGINA NO ENCONTRADA";
+                //    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
+                //    break;
                 case 405:
                     ViewBag.Title = "Acción no permitida";
                     ViewBag.Description = mensaje;
@@ -84,6 +84,14 @@ namespace BackendTp.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Error404()
+        {
+            ViewBag.code = "404";
+            ViewBag.Title = "PÁGINA NO ENCONTRADA";
+            ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
+            return View("Error");
         }
         
     }
