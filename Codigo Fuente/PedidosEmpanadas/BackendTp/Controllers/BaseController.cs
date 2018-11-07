@@ -11,13 +11,8 @@ namespace BackendTp.Controllers
     [CustomExceptionFilter]
     public class BaseController : Controller
     {
-        
         public BaseController()
         {
         }
-
-        
-
-
     }
 }

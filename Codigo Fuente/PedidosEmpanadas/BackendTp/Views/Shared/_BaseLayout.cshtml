@@ -11,7 +11,7 @@
 <body>
 @RenderSection("Navbar")
 <div class="container-fluid body-content">
-    <div class="row full-height">
+    <div class="row full-height @if (Request.RawUrl != "/"){<text>pb-3</text>}">
         <div id="contenedorAlertas" class="div-contenedor-alertas"></div>
         @RenderBody()
     </div>

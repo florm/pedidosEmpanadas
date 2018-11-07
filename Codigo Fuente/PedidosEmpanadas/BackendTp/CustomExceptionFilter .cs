@@ -31,13 +31,17 @@ namespace BackendTp
                 filterContext.Result = new RedirectResult(excUsuario.PathRedirect);
             }
 
-            if (filterContext.HttpContext.Request.IsAjaxRequest())
+            else if (filterContext.Exception is PedidosEmpanadasException pe)
+            {
+                ArmarMsgRespuestaError(filterContext, filterContext.Exception.Message);
+            }
+            else if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
                 filterContext.Result = AjaxException(filterContext.Exception.Message, filterContext);
             }
             else
             {
-                ArmarMsgRespuestaError(filterContext, filterContext.Exception.Message);
+                ArmarMsgRespuestaErrorGenerica(filterContext);
             }
         }
 
@@ -68,11 +72,17 @@ namespace BackendTp
         {
             context.ExceptionHandled = true;
             context.RouteData.Values.Add("Error", msgError);
-            context.Result = new RedirectResult("~/Home/Error");
+            context.Result = new RedirectResult("~/Home/Error?error=405&mensaje="+msgError);
             var response = context.HttpContext.Response;
             response.ContentType = "text/plain";
             response.StatusCode = 400;
             response.Write(msgError);
+        }
+
+        public static void ArmarMsgRespuestaErrorGenerica(ExceptionContext context)
+        {
+            context.ExceptionHandled = true;
+            context.Result = new RedirectResult("~/Home/Error?error=505");
         }
     }
 }

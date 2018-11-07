@@ -163,5 +163,12 @@ namespace BackendTp.Controllers
         {
             _servicioPedido.Eliminar(id);   
         }
+        
+        public ActionResult Detalle(int id)
+        {
+            Pedido pedidoElegido = _servicioPedido.GetById(id);
+            Pedido pedido = _servicioPedido.Detalle(pedidoElegido);
+            return View(pedido);
+        }
     }
 }

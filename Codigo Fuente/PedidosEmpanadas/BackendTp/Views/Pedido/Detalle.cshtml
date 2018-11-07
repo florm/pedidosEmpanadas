@@ -1,0 +1,107 @@
+﻿@model BackendTp.Models.Pedido
+@using BackendTp.Helpers
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="row wrapper title box-shadow page-heading bg-white">
+        <div class="col-12">
+            <h2>Detalles del Pedido N° @Html.DisplayFor(model => model.IdPedido)</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="recuadro box-shadow bg-white">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td class="font-weight-bold">Fecha de Creación:</td>
+                            <td>@Html.DisplayFor(model => model.FechaCreacion)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Usuario Responsable:</td>
+                            <td>@Model.Usuario.Email</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Descripción del Pedido:</td>
+                            <td>@Model.Descripcion</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Estado del Pedido:</td>
+                            <td>$@Model.EstadoPedido.Nombre</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Nombre del Negocio:</td>
+                            <td>$@Model.NombreNegocio</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Precio por Unidad:</td>
+                            <td>$@Model.PrecioUnidad</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Precio por Docena:</td>
+                            <td>$@Model.PrecioDocena</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Fecha de Modificación:</td>
+                            <td>
+                                @if (Model.FechaModificacion != null)
+                                {
+                                    @Html.DisplayFor(model => model.FechaModificacion)
+                                }
+                                else
+                                {
+                                    <text>Sin modificaciones</text>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Gustos de Empanadas:</td>
+                            <td>
+                                @if (Model.GustoEmpanada.FirstOrDefault() != null)
+                                {
+                                    <ul class="mb-0 pl-3">
+                                        @foreach (var m in Model.GustoEmpanada)
+                                        {
+                                            <li>@(m.Nombre)</li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <text>No hay gustos disponibles.</text>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Invitados:</td>
+                            <td>
+                                @if (Model.InvitacionPedido.FirstOrDefault() != null)
+                                {
+                                    <ul class="mb-0 pl-3">
+                                        @foreach (var m in Model.InvitacionPedido)
+                                        {
+                                            <li> @(m.Usuario.Email) </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <text>No hay invitados en este pedido.</text>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-right mt-3">
+            <input type="reset" value="Volver" id="btnCancelar" class="btn btn-cancelar mr-1" />
+        </div>
+    </div>
+</div>
