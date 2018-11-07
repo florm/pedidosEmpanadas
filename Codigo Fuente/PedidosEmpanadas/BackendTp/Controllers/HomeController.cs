@@ -16,16 +16,14 @@ namespace BackendTp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return Sesion.IdUsuario != 0 ? (ActionResult) RedirectToAction("Lista","Pedido") : View();
         }
-
 
         public JsonResult Registro(Usuario usuario)
         {
             _servicioUsuario.CrearUsuario(usuario);
             return Json("");
         }
-
 
         public JsonResult LoginOk(Usuario usuario)
         {
@@ -46,12 +44,55 @@ namespace BackendTp.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Error()
+        //        public ActionResult Error()
+        //        {
+        //            ViewBag.MensajeDeError = RouteData.Values["Error"];
+        //            return View();
+        //        }
+
+        
+        public ActionResult Error(int? error, string mensaje)
         {
-            ViewBag.MensajeDeError = RouteData.Values["Error"];
+            if (error == null)
+            {
+                ViewBag.code = "505";
+            }
+            else
+            {
+                ViewBag.code = error;
+            }
+                
+            switch (error)
+            {
+                case 505:
+                    ViewBag.Title = "ERROR EN EL SERVIDOR";
+                    ViewBag.Description = "Ocurrió un error inesperado, esperamos que no vuelva a pasar.";
+                    break;
+
+                //case 404:
+                //    ViewBag.Title = "PÁGINA NO ENCONTRADA";
+                //    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
+                //    break;
+                case 405:
+                    ViewBag.Title = "Acción no permitida";
+                    ViewBag.Description = mensaje;
+                    break;
+                default:
+                    ViewBag.Title = "PÁGINA NO ENCONTRADA";
+                    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
+                    break;
+            }
+
             return View();
         }
 
-
+        public ActionResult Error404()
+        {
+            ViewBag.code = "404";
+            ViewBag.Title = "PÁGINA NO ENCONTRADA";
+            ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
+            return View("Error");
+        }
+        
     }
 }

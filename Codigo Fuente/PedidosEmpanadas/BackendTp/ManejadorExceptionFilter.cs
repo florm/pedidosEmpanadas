@@ -11,16 +11,16 @@ namespace BackendTp
 {
     public class ManejadorExceptionFilter : IExceptionFilter
     {
-        
+
         public void OnException(ExceptionContext filterContext)
         {
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
-               filterContext.Result = AjaxException(filterContext.Exception.Message, filterContext);
+                filterContext.Result = AjaxException(filterContext.Exception.Message, filterContext);
             }
             //else
             //{
-            //    filterContext.Result = new RedirectResult("~/Home/Login");
+            //    filterContext.Result = new RedirectResult("~/Home/Error");
             //}
         }
 
@@ -28,7 +28,7 @@ namespace BackendTp
         {
             if (string.IsNullOrEmpty(message))
             {
-                message = "Ha ocurrido un error interno. Comuníquese con el Administrador"; 
+                message = "Ha ocurrido un error interno. Comuníquese con el Administrador";
             }
 
             filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -41,6 +41,6 @@ namespace BackendTp
                 ContentEncoding = Encoding.UTF8,
             };
         }
-        
+
     }
 }

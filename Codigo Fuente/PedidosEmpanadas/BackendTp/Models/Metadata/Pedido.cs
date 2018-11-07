@@ -10,6 +10,18 @@ namespace BackendTp.Models
     [MetadataType(typeof(PedidoMetadata))]
     public partial class Pedido
     {
-     
+
+        public decimal PrecioTotal => CalcularPrecioTotal();
+        public decimal PrecioPorUnidad => CalcularPrecioPorUnidad();
+
+        private decimal CalcularPrecioPorUnidad()
+        {
+            return 1;
+        }
+
+        private decimal CalcularPrecioTotal()
+        {
+            return 10;
+        }
     }
 }

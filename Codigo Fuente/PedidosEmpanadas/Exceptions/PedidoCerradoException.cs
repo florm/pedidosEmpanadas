@@ -5,13 +5,13 @@ using System.Web.Mvc;
 
 namespace Exceptions
 {
-    public class PedidoCerradoException : Exception
+    public class PedidoCerradoException : PedidosEmpanadasException
     {
         public PedidoCerradoException()
         {
            
         }
 
-        public override string Message => "Pedido cerrado";
+        public override string Message => "El Pedido se encuentra cerrado";
     }
 }
