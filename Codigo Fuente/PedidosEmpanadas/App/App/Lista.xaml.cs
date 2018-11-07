@@ -30,7 +30,7 @@ namespace App
             {
                 HttpClient client = new HttpClient();
                 string url = string.Format("/api/Usuarios/GetListaPedidos/{0}", id);
-                string url2 = "http://192.168.0.6:45455" + url;
+                string url2 = "http://192.168.0.14:45455" + url;
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
             }
