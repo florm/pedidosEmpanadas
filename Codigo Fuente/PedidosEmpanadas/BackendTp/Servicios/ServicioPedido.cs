@@ -1,6 +1,7 @@
 ﻿using BackendTp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
@@ -102,7 +103,19 @@ namespace BackendTp.Servicios
 
         public void Eliminar(int id)
         {
-            Pedido pedido = GetById(id);
+            Pedido pedido = Db.Pedido
+                .Include("InvitacionPedidoGustoEmpanadaUsuario")
+                .Include("GustoEmpanada")
+                .Include("InvitacionPedido")
+                .FirstOrDefault(p => p.IdPedido == id);
+            
+            Db.InvitacionPedidoGustoEmpanadaUsuario.RemoveRange(pedido.InvitacionPedidoGustoEmpanadaUsuario);
+            Db.InvitacionPedido.RemoveRange(pedido.InvitacionPedido);
+         
+            //otra manera de borrar los relacionados
+            //pedido.InvitacionPedidoGustoEmpanadaUsuario.ToList().ForEach(s => Db.Entry(s).State = EntityState.Deleted);
+            //pedido.InvitacionPedido.ToList().ForEach(s => Db.Entry(s).State = EntityState.Deleted);
+            
             Db.Pedido.Remove(pedido);
             Db.SaveChanges();
         }

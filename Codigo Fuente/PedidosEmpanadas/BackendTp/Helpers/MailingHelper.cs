@@ -8,7 +8,7 @@ using System.Net.Mime;
 using System.Reflection;
 using System.Web;
 using System.Web.Services.Description;
-using MimeKit;
+//using MimeKit;
 
 namespace BackendTp.Helpers
 {

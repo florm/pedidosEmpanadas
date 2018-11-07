@@ -1,5 +1,6 @@
 ﻿$(document).ready(function() {
     $('button.delete').on('click',function(e){
+        var button = $(this);
         e.preventDefault();
         var form = $(this).parents('form');
         swal({
@@ -14,6 +15,7 @@
                 $.post( form.attr('action'))
                     .done(function(data) {
                         toastr.success("El pedido fue borrado exitosamente.");
+                        tabla.row( button.closest('tr') ).remove().draw();
                     })
                     .fail(function(error) {
                         console.log(error);
@@ -25,7 +27,7 @@
     });
 
     $.fn.dataTable.moment( 'D/M/YYYY H:mm:ss' );//para que se pueda ordenar por fecha
-    $(".table").DataTable({
+    var tabla = $(".table").DataTable({
         responsive: true,
         autoWidth: false,
         paging:   false,
