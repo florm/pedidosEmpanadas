@@ -11,80 +11,85 @@
     <link href="@Url.Content("~/Content/pedidoEditar.css")" rel="stylesheet" />    
 }
 
-<div class="col-lg-12">
-    <div class="row wrapper title box-shadow page-heading bg-white">
-        <div class="col-10">
-            <h2>Editar Pedido</h2>
-        </div>
-        <div class="col-2 action_buttons">
-         
-        </div>
-    </div>
-    @using (Html.BeginForm("Modificar", "Pedido"))
-    {
-        @Html.AntiForgeryToken()
-    <div class="row">
-        @Html.HiddenFor(p => p.Pedido.IdPedido)
-        @Html.Partial("_pedidoFormulario")
-        <div class="col-md-4">
-            <div class="recuadro box-shadow bg-white">
-                <h5>3. Ingrese email de los invitados</h5>
-                <hr />
-                <div class="table-responsive table-hover">
-                    <table id="tablaInvitados" class="table">
-                        <thead>
-                            <tr>
-                                <th>Invitado</th>
-                                <th>Completó su pedido</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var invitado in Model.Invitados)
-                            {
-                                <tr>
-                                    <td>@invitado.Email</td>
-                                    <td>@(invitado.CompletoPedido ? "Si" : "No")</td>
-                                    <td>
-                                        @if (!invitado.CompletoPedido)
-                                        {
-                                            <i class="fas fa-user-times iconoEliminarInvitado" id="@invitado.Email" completoPedido="False" eliminado="false"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido="True" eliminado="false"></i>
-                                        }
+    <div class="col-lg-12">
+        <div class="row wrapper title box-shadow page-heading bg-white">
+            <div class="col-10">
+                <h2>Editar Pedido</h2>
+            </div>
+            <div class="col-2 action_buttons">
 
-                                    </td>
-                                </tr>
-                            }       
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="form-group w-100 mt-2" id="divInvitado">
-                        <label for="inputInvitados">Agregar invitados</label>
-                        <input id="inputInvitados" type="text" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
-                    </div>
-                    <div class="form-group w-100 mt-2" id="divInvitado">
-                        <label for="inputInvitados">Enviar Email</label>
-                        <select class="form-control w-100">
-                            @foreach(var accion in ViewBag.emailAcciones)
-                            {
-                                <option value="@accion.Id">@accion.Nombre</option>
-                            }
-                        </select>                   
+            </div>
+        </div>
+        <form action="/Pedido/Modificar" method="post" id="formModificar">
+            
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @Html.HiddenFor(p => p.Pedido.IdPedido)
+                @Html.Partial("_pedidoFormulario")
+                <div class="col-md-4">
+                    <div class="recuadro box-shadow bg-white">
+                        <h5>3. Ingrese email de los invitados</h5>
+                        <hr />
+                        <div class="table-responsive table-hover">
+                            <table id="tablaInvitados" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Invitado</th>
+                                        <th>Completó su pedido</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var invitado in Model.Invitados)
+                                    {
+                                        <tr>
+                                            <td>@invitado.Email</td>
+                                            <td>@(invitado.CompletoPedido ? "Si" : "No")</td>
+                                            <td>
+                                                @if (!invitado.CompletoPedido)
+                                                {
+                                                    <i class="fas fa-user-times iconoEliminarInvitado" id="@invitado.Email" completoPedido="False" eliminado="false"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-user-times iconoEliminarInvitado deshabilitado" id="@invitado.Email" completoPedido="True" eliminado="false"></i>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group w-100 mt-2" id="divInvitado">
+                            <label for="inputInvitados">Agregar invitados</label>
+                            <input id="inputInvitados" type="text" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
+                        </div>
+                        <div class="form-group w-100 mt-2" id="divInvitado">
+                            <label for="inputInvitados">Enviar Email</label>
+                            <select class="form-control w-100" name="acciones">
+                                @foreach (var accion in ViewBag.emailAcciones)
+                                {
+                                    <option value="@accion.Id">@accion.Nombre</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">  
-            <div class="col-12 text-right mt-3">
-                <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-                <input type="submit" value="Confirmar" id="btnEditar" class="btn btn-aceptar" />
+            <div class="row">
+                <div class="col-12 text-right mt-3">
+                    <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
+                    <input type="submit" value="Guardar" id="btnEditar" class="btn btn-aceptar" />
+                </div>
             </div>
-        </div>
-    }
-</div>
+        </form>
+        @using (Html.BeginForm("Confirmar", "Pedido"))
+        {
+            @Html.HiddenFor(p => p.Pedido.IdPedido)
+            <input type="submit" value="Confirmar" id="btnConfirmar" class="btn btn-aceptar" />
+        }
+    </div>
 
 @section custom_js_libraries
 {

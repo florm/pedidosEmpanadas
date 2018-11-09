@@ -38,7 +38,7 @@ namespace BackendTp.Servicios
             return null;
         }
 
-        private List<int> GetInvitados (List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        private List<int> GetInvitados (List<UsuarioViewModel> invitados, int? idUsuarioResponsable)
         {
             List<int> idUsuarios = new List<int>();
             foreach(var invitado in invitados)
@@ -49,7 +49,8 @@ namespace BackendTp.Servicios
                     idUsuarios.Add(usuario.IdUsuario);
             }
             //se agrega tambien como invitado al usuario que realizo inicio el pedido
-            idUsuarios.Add(idUsuarioResponsable);
+            if(idUsuarioResponsable!=null)
+            idUsuarios.Add((int)idUsuarioResponsable);
             return idUsuarios;
         }
 
@@ -64,7 +65,7 @@ namespace BackendTp.Servicios
             return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
         }
 
-        public void Modificar(int idPedido, List<UsuarioViewModel> invitados)
+        public void Modificar(int idPedido, List<UsuarioViewModel> invitados, int accion)
         {
             var invitacionPedidoModel = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido).ToList();
             var invitadosModel = GetInvitados(invitados, Sesion.IdUsuario);
@@ -73,7 +74,7 @@ namespace BackendTp.Servicios
                 if (!invitadosModel.Contains(invitacionPedido.IdUsuario))
                     Db.InvitacionPedido.Remove(invitacionPedido);
             }
-
+            var nuevosInvitados = new List<int>();
             foreach (var invitado in invitadosModel)
             {
                 if (!invitacionPedidoModel.Select(ip => ip.IdUsuario).Contains(invitado))
@@ -81,10 +82,35 @@ namespace BackendTp.Servicios
                     var nuevaInvitacionPedido = new InvitacionPedido
                     {
                         IdUsuario = invitado,
-                        IdPedido = idPedido
+                        IdPedido = idPedido,
+                        Token = Guid.NewGuid(),
+                        Completado = false
                     };
                     Db.InvitacionPedido.Add(nuevaInvitacionPedido);
+                    nuevosInvitados.Add(nuevaInvitacionPedido.IdUsuario);
                 }
+            }
+            ServicioEmail servicioMail = new ServicioEmail();
+            switch (accion)
+            {
+                case (int)EmailAcciones.ANadie:
+                      break;
+                case (int)EmailAcciones.EnviarSoloALosNuevos:
+                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
+                    break;
+                case (int)EmailAcciones.ReEnviarInvitacionATodos:
+                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
+                        .Select(i=>i.IdUsuario)
+                        .ToList();
+                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
+                    break;
+                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
+                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
+                                                                            && ip.Completado == false)
+                        .Select(i => i.IdUsuario)
+                        .ToList();
+                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
+                    break;
             }
             Db.SaveChanges();
         }

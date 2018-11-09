@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using BackendTp.Enums;
 using BackendTp.Models;
@@ -48,7 +49,7 @@ namespace BackendTp.Controllers
             return View("Iniciar", pedidoGustosEmpanadas);
         }
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Iniciado(int id)
         {
             return View();
@@ -60,13 +61,13 @@ namespace BackendTp.Controllers
             return View(gustos);
         }
 
-        public ActionResult ListaPedidosTotal()
-        {
-            var pedidos = _servicioPedido.GetAll();
-            return View(pedidos);
-        }
+        //public ActionResult ListaPedidosTotal()
+        //{
+        //    var pedidos = _servicioPedido.GetAll();
+        //    return View(pedidos);
+        //}
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult Editar(int id)
         {
             var pedido = _servicioPedido.GetById(id);
@@ -93,7 +94,7 @@ namespace BackendTp.Controllers
         //    return View();
         //}
 
-        [HttpGet]
+        [System.Web.Mvc.HttpGet]
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
 
@@ -145,11 +146,10 @@ namespace BackendTp.Controllers
 
         public ActionResult Modificar(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
-            //todo Esto es de crear. Hacer logica para modificacion del pedido
             if (ModelState.IsValid)
             {
                 var pedidoId = _servicioPedido.Modificar(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Modificar(pedidoId, pedidoGustosEmpanadas.Invitados);
+                _servicioInvitacionPedido.Modificar(pedidoId, pedidoGustosEmpanadas.Invitados, pedidoGustosEmpanadas.Acciones);
                 return RedirectToAction("Lista");
 
             }
@@ -159,7 +159,14 @@ namespace BackendTp.Controllers
             return View("Editar", pedidoGustosEmpanadas);
         }
 
-        [HttpPost]
+        public ActionResult Confirmar([FromBody] Pedido pedido)
+        {
+            _servicioPedido.Confirmar(pedido);
+            _servicioEmail.ArmarMailsConfirmacion(pedido);
+            return RedirectToAction("Lista", "Pedido");
+        }
+
+        [System.Web.Mvc.HttpPost]
         public void Eliminar(int id)
         {
             _servicioPedido.Eliminar(id);   

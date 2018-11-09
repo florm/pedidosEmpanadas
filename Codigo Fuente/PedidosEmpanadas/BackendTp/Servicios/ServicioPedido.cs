@@ -87,7 +87,6 @@ namespace BackendTp.Servicios
             pedido.PrecioUnidad = pge.Pedido.PrecioUnidad;
             pedido.PrecioDocena = pge.Pedido.PrecioDocena;
             pedido.FechaModificacion = DateTime.Now;
-            pedido.IdEstadoPedido = (int)EstadosPedido.Cerrado;
             List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
             foreach (var gusto in pge.GustosDisponibles)
             {
@@ -121,6 +120,14 @@ namespace BackendTp.Servicios
             }
 
             return pedidoDetalle;
+        }
+
+        public void Confirmar(Pedido pedido)
+        {
+            var pedidoModel = GetById(pedido.IdPedido);
+            pedidoModel.IdEstadoPedido = (int)EstadosPedido.Cerrado;
+            Db.SaveChanges();
+
         }
 
     }

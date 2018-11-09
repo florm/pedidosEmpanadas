@@ -9,6 +9,7 @@ namespace BackendTp.Models
     {
         public string Email { get; set; }
         public List<GustoEmpanada> GustosEmpanadas { get; set; }
+        public List<InvitadosMail> InvitadosMail { get; set; }
         public int CantidadTotal { get; set; }
         public decimal PrecioTotal { get; set; }
         public string Link { get; set; }
@@ -16,6 +17,7 @@ namespace BackendTp.Models
         public Mail()
         {
             GustosEmpanadas = new List<GustoEmpanada>();
+            InvitadosMail = new List<InvitadosMail>();
         }
     }
 
