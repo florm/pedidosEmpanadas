@@ -11,6 +11,7 @@ namespace BackendTp.Models
         public List<GustoEmpanada> GustosEmpanadas { get; set; }
         public int CantidadTotal { get; set; }
         public decimal PrecioTotal { get; set; }
+        public string Link { get; set; }
 
         public Mail()
         {

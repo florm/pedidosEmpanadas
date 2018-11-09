@@ -14,7 +14,7 @@ namespace BackendTp.Servicios
     public class ServicioInvitacionPedido: Servicio
     {
         
-        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        public List<int> Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {
             var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
             foreach(var id in idUsuarios)
@@ -30,6 +30,7 @@ namespace BackendTp.Servicios
             } 
             
             Db.SaveChanges();
+            return idUsuarios;
         }
 
         public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()

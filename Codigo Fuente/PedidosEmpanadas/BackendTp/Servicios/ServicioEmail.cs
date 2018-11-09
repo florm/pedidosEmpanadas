@@ -117,7 +117,7 @@ namespace BackendTp.Servicios
             }
         }
 
-        public static void MandarMail(Mail mailInfo, string subject, string tipoUsuario)
+        public static void MandarMail(Mail mailInfo, string subject, string tipoMail)
         {
             //List<string> invitados = new List<string>()
             //{
@@ -128,7 +128,7 @@ namespace BackendTp.Servicios
             //
             // se crea el mensaje
             //
-            string mensaje = ArmarMensajeBody(tipoUsuario, mailInfo);
+            string mensaje = ArmarMensajeBody(tipoMail, mailInfo);
 
             MailMessage mail = new MailMessage()
             {
@@ -166,10 +166,10 @@ namespace BackendTp.Servicios
 
         }
 
-        private static string ArmarMensajeBody(string tipoUsuario, Mail mailInfo)
+        private static string ArmarMensajeBody(string tipoMail, Mail mailInfo)
         {
             var mensaje = "";
-            switch (tipoUsuario.ToLower())
+            switch (tipoMail.ToLower())
             {
                 case "responsable":
                     mensaje = "";
@@ -192,10 +192,27 @@ namespace BackendTp.Servicios
                                "<br/>" +
                                "Gracias por elegirnos!";
                     break;
+                case "inicio":
+                    mensaje = $"Hola {mailInfo.Email}, <br/><br/>" +
+                              "Se ha iniciado un nuevo pedido de empanadas<br/>" +
+                              "Podes seleccionar los gustos que desees en el siguiente " +
+                              "<a href='" + mailInfo.Link + "'>link</a>";
+                    break;
             }
 
             return mensaje;
         }
 
+        public void ArmarMailInicioPedido(List<int> usuarios, int idPedido)
+        {
+            foreach (var u in usuarios)
+            {
+                var email = new Mail();
+                var tokenUsuario = Db.InvitacionPedido.FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido).Token;
+                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u).Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
     }
 }

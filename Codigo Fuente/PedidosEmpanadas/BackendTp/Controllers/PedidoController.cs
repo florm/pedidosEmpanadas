@@ -38,7 +38,8 @@ namespace BackendTp.Controllers
             if (ModelState.IsValid)
             {
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
+                var usuarios = _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
+                _servicioEmail.ArmarMailInicioPedido(usuarios, pedidoNuevo.IdPedido);
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
 
             }
