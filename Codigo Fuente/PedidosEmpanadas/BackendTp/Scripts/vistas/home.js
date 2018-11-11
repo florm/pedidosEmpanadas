@@ -36,7 +36,7 @@ btnAceptar.click(function () {
     usuario.email = textEmail.val();
     usuario.password = textPassword.val();
 
-    llamadaAjax(window.pathRegistro, JSON.stringify(usuario), false, "registroOk", "registroError");
+    llamadaAjax(window.pathRegistro, JSON.stringify(usuario), false, "callback");
 });
 
 btnAceptarLogin.click(function () {
@@ -50,18 +50,13 @@ btnAceptarLogin.click(function () {
     llamadaAjax(window.pathLogin, JSON.stringify(usuario), false, "loginOk", "loginError");
 });
 
-function registroOk() {
-    mostrarMsgExito("El registro se realizó correctamente. Ahora puede iniciar sesión");
+function callback(data) {
+    mostrarMsgExito(data.mensaje);
+    if(data.operacion ==="ok")
     modalRegistro.modal("hide");
 
 }
 
-function registroError(mensaje, params) {
-    mensaje = JSON.parse(mensaje);
-    mostrarMsgError(mensaje.message);
-    console.log(mensaje);
-    console.log(params);
-}
 
 function loginOk() {
     window.location.href = window.pathListaPedidos;

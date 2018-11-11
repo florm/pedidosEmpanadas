@@ -21,15 +21,32 @@ namespace BackendTp.Controllers
 
         public JsonResult Registro(Usuario usuario)
         {
+            if (ModelState.IsValid)
+            {
             _servicioUsuario.CrearUsuario(usuario);
-            return Json("");
+                return Json(new
+                {
+                    mensaje="El registro se realizó correctamente.Ahora puede iniciar sesión", 
+                    operacion="ok"
+                });
+            }
+
+            return Json(new
+            {
+                mensaje="Debe completar mail y contraseña",
+                operacion="error"
+            });
         }
 
         public JsonResult LoginOk(Usuario usuario)
         {
+            if (ModelState.IsValid)
+            {
             var usuarioLogueado = _servicioUsuario.Login(usuario);
             Sesion.IdUsuario = usuarioLogueado.IdUsuario;
             Sesion.EmailUsuario = usuarioLogueado.Email;
+
+            }
             return Json("");
         }
 

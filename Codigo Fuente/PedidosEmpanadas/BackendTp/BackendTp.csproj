@@ -276,6 +276,8 @@
     <Compile Include="Models\InvitadosMail.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Metadata\GustoEmpanada.cs" />
+    <Compile Include="Models\Metadata\UsuarioMetadata.cs" />
+    <Compile Include="Models\Metadata\Usuario.cs" />
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\PedidoRequest.cs" />
