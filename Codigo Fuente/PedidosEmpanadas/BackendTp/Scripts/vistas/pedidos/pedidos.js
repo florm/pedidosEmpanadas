@@ -19,7 +19,10 @@ function validacionYEnvio(e, arrayViejos)
     var checkboxes = $("form input:checkbox");
     if (validarSeleccionDeGustos(checkboxes)) {
         armarInvitados(inputInvitados, arrayViejos);
-        $("form").submit();
+        if ($("#formModificar").length > 0)
+            $("#formModificar").submit();
+        else
+            $("form").submit();
     }
     else {
         textValidacionGustos.removeClass("d-none");

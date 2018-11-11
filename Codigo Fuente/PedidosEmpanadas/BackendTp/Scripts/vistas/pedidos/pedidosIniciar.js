@@ -4,7 +4,6 @@ var btnIniciar = $("#btnIniciar");
 var inputInvitados = $("#inputInvitados");
 var divInvitado = $("#divInvitado");
 
-var btnIniciar = $("#btnIniciar");
 var invitadosEditar = $(".invitadosEditar");
 inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
 if(invitadosEditar != null || invitadosEditar != undefined)

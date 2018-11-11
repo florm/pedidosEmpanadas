@@ -49,6 +49,15 @@ namespace BackendTp.Servicios
 
             return lista;
         }
-        
+
+        //App
+        public Usuario LoginMobile(string email, string pass)
+        {
+            var user = Db.Usuario.FirstOrDefault(u => u.Email == email && u.Password == pass);
+            if (user == null)
+                return null;
+            return user;
+        }
+
     }
 }

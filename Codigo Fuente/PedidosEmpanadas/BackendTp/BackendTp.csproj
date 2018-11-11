@@ -252,9 +252,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Enums\EstadosPedido.cs" />
     <Compile Include="Helpers\MailingHelper.cs" />
     <Compile Include="Helpers\EmailAcciones.cs" />
@@ -273,12 +273,15 @@
     </Compile>
     <Compile Include="Models\GustoEmpanadasCantidad.cs" />
     <Compile Include="Models\GustosPedidoUsuarioViewModel.cs" />
+    <Compile Include="Models\InvitadosMail.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Metadata\GustoEmpanada.cs" />
+    <Compile Include="Models\Metadata\UsuarioMetadata.cs" />
+    <Compile Include="Models\Metadata\Usuario.cs" />
     <Compile Include="Models\Metadata\Pedido.cs" />
     <Compile Include="Models\Metadata\PedidoMetadata.cs" />
     <Compile Include="Models\PedidoRequest.cs" />
-    <Compile Include="Models\UsuarioMail.cs" />
+    <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Models\InvitacionPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>

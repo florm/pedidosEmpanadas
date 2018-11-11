@@ -24,78 +24,66 @@ namespace BackendTp.Servicios
         }
 
 
-        public void ArmarMailsConfirmacion(EmailViewModel emailViewModel)
+        public void ArmarMailsConfirmacion(Pedido pedidoView)
         {
 
-            var pedido = Db.Pedido.FirstOrDefault(p => p.IdPedido == emailViewModel.IdPedido);
+            var pedido = Db.Pedido.FirstOrDefault(p => p.IdPedido == pedidoView.IdPedido);
             EmailInvitados(pedido);
-            //EmailResponsable(pedido);
-
-
-                //esto podria ser para el responsable.. TODO
-            //foreach (var i in pedido.InvitacionPedido.)
-            //{
-            //    var email = new Mail();
-            //    email.Email = i.Usuario.Email;
-
-            //    var gustosSeleccionados = i.Pedido.InvitacionPedidoGustoEmpanadaUsuario;
-
-            //    foreach (var gustoDelPedido in gustosDelPedido)
-            //    {
-            //        var gustoSelecccionado =
-            //            gustosSeleccionados.FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
-
-            //        if (gustoSelecccionado != null)
-            //        {
-            //            email.GustoEmpanadas.Add(new GustoEmpanadaMail
-            //            {
-            //                GustoEmpanada = gustoDelPedido,
-            //                Cantidad = gustoSelecccionado.Cantidad
-            //            });
-            //        }
-            //        else
-            //        {
-            //            email.GustoEmpanadas.Add(new GustoEmpanadaMail
-            //            {
-            //                GustoEmpanada = gustoDelPedido,
-            //                Cantidad = 0
-            //            });
-            //        }
-
-            //    }
-
-            //}
-
-            //List<string> emails = new List<string>();
-            //var x = invitacionPedidoGustoUsuario.ToList();
-            //switch (emailViewModel.Acciones)
-            //{
-            //    case (int)EmailAcciones.ReEnviarInvitacionATodos:
-            //        emails = invitados.Select(i => i.Email).ToList();
-            //        break;
-            //    case (int)EmailAcciones.EnviarSoloALosNuevos:
-            //        emails = emailViewModel.NuevosInvitados;
-            //        break;
-            //    case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
-            //        emails = Db.InvitacionPedido
-            //            .Where(ip => ip.IdPedido == emailViewModel.IdPedido && ip.Completado == false)
-            //            .Select(u => u.Usuario.Email).ToList();
-            //        break;
-            //    default:
-            //        emails = null;
-            //        break;
-
-            //}
-
-
-
-
+            EmailResponsable(pedido);
 
         }
 
         private void EmailResponsable(Pedido pedido)
         {
-            throw new NotImplementedException();
+            var email = new Mail();
+            email.Email = pedido.Usuario.Email; //usuario responsable
+            email.PrecioTotal = pedido.PrecioTotal;
+
+            //armos los gustos, seleccionados y no seleccionados para tener el detalle a enviar el responsable
+            var gustosSeleccionados = pedido.InvitacionPedidoGustoEmpanadaUsuario;
+
+            foreach (var gustoDelPedido in pedido.GustoEmpanada)
+            {
+                var gustoSelecccionado =
+                    gustosSeleccionados.FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
+
+                if (gustoSelecccionado != null)
+                {
+                    email.GustosEmpanadas.Add(new GustoEmpanada
+                    {
+                        Nombre = gustoSelecccionado.GustoEmpanada.Nombre,
+                        Cantidad = gustoSelecccionado.Cantidad
+                    });
+                }
+                else
+                {
+                    email.GustosEmpanadas.Add(new GustoEmpanada
+                    {
+                        Nombre = gustoDelPedido.Nombre,
+                        Cantidad = 0
+                    });
+                }
+
+            }
+
+            //armo la lista de invitados con su detalle de mail y precio total que paga cada uno
+            foreach (var i in pedido.InvitacionPedido)
+            {
+                var cantidad = 0;
+                var pedidosDeUsuario = i.Pedido.InvitacionPedidoGustoEmpanadaUsuario.Where(u => u.IdUsuario == i.IdUsuario).ToList();
+                if (pedidosDeUsuario.Count() != 0)
+                {
+                    foreach (var pu in pedidosDeUsuario)
+                    {
+                        cantidad += pu.Cantidad;
+                    }
+                    email.InvitadosMail.Add(new InvitadosMail {Email = i.Usuario.Email, PrecioTotal = pedido.PrecioPorUnidad * cantidad}); 
+
+                }
+
+            }
+
+            MandarMail(email, "Detalle de Pedido Confirmado", "responsable");
         }
 
         private static void EmailInvitados(Pedido pedido)
@@ -105,30 +93,22 @@ namespace BackendTp.Servicios
             {
                 var email = new Mail();
                 email.Email = invitado.Usuario.Email;
-                email.PrecioTotal = pedido.PrecioTotal; 
                 email.GustosEmpanadas = invitado.Pedido.InvitacionPedidoGustoEmpanadaUsuario.Where(u => u.IdUsuario == invitado.IdUsuario)
                         .Select(g => new GustoEmpanada
                         {
                             Nombre = g.GustoEmpanada.Nombre,
                             Cantidad = g.Cantidad
                         }).ToList();
-
+                var cantidadTotal=0;
+                email.GustosEmpanadas.ForEach(ge => { cantidadTotal += ge.Cantidad; });
+                email.PrecioTotal = pedido.PrecioTotal / cantidadTotal; 
                 MandarMail(email, "Detalles de Pedido Confirmado","invitado" );
             }
         }
 
-        public static void MandarMail(Mail mailInfo, string subject, string tipoUsuario)
+        public static void MandarMail(Mail mailInfo, string subject, string tipoMail)
         {
-            //List<string> invitados = new List<string>()
-            //{
-            //    "florenciamartin05@gmail.com"
-            //};
-
-
-            //
-            // se crea el mensaje
-            //
-            string mensaje = ArmarMensajeBody(tipoUsuario, mailInfo);
+            string mensaje = ArmarMensajeBody(tipoMail, mailInfo);
 
             MailMessage mail = new MailMessage()
             {
@@ -138,20 +118,9 @@ namespace BackendTp.Servicios
                 IsBodyHtml = true
             };
 
-
-            //
-            // se asignan los destinatarios
-            //
-            //foreach (string item in invitados)
-            //{
-            //    mail.To.Add(new MailAddress(item));
-            //}
             mail.To.Add(new MailAddress(mailInfo.Email));
-
-
-            //
+            
             // se define el smtp
-            //
             SmtpClient smtp = new SmtpClient()
             {
                 Host = "smtp.gmail.com",
@@ -166,13 +135,28 @@ namespace BackendTp.Servicios
 
         }
 
-        private static string ArmarMensajeBody(string tipoUsuario, Mail mailInfo)
+        private static string ArmarMensajeBody(string tipoMail, Mail mailInfo)
         {
             var mensaje = "";
-            switch (tipoUsuario.ToLower())
+            switch (tipoMail.ToLower())
             {
                 case "responsable":
-                    mensaje = "";
+                    mensaje = $"Hola {mailInfo.Email}, <br/><br/>" +
+                              "Estos son los detalles de tu pedido: <br/>";
+                    mensaje += "<strong>Detalle de la recaudación:</strong> <br/>" +
+                               "Precio Total: " + mailInfo.PrecioTotal + "<br/>" +
+                               "Invitados: <br/>";
+                    foreach (var invitado in mailInfo.InvitadosMail)
+                    {
+                        mensaje += invitado.Email + ": " + invitado.PrecioTotal + "<br/>";
+                    }
+
+                    mensaje += "<strong>Detalle del pedido:</strong> <br/>" +
+                               "Gustos: <br/>";
+                    foreach (var gusto in mailInfo.GustosEmpanadas)
+                    {
+                        mensaje += gusto.Nombre+ ": " + gusto.Cantidad+ "<br/>";
+                    }
 
                     break;
                 case "invitado":
@@ -192,10 +176,27 @@ namespace BackendTp.Servicios
                                "<br/>" +
                                "Gracias por elegirnos!";
                     break;
+                case "inicio":
+                    mensaje = $"Hola {mailInfo.Email}, <br/><br/>" +
+                              "Se ha iniciado un nuevo pedido de empanadas<br/>" +
+                              "Podes seleccionar los gustos que desees en el siguiente " +
+                              "<a href='" + mailInfo.Link + "'>link</a>";
+                    break;
             }
 
             return mensaje;
         }
 
+        public void ArmarMailInicioPedido(List<int> usuarios, int idPedido)
+        {
+            foreach (var u in usuarios)
+            {
+                var email = new Mail();
+                var tokenUsuario = Db.InvitacionPedido.FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido).Token;
+                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u).Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
     }
 }

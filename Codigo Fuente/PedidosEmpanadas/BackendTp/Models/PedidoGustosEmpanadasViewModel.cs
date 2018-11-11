@@ -11,8 +11,8 @@ namespace BackendTp.Models
     {
         public Pedido Pedido { get; set; }
         public List<GustosEmpanadasViewModel> GustosDisponibles{ get; set; }
-
         public List<UsuarioViewModel> Invitados { get; set; }
+        public int Acciones { get; set; }
 
         public PedidoGustosEmpanadasViewModel()
         {
