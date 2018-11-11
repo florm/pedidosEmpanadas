@@ -568,3 +568,6 @@ tbody {
 .toast-error {
     background-color: #ed5565;
 }
+button:disabled{
+    cursor: not-allowed;
+}

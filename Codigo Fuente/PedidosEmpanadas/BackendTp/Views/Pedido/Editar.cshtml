@@ -79,16 +79,13 @@
             </div>
             <div class="row">
                 <div class="col-12 text-right mt-3">
-                    <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-                    <input type="submit" value="Guardar" id="btnEditar" class="btn btn-aceptar" />
+                    <input type="reset" value="Volver" id="btnCancelar" class="btn btn-cancelar mr-1" />
+                    <input type="submit" value="Guardar" id="btnEditar" class="btn btn-aceptar" />                   
+                    <button type="button" id="btnConfirmar" data-pedido_id="@Model.Pedido.IdPedido" class="btn btn-primary">Confirmar</button>
+                   
                 </div>
             </div>
         </form>
-        @using (Html.BeginForm("Confirmar", "Pedido"))
-        {
-            @Html.HiddenFor(p => p.Pedido.IdPedido)
-            <input type="submit" value="Confirmar" id="btnConfirmar" class="btn btn-aceptar" />
-        }
     </div>
 
 @section custom_js_libraries

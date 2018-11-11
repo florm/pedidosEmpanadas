@@ -39,6 +39,16 @@ $("#pruebainvitados").click(function () {
     buscarInvitadosNoEliminados();
 });
 
+$("#btnConfirmar").click(function () {
+    
+    buttonLoading($(this), true);
+    $.post( "/Pedido/Confirmar", { "Pedido.IdPedido": $(this).data("pedido_id") })
+    .done(function( data ) {
+        toastr.success("El pedido fue Confirmado exitosamente.");
+        $("#btnConfirmar").find("span").remove();
+    });
+});
+
 function buscarInvitadosNoEliminados() {
     var eliminadosFalse = $(".iconoEliminarInvitado[eliminado=false]");
     var invitadosConfirmados = new Array();

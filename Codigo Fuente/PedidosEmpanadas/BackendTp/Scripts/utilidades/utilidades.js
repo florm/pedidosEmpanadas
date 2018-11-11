@@ -527,3 +527,13 @@
 
     function dummy() {
     }
+    
+    function buttonLoading(button, state) {
+        if (state){
+            button.attr("disabled",true);
+            button.append(" <span><i class='fa fa-cog fa-spin fa-fw '></i></span>");
+        }else{
+            button.find("span").remove();
+            button.attr("disabled",false);
+        }
+    }

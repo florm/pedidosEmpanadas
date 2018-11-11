@@ -101,7 +101,7 @@ namespace BackendTp.Servicios
                         }).ToList();
                 var cantidadTotal=0;
                 email.GustosEmpanadas.ForEach(ge => { cantidadTotal += ge.Cantidad; });
-                email.PrecioTotal = pedido.PrecioTotal / cantidadTotal; 
+                email.PrecioTotal = cantidadTotal != 0? pedido.PrecioTotal / cantidadTotal:0; 
                 MandarMail(email, "Detalles de Pedido Confirmado","invitado" );
             }
         }
