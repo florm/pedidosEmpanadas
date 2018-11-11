@@ -170,5 +170,11 @@ namespace BackendTp.Controllers
             Pedido pedido = _servicioPedido.Detalle(pedidoElegido);
             return View(pedido);
         }
+
+        public ActionResult Clonar(int id)
+        {
+            PedidoGustosEmpanadasViewModel pedido = _servicioPedido.Clonar(id);
+            return View("Iniciar", pedido);
+        }
     }
 }
