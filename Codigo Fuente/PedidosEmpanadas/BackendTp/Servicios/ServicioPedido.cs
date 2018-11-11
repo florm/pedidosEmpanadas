@@ -15,7 +15,9 @@ namespace BackendTp.Servicios
 {
     public class ServicioPedido : Servicio
     {
-
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
+        
         public List<Pedido> GetAll()
         {
             return Db.Pedido.ToList();
@@ -136,5 +138,15 @@ namespace BackendTp.Servicios
             return pedidoDetalle;
         }
 
+        public PedidoGustosEmpanadasViewModel Clonar(int id)
+        {
+            
+            Pedido pedido = GetById(id);
+            var gustosModel = _servicioGustoEmpanada.GetAll();
+            var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);
+            var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(),gustosModel, invitados);
+            
+            return pgeVM;
+        }
     }
 }
