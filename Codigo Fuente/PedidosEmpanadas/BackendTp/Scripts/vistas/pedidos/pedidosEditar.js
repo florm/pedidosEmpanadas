@@ -40,12 +40,23 @@ $("#pruebainvitados").click(function () {
 });
 
 $("#btnConfirmar").click(function () {
-    
-    buttonLoading($(this), true);
-    $.post( "/Pedido/Confirmar", { "Pedido.IdPedido": $(this).data("pedido_id") })
-    .done(function( data ) {
-        toastr.success("El pedido fue Confirmado exitosamente.");
-        $("#btnConfirmar").find("span").remove();
+
+    swal({
+        title: "¿Seguro desea Confirmar el pedido?",
+        text: "Una vez confirmado no se podrá modificar.",
+        icon: "warning",
+        buttons:  ["Cancelar", "Aceptar"],
+        dangerMode: true,
+    })
+        .then((willConfirm) => {
+        if (willConfirm) {
+            buttonLoading($(this), true);
+            $.post( "/Pedido/Confirmar", { "Pedido.IdPedido": $(this).data("pedido_id") })
+                .done(function( data ) {
+                    toastr.success("El pedido fue Confirmado exitosamente.");
+                    $("#btnConfirmar").find("span").remove();
+                });
+        }
     });
 });
 

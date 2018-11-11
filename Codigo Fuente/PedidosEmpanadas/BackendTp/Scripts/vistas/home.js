@@ -128,7 +128,11 @@ function gustosOk(data) {
 
 var btnCancelar = $("#btnCancelar");
 btnCancelar.on('click', function () {
-    history.go(-1);
+    if ('referrer' in document) {
+        window.location = document.referrer;
+    } else {
+        window.history.back();
+    }
 });
 
 toastr.options = {

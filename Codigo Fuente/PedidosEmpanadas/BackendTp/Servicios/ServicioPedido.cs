@@ -75,7 +75,7 @@ namespace BackendTp.Servicios
                     on p.IdPedido equals i.IdPedido
                 where (i.IdUsuario == idUsuario || p.IdUsuarioResponsable == idUsuario)
                 
-                select p).OrderByDescending(p => p.FechaCreacion).Distinct().ToList();
+                select p).Distinct().OrderByDescending(p => p.FechaCreacion).ToList();
 
             return pedidosQuery;
         }
