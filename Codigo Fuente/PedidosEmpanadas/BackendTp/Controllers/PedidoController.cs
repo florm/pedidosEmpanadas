@@ -36,7 +36,7 @@ namespace BackendTp.Controllers
 
         public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && pedidoGustosEmpanadas.Invitados.Count != 0)
             {
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
                 var usuarios = _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
@@ -45,6 +45,8 @@ namespace BackendTp.Controllers
 
             }
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
+            if(pedidoGustosEmpanadas.Invitados.Count == 0)
+                ViewBag.mensajeError = "Debe seleccionar al menos un invitado";
             ViewBag.iniciar = false;
             return View("Iniciar", pedidoGustosEmpanadas);
         }

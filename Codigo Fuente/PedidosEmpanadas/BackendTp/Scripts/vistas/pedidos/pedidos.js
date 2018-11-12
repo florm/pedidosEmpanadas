@@ -1,10 +1,23 @@
 ﻿$(document).ready(function () {
     var textValidacionGustos = $("#textValidacionGustos");
+    
     //var btnIniciar = $("#btnIniciar");
     var inputInvitados = $("#inputInvitados");
     var divInvitado = $("#divInvitado");
 });
+var textValidacionInvitados = $("#textValidacionInvitados");
+var nombreNegocio = $("#Pedido_NombreNegocio");
+var precioUnidad = $("#Pedido_PrecioUnidad");
+var precioDocena = $("#Pedido_PrecioDocena");
 
+
+function validar() {
+    if (!validarCampoObligatorio(nombreNegocio)) return false;
+    if (!validarCampoObligatorio(precioUnidad)) return false;
+    if (!validarCampoObligatorio(precioDocena)) return false;
+    
+    return true;
+}
 
 function seleccionarTodos(source) {
     var checkboxes = $("form input:checkbox");
@@ -17,17 +30,30 @@ function validacionYEnvio(e, arrayViejos)
 {
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
+    if (!validar()) return;
     if (validarSeleccionDeGustos(checkboxes)) {
-        armarInvitados(inputInvitados, arrayViejos);
-        if ($("#formModificar").length > 0)
-            $("#formModificar").submit();
-        else
-            $("form").submit();
+        if (validarInvitados(inputInvitados)) {
+
+            armarInvitados(inputInvitados, arrayViejos);
+            if ($("#formModificar").length > 0)
+                $("#formModificar").submit();
+            else
+                $("form").submit();
+        } else {
+            textValidacionInvitados.removeClass("d-none");
+            textValidacionInvitados.text("Debe seleccionar al menos 1 invitado");
+        }
     }
     else {
         textValidacionGustos.removeClass("d-none");
         textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
     }
+}
+
+function validarInvitados(invitado) {
+    if (invitado.val() === "")
+        return false;
+    return true;
 }
 
 function validarSeleccionDeGustos(checkboxes) {

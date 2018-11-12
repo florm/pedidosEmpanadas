@@ -35,9 +35,14 @@
                 {
                     <input class="invitadosEditar" id="@Model.Invitados[i].Id" value="@Model.Invitados[i].Email" hidden="" />
                 }
-                <div id="divInvitado" class="form-group w-100">
-                    <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
-                </div>
+                    <div id="divInvitado" class="form-group w-100">
+                        <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
+                        @if (ViewBag.mensajeError != null)
+                        {
+                            <span class="field-validation-error text-danger">@ViewBag.mensajeError</span>
+                        }
+                        <span id="textValidacionInvitados" class="field-validation-error text-danger text-center d-none mt-2 d-inline-block"></span>
+                    </div>
             </div>
         </div>
         <div class="col-12 text-right mt-3">
