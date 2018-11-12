@@ -72,13 +72,13 @@ namespace BackendTp.Controllers
         [System.Web.Mvc.HttpGet]
         public ActionResult Editar(int id)
         {
+            _servicioUsuario.ValidarPermisoUsuario(id, Sesion.IdUsuario);
             var pedido = _servicioPedido.GetById(id);
-            if (pedido.IdEstadoPedido == (int)EstadosPedido.Cerrado)
-                throw new PedidoCerradoException();
+            //if (pedido.IdEstadoPedido == (int)EstadosPedido.Cerrado)
+            //    throw new PedidoCerradoException();
             if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
             {
-                //todo
-                //RedirectToAction("Detalle");
+                return RedirectToAction("Detalle", new { id });
             }
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);

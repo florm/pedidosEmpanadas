@@ -47,11 +47,13 @@ namespace BackendTp.Controllers
             Sesion.EmailUsuario = usuarioLogueado.Email;
 
             }
-            return Json("");
+            
+            return Json(Sesion.UltimaUrlAccedida);
         }
 
         public ActionResult Login()
         {
+            
             return View();
         }
 

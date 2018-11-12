@@ -58,8 +58,14 @@ function callback(data) {
 }
 
 
-function loginOk() {
-    window.location.href = window.pathListaPedidos;
+function loginOk(data) {
+    var url = data.split('/');
+    if (url[1] === 'Pedido' && url[2] === 'Detalle' || url[1] === 'Pedido' && url[2] === 'ElegirGustos')
+        window.location.href = data;
+    else
+    {
+        window.location.href = window.pathListaPedidos;
+    }
 
 }
 

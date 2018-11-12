@@ -50,6 +50,15 @@ namespace BackendTp.Servicios
             return lista;
         }
 
+        public void ValidarPermisoUsuario(int pedidoId, int usuarioId)
+        {
+            var pedido = Db.Pedido
+                .FirstOrDefault(p => p.IdUsuarioResponsable == usuarioId && p.IdPedido == pedidoId);
+            if(pedido==null)
+                throw new PermisosException();
+
+        }
+
         //App
         public Usuario LoginMobile(string email, string pass)
         {

@@ -31,5 +31,11 @@ namespace BackendTp.Helpers
             }
             set => HttpContext.Current.Session["EmailUsuario"] = value;
         }
+
+        public static string UltimaUrlAccedida
+        {
+            get=> HttpContext.Current.Session["UltimaUrlAccedida"].ToString();
+            set => HttpContext.Current.Session["UltimaUrlAccedida"] = value;
+        }
     }
 }
