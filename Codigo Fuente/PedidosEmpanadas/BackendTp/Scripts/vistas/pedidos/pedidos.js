@@ -30,29 +30,21 @@ function validacionYEnvio(e, arrayViejos)
 {
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
-    if (!validar()) return;
-    if (validarSeleccionDeGustos(checkboxes)) {
-        if (validarInvitados(inputInvitados)) {
-
-            armarInvitados(inputInvitados, arrayViejos);
-            if ($("#formModificar").length > 0)
-                $("#formModificar").submit();
-            else
-                $("form").submit();
-        } else {
-            textValidacionInvitados.removeClass("d-none");
-            textValidacionInvitados.text("Debe seleccionar al menos 1 invitado");
-        }
-    }
-    else {
-        textValidacionGustos.removeClass("d-none");
-        textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
-    }
+    if (!validar() || !validarSeleccionDeGustos(checkboxes) || !validarInvitados(inputInvitados)) return;
+    
+    armarInvitados(inputInvitados, arrayViejos);
+    if ($("#formModificar").length > 0)
+        $("#formModificar").submit();
+    else
+        $("form").submit();
 }
 
 function validarInvitados(invitado) {
-    if (invitado.val() === "")
+    if (invitado.val() === "") {
+        textValidacionInvitados.removeClass("d-none");
+        textValidacionInvitados.text("Debe seleccionar al menos 1 invitado");
         return false;
+    }
     return true;
 }
 
@@ -62,8 +54,11 @@ function validarSeleccionDeGustos(checkboxes) {
         if (checkboxes[i].checked === false)
             validacion++;
     }
-    if (checkboxes.length === validacion)
+    if (checkboxes.length === validacion) {
+        textValidacionGustos.removeClass("d-none");
+        textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
         return false;
+    }
     else
         return true;
 }
