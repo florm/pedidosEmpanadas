@@ -144,11 +144,11 @@ namespace BackendTp.Servicios
                     mensaje = $"Hola {mailInfo.Email}, <br/><br/>" +
                               "Estos son los detalles de tu pedido: <br/>";
                     mensaje += "<strong>Detalle de la recaudación:</strong> <br/>" +
-                               "Precio Total: " + mailInfo.PrecioTotal + "<br/>" +
+                               "Precio Total: $" + mailInfo.PrecioTotal + "<br/>" +
                                "Invitados: <br/>";
                     foreach (var invitado in mailInfo.InvitadosMail)
                     {
-                        mensaje += invitado.Email + ": " + invitado.PrecioTotal + "<br/>";
+                        mensaje += invitado.Email + ": $" + invitado.PrecioTotal + "<br/>";
                     }
 
                     mensaje += "<strong>Detalle del pedido:</strong> <br/>" +
@@ -172,7 +172,7 @@ namespace BackendTp.Servicios
                     mensaje +=
                         $"<br/><br/> La <strong>cantidad total</strong> de empanadas que elegiste es: {cantidadTotal}" +
                         "<br/>";
-                    mensaje += $"El <strong>precio</strong> que debes abonar es de: {mailInfo.PrecioTotal}" +
+                    mensaje += $"El <strong>precio</strong> que debes abonar es de: ${mailInfo.PrecioTotal}" +
                                "<br/>" +
                                "Gracias por elegirnos!";
                     break;
