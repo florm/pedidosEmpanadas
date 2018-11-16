@@ -34,7 +34,17 @@ namespace BackendTp.Helpers
 
         public static string UltimaUrlAccedida
         {
-            get=> HttpContext.Current.Session["UltimaUrlAccedida"].ToString();
+            get
+            {
+                if (HttpContext.Current.Session["UltimaUrlAccedida"] != null)
+                {
+                    return HttpContext.Current.Session["UltimaUrlAccedida"].ToString();
+
+                }
+
+                return null;
+
+            } 
             set => HttpContext.Current.Session["UltimaUrlAccedida"] = value;
         }
     }

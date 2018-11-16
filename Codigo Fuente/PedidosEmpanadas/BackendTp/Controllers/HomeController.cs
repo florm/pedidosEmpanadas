@@ -47,8 +47,10 @@ namespace BackendTp.Controllers
             Sesion.EmailUsuario = usuarioLogueado.Email;
 
             }
-            
-            return Json(Sesion.UltimaUrlAccedida);
+            if(Sesion.UltimaUrlAccedida != null)
+                return Json(Sesion.UltimaUrlAccedida);
+            return Json("");
+
         }
 
         public ActionResult Login()
