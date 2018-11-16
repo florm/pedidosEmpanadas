@@ -13,10 +13,13 @@ namespace BackendTp.Servicios
     public class ServicioUsuario : Servicio
     {
         
-        public void CrearUsuario(Usuario usuario)
+        public (string, string) CrearUsuario(Usuario usuario)
         {
+            if(!UsuarioValido(usuario))
+                return ("error","El usuario ya existe");
             Db.Usuario.Add(usuario);
             Db.SaveChanges();
+            return ("ok", "El registro se realizó correctamente");
         }
 
         public Usuario Login(Usuario usuario)
@@ -66,6 +69,15 @@ namespace BackendTp.Servicios
             if (user == null)
                 return null;
             return user;
+        }
+
+        public bool UsuarioValido(Usuario usuario)
+        {
+            var usuarioModel = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email);
+            if (usuarioModel != null)
+                return false;
+            return true;
+
         }
 
     }

@@ -132,6 +132,50 @@ function agregarTag(select, array) {
         });
 }
 
+//registro
+//$("#btnRegistro").click(function() {
+    
+
+//});
+
+
+$("#btnRegistro").click(function () {
+    if (!validarRegistro())
+        return;
+
+    var usuario = new Object();
+    usuario.email = textEmail.val();
+    usuario.password = textPassword.val();
+
+    llamadaAjax(window.pathRegistro, JSON.stringify(usuario), false, "callback");
+});
+
+function callback(data) {
+    mostrarMsgExito(data.mensaje);
+    if (data.operacion === "ok")
+        $("#modalRegistro").modal("hide");
+    inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
+
+}
+
+var textEmail = $("#textEmail");
+var textPassword = $("#textPassword");
+var textRepetirPassword = $("#textRepetirPassword");
+
+function validarRegistro() {
+    if (!validarCampoEmail(textEmail)) return false;
+    if (!validarCampoObligatorio(textPassword)) return false;
+    if (!validarTextRepetir()) return false;
+    return true;
+}
+
+function validarTextRepetir() {
+    if (textPassword.val() != textRepetirPassword.val()) {
+        mostrarMensajeValidacionErronea(textRepetirPassword, "Las contraseñas deben ser iguales");
+        return false;
+    }
+    return validarCampoObligatorio(textRepetirPassword);
+}
 
 
 

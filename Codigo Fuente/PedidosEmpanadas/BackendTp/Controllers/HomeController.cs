@@ -23,11 +23,11 @@ namespace BackendTp.Controllers
         {
             if (ModelState.IsValid)
             {
-            _servicioUsuario.CrearUsuario(usuario);
+                var (operacion, mensaje) = _servicioUsuario.CrearUsuario(usuario);
                 return Json(new
                 {
-                    mensaje="El registro se realizó correctamente.Ahora puede iniciar sesión", 
-                    operacion="ok"
+                    mensaje,
+                    operacion
                 });
             }
 
@@ -65,12 +65,6 @@ namespace BackendTp.Controllers
             return RedirectToAction("Index");
         }
 
-        //        public ActionResult Error()
-        //        {
-        //            ViewBag.MensajeDeError = RouteData.Values["Error"];
-        //            return View();
-        //        }
-
         
         public ActionResult Error(int? error, string mensaje)
         {
@@ -89,11 +83,6 @@ namespace BackendTp.Controllers
                     ViewBag.Title = "ERROR EN EL SERVIDOR";
                     ViewBag.Description = "Ocurrió un error inesperado, esperamos que no vuelva a pasar.";
                     break;
-
-                //case 404:
-                //    ViewBag.Title = "PÁGINA NO ENCONTRADA";
-                //    ViewBag.Description = "Esta página no está disponible, no existe o no se puede encontrar.";
-                //    break;
                 case 405:
                     ViewBag.Title = "Acción no permitida";
                     ViewBag.Description = mensaje;
