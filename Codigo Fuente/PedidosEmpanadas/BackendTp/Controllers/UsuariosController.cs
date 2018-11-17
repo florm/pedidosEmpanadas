@@ -28,5 +28,13 @@ namespace BackendTp.Controllers
             List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
             return Ok(ListaPedido);
         }
+
+        [ResponseType(typeof(string))]
+        public IHttpActionResult PostNewUser(Usuario usuario)
+        {
+            var valida = servicioUsuario.CrearUsuario(usuario);
+            string respuesta = valida.Item1;
+            return Ok(respuesta);
+        }
     }
 }

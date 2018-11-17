@@ -61,14 +61,18 @@ namespace App
                 return;
             }
 
-
             var deviceUser = JsonConvert.DeserializeObject<DeviceUser>(result);
 
-            App.Current.Properties["IdUsuario"] = deviceUser.IdUsuario; //ver si borro
+            App.Current.Properties["IdUsuario"] = deviceUser.IdUsuario; 
             App.Current.Properties["IsLoggedIn"] = true;
 
             //await Navigation.PushAsync(new Lista(deviceUser));
             await Navigation.PushAsync(new Lista());
+        }
+
+        private async void IrARegistro_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Registrar());
         }
     }
 }

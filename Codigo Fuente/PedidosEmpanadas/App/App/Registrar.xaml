@@ -1,15 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:App"
-             x:Class="App.MainPage">
-
-    <!--<StackLayout>
-        <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
-        <Entry Placeholder="Correo" x:Name="Correo"></Entry>
-        <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"></Entry>
-        <Button Clicked="Button_Clicked" Text="IniciarSesion" x:Name="Boton"></Button>
-    </StackLayout>-->
+             x:Class="App.Registrar">
     <ContentPage.Content>
         <Grid>
             <Image Source="portada.jpg" Aspect="AspectFill"/>
@@ -24,20 +16,23 @@
                 <StackLayout Grid.Row="1" Padding="20,200,20,0">
                     <Frame CornerRadius="10" BackgroundColor="White" Opacity="0.5" Padding="5,0,5,0">
                         <StackLayout>
-                            <Entry Placeholder="Correo electrónico" x:Name="Correo"/>
+                            <Entry Placeholder="Ingrese su Email" x:Name="CorreoRegistro"/>
                         </StackLayout>
                     </Frame>
                     <Frame CornerRadius="10" BackgroundColor="White" Opacity="0.5" Padding="5,0,5,0">
                         <StackLayout>
-                            <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"/>
+                            <Entry Placeholder="Ingrese una Contraseña" x:Name="PassRegistro" IsPassword="True"/>
                         </StackLayout>
                     </Frame>
-                    
-                    <Button Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
-                    <Button Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
+                    <Frame CornerRadius="10" BackgroundColor="White" Opacity="0.5" Padding="5,0,5,0">
+                        <StackLayout>
+                            <Entry Placeholder="Repita la Contraseña" x:Name="RePassRegistro" IsPassword="True"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Button Clicked="Registrar_Click" Text="Iniciar Sesion" x:Name="BotonReg" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
                 </StackLayout>
             </Grid>
         </Grid>
     </ContentPage.Content>
-
 </ContentPage>
