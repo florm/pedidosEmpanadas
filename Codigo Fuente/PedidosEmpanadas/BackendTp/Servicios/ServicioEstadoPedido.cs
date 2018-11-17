@@ -12,6 +12,11 @@ namespace BackendTp.Servicios
 {
     public class ServicioEstadoPedido : Servicio
     {
+        
+        public ServicioEstadoPedido(Entities context) : base(context)
+        {
+        }
+
         public EstadoPedido GetAbierto()
         {
             return Db.EstadoPedido.FirstOrDefault(p => p.Nombre == "Abierto");

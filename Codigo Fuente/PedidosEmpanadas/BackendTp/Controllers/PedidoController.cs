@@ -15,11 +15,12 @@ namespace BackendTp.Controllers
 {
     public class PedidoController : BaseController
     {
-        private readonly ServicioPedido _servicioPedido = new ServicioPedido();
-        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
-        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
-        private readonly ServicioEmail _servicioEmail= new ServicioEmail();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioPedido _servicioPedido = new ServicioPedido(Context);
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada(Context);
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
+        private readonly ServicioEmail _servicioEmail= new ServicioEmail(Context);
 
         public ActionResult Iniciar()
         {

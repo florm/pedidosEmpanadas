@@ -12,6 +12,10 @@ namespace BackendTp.Servicios
 {
     public class ServicioEmail : Servicio
     {
+        public ServicioEmail(Entities context) : base(context)
+        {
+        }
+
         public List<EmailAccion> GetAcciones()
         {
             return new List<EmailAccion>

@@ -12,8 +12,10 @@ namespace BackendTp.Controllers
 {
     public class UsuariosController : ApiController
     {
-        ServicioUsuario servicioUsuario = new ServicioUsuario();
-        ServicioPedido servicioPedido = new ServicioPedido();
+        private static readonly Entities Context = new Entities();
+
+        private readonly ServicioUsuario servicioUsuario = new ServicioUsuario(Context);
+        private readonly ServicioPedido servicioPedido = new ServicioPedido(Context);
 
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetMobileUser(string id, string param2)

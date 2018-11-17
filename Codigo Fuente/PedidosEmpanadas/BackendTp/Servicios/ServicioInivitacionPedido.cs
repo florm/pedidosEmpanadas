@@ -13,7 +13,13 @@ namespace BackendTp.Servicios
 {
     public class ServicioInvitacionPedido: Servicio
     {
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
+
+        public ServicioInvitacionPedido(Entities context) : base(context)
+        {
+
+        }
 
         public List<InvitacionPedido> Crear(List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {

@@ -17,8 +17,8 @@ namespace BackendTp.Controllers
     
     public class PedidosController : ApiController
     {
-        ////[HttpPost]
-        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
 
         //[Route("api/pedidos/confirmargustos")]
         public JsonResult ConfirmarGustos([FromBody] PedidoRequest pedido)

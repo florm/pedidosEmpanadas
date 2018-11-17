@@ -11,7 +11,8 @@ namespace BackendTp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
         
         // GET: Home
         public ActionResult Index()

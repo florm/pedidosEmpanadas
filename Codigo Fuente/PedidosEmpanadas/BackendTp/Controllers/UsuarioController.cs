@@ -12,7 +12,8 @@ namespace BackendTp.Controllers
 {
     public class UsuarioController : BaseController
     {
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
         
 
         public JsonResult Consultar(UsuarioViewModel usuario)

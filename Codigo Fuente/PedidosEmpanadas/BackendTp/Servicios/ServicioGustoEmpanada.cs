@@ -10,6 +10,10 @@ namespace BackendTp.Servicios
 {
     public class ServicioGustoEmpanada: Servicio
     {
+        public ServicioGustoEmpanada(Entities context) : base(context)
+        {
+        }
+
         public GustoEmpanada GetById(int id)
         {
             return Db.GustoEmpanada.Single(e => e.IdGustoEmpanada == id);

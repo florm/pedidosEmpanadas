@@ -15,11 +15,16 @@ namespace BackendTp.Servicios
 {
     public class ServicioPedido : Servicio
     {
-        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
-        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
-        private readonly ServicioEmail _servicioEmail = new ServicioEmail();
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
-        private readonly ServicioEstadoPedido _servicioEstadoPedido = new ServicioEstadoPedido();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada(Context);
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
+        private readonly ServicioEmail _servicioEmail = new ServicioEmail(Context);
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
+        private readonly ServicioEstadoPedido _servicioEstadoPedido = new ServicioEstadoPedido(Context);
+        
+        public ServicioPedido(Entities Context) : base(Context)
+        {
+        }
         
         public PedidoGustosEmpanadasViewModel  Iniciar()
         {
