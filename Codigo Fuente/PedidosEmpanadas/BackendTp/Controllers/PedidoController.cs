@@ -150,6 +150,7 @@ namespace BackendTp.Controllers
         public ActionResult Clonar(int id)
         {
             PedidoGustosEmpanadasViewModel pedido = _servicioPedido.Clonar(id);
+            ViewBag.iniciar = true;
             return View("Iniciar", pedido);
         }
     }
