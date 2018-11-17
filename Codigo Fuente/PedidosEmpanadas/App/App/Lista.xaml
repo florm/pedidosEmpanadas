@@ -1,7 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App; assembly=App"
              x:Class="App.Lista">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="PedidoAbiertoTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Padding="15" Margin="20">
+                                <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="PedidoCerradoTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Padding="15" Margin="20" BackgroundColor="Aquamarine">
+                                <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <local:PedidoTemplateSelector x:Key="pedidoTemplateSelector" PedidoAbiertoTemplate="{StaticResource PedidoAbiertoTemplate}"
+                                                                         PedidoCerradoTemplate="{StaticResource PedidoCerradoTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -18,29 +66,7 @@
 
             </StackLayout>
             <ScrollView Grid.Row="1" BackgroundColor="#e8e8e8">
-                <ListView x:Name="ListaPruebaAle" HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Padding="15" Margin="20">
-                                            <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
-                                            <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
-                                            <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
-                                            <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
-                                        </StackLayout>
-                                    </Grid>
-                                </ViewCell.View>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="ListaPruebaAle" HasUnevenRows="True" ItemTemplate="{StaticResource pedidoTemplateSelector}"/>
             </ScrollView>
         </Grid>
 
