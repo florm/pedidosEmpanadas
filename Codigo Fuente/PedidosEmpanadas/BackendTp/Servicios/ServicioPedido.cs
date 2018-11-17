@@ -151,6 +151,14 @@ namespace BackendTp.Servicios
             return pgeVM;
         }
 
+
+        public GustosPedidoUsuarioViewModel ElegirGustosPorToken(Guid Token)
+        {
+            var invitacion = Db.InvitacionPedido.FirstOrDefault(i => i.Token == Token);
+            var gpu = ElegirGustosUsuario(invitacion.IdPedido, invitacion.IdUsuario);
+            return gpu;
+        }
+
         public GustosPedidoUsuarioViewModel ElegirGustosUsuario(int id, int usuarioId)
         {
             GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();

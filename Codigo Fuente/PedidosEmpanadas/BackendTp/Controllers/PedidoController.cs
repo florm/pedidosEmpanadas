@@ -60,9 +60,8 @@ namespace BackendTp.Controllers
         [System.Web.Mvc.HttpGet]
         public ActionResult Elegir(Guid Token)
         {
-
-            var gustos = _servicioGustoEmpanada.GetAll();
-            return View(gustos);
+            var gpu = _servicioPedido.ElegirGustosPorToken(Token);
+            return View("ElegirGustos", gpu);
         }
 
         //public ActionResult ListaPedidosTotal()
