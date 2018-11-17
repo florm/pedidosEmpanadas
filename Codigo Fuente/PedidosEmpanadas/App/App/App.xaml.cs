@@ -7,10 +7,12 @@ namespace App
 {
     public partial class App : Application
     {
+        public static App Current; // ver si borro
         public App()
         {
             InitializeComponent();
-
+            Current = this;
+            //var isLoggedIn = Properties.ContainsKey("IsLoggedIn") ? (bool)Properties["IsLoggedIn"] : false;
             //MainPage = new MainPage();
             MainPage = new NavigationPage(new MainPage());
         }
@@ -28,6 +30,12 @@ namespace App
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public void Logout()
+        {
+            Properties["IsLoggedIn"] = false;
+            MainPage = new NavigationPage(new MainPage());
         }
     }
 }

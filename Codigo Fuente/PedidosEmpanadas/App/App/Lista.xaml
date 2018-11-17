@@ -9,38 +9,28 @@
             <DataTemplate x:Key="PedidoAbiertoTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <StackLayout Padding="15" Margin="20">
-                                <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
-                                <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
-                                <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
-                                <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                        <StackLayout Orientation="Vertical" BackgroundColor="#e8e8e8">
+                            <StackLayout Padding="15" Margin="6,3,6,3" BackgroundColor="#9ebeff">
+                                <Label TextColor="White" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
                             </StackLayout>
-                        </Grid>
+                        </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
             <DataTemplate x:Key="PedidoCerradoTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <StackLayout Padding="15" Margin="20" BackgroundColor="Aquamarine">
-                                <Label Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
-                                <Label Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
-                                <Label Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
-                                <Label Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                        <StackLayout Orientation="Vertical" BackgroundColor="#e8e8e8">
+                            <StackLayout Padding="15" Margin="6,3,6,3" BackgroundColor="#ff9e9e">
+                                <Label TextColor="White" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                <Label TextColor="White" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
                             </StackLayout>
-                        </Grid>
+                        </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
@@ -63,11 +53,9 @@
                 <StackLayout BackgroundColor="#6d97c9" HeightRequest="60" Orientation="Horizontal" Padding="10,0,0,0">
                     <Label FontAttributes="Bold" Text="Mis pedidos" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
                 </StackLayout>
-
             </StackLayout>
-            <ScrollView Grid.Row="1" BackgroundColor="#e8e8e8">
-                <ListView x:Name="ListaPruebaAle" HasUnevenRows="True" ItemTemplate="{StaticResource pedidoTemplateSelector}"/>
-            </ScrollView>
+            <ListView Grid.Row="1" SeparatorVisibility="None" BackgroundColor="#e8e8e8" x:Name="ListaPruebaAle" HasUnevenRows="True" ItemTemplate="{StaticResource pedidoTemplateSelector}"/>
+
         </Grid>
 
     </ContentPage.Content>

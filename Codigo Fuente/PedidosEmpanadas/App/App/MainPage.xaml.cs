@@ -35,7 +35,7 @@ namespace App
 
                 string url = string.Format("/api/Usuarios/GetMobileUser/{0}/{1}", Correo.Text, Pass.Text);
 
-                string url2 = "http://192.168.0.6:45455" + url;
+                string url2 = "http://192.168.0.6:45457" + url;
 
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
@@ -61,10 +61,14 @@ namespace App
                 return;
             }
 
+
             var deviceUser = JsonConvert.DeserializeObject<DeviceUser>(result);
 
-            await Navigation.PushAsync(new Lista(deviceUser));
+            App.Current.Properties["IdUsuario"] = deviceUser.IdUsuario; //ver si borro
+            App.Current.Properties["IsLoggedIn"] = true;
 
+            //await Navigation.PushAsync(new Lista(deviceUser));
+            await Navigation.PushAsync(new Lista());
         }
     }
 }
