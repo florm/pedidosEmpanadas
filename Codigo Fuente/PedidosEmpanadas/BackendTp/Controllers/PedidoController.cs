@@ -23,13 +23,7 @@ namespace BackendTp.Controllers
 
         public ActionResult Iniciar()
         {
-            PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
-            var gustos = _servicioGustoEmpanada.GetAll();
-            foreach (var gusto in gustos)
-            {
-                pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-
-            }
+            PedidoGustosEmpanadasViewModel pgeVm = _servicioPedido.Iniciar();
             ViewBag.iniciar = true;
             return View(pgeVm);
         }
@@ -39,11 +33,9 @@ namespace BackendTp.Controllers
             if (ModelState.IsValid && pedidoGustosEmpanadas.Invitados.Count != 0)
             {
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-                var usuarios = _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
-                _servicioEmail.ArmarMailInicioPedido(usuarios, pedidoNuevo.IdPedido);
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
-
             }
+            
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             if(pedidoGustosEmpanadas.Invitados.Count == 0)
                 ViewBag.mensajeError = "Debe seleccionar al menos un invitado";

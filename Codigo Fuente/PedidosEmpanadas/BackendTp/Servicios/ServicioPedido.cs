@@ -17,6 +17,18 @@ namespace BackendTp.Servicios
     {
         private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
         private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
+        private readonly ServicioEmail _servicioEmail = new ServicioEmail();
+        
+        public PedidoGustosEmpanadasViewModel  Iniciar()
+        {
+            PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
+            var gustos = _servicioGustoEmpanada.GetAll();
+            foreach (var gusto in gustos)
+            {
+                pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
+            }
+            return pgeVm;
+        }
         
         public List<Pedido> GetAll()
         {
@@ -47,6 +59,7 @@ namespace BackendTp.Servicios
             pedido.FechaCreacion = DateTime.Now;
             pedido.IdUsuarioResponsable = Sesion.IdUsuario;
             pedido.IdEstadoPedido = (int)EstadosPedido.Abierto;
+            
             List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
             foreach (var gusto in pge.GustosDisponibles)
             {
@@ -55,8 +68,13 @@ namespace BackendTp.Servicios
             }
             //gustosSeleccionados.ForEach(gusto => pedido.GustoEmpanada.Add(gusto));
             pedido.GustoEmpanada = gustosSeleccionados;
+            
+            _servicioInvitacionPedido.Crear(pedido, pge.Invitados, Sesion.IdUsuario);            
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
+            
+            _servicioEmail.ArmarMailInicioPedido(pedido);
+
             return pedido;
         }
 
@@ -149,6 +167,17 @@ namespace BackendTp.Servicios
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(),gustosModel, invitados);
             
             return pgeVM;
+        }
+
+        public List<Usuario> getInvitados(Pedido pedido)
+        {
+            List<Usuario> invitados = new List<Usuario>();
+            foreach (var invitacion in pedido.InvitacionPedido)
+            {
+                invitados.Add(invitacion.Usuario);
+            }
+
+            return invitados;
         }
     }
 }

@@ -7,11 +7,6 @@ namespace Exceptions
 {
     public class PermisosException : PedidosEmpanadasException
     {
-        public PermisosException()
-        {
-           
-        }
-
         public override string Message => "No posee permisos para ver esta página";
     }
 }

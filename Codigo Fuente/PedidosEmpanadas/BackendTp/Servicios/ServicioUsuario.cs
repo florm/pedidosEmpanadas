@@ -12,6 +12,10 @@ namespace BackendTp.Servicios
 {
     public class ServicioUsuario : Servicio
     {
+        public Usuario GetById(int id)
+        {
+            return Db.Usuario.Single(u=> u.IdUsuario==id);
+        } 
         
         public (string, string) CrearUsuario(Usuario usuario)
         {

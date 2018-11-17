@@ -12,6 +12,7 @@ namespace BackendTp.Servicios
 {
     public class ServicioEmail : Servicio
     {
+        private readonly ServicioPedido _servicioPedido = new ServicioPedido();
 
         public List<EmailAccion> GetAcciones()
         {
@@ -192,15 +193,14 @@ namespace BackendTp.Servicios
             return mensaje;
         }
 
-        public void ArmarMailInicioPedido(List<int> usuarios, int idPedido)
+        public void ArmarMailInicioPedido(Pedido pedido)
         {
-            foreach (var u in usuarios)
+            foreach (var invitacionPedido in pedido.InvitacionPedido)
             {
                 var email = new Mail();
-                var tokenUsuario = Db.InvitacionPedido
-                    .FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido)?.Token;
+                var tokenUsuario = invitacionPedido.Token;
                 email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
-                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u)?.Email;
+                email.Email = invitacionPedido.Usuario.Email;
                 MandarMail(email, "Inicio de Pedido", "inicio");
             }
         }

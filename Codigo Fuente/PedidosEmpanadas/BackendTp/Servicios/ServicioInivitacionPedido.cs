@@ -13,24 +13,22 @@ namespace BackendTp.Servicios
 {
     public class ServicioInvitacionPedido: Servicio
     {
-        
-        public List<int> Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
+
+        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {
             var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
             foreach(var id in idUsuarios)
             {
-                Db.InvitacionPedido.Add(new InvitacionPedido
-                    {
-                        IdPedido = pedido.IdPedido,
-                        IdUsuario = id,
-                        Token = Guid.NewGuid(),
-                        Completado = false
-                    });
-                
+                InvitacionPedido invitacion = new InvitacionPedido
+                {
+                    Usuario = _servicioUsuario.GetById(id),
+                    Token = Guid.NewGuid(),
+                    Completado = false
+                };
+
+                pedido.InvitacionPedido.Add(invitacion);
             } 
-            
-            Db.SaveChanges();
-            return idUsuarios;
         }
 
         public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()
@@ -92,7 +90,7 @@ namespace BackendTp.Servicios
             }
 
             Db.SaveChanges();
-            EnviarMailInicioPedido(nuevosInvitados, idPedido, accion);
+            //EnviarMailInicioPedido(nuevosInvitados, idPedido, accion);
             
         }
 
@@ -133,30 +131,30 @@ namespace BackendTp.Servicios
             }
         }
 
-        public void EnviarMailInicioPedido(List<int> nuevosInvitados, int idPedido, int accion)
-        {
-            ServicioEmail servicioMail = new ServicioEmail();
-            switch (accion)
-            {
-                case (int)EmailAcciones.ANadie:
-                    break;
-                case (int)EmailAcciones.EnviarSoloALosNuevos:
-                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarInvitacionATodos:
-                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
-                        .Select(i => i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
-                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
-                                                                             && ip.Completado == false)
-                        .Select(i => i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
-                    break;
-            }
-        }
+//        public void EnviarMailInicioPedido(List<int> nuevosInvitados, int idPedido, int accion)
+//        {
+//            ServicioEmail servicioMail = new ServicioEmail();
+//            switch (accion)
+//            {
+//                case (int)EmailAcciones.ANadie:
+//                    break;
+//                case (int)EmailAcciones.EnviarSoloALosNuevos:
+//                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
+//                    break;
+//                case (int)EmailAcciones.ReEnviarInvitacionATodos:
+//                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
+//                        .Select(i => i.IdUsuario)
+//                        .ToList();
+//                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
+//                    break;
+//                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
+//                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
+//                                                                             && ip.Completado == false)
+//                        .Select(i => i.IdUsuario)
+//                        .ToList();
+//                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
+//                    break;
+//            }
+//        }
     }
 }
