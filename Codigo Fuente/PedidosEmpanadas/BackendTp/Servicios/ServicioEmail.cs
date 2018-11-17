@@ -1,5 +1,6 @@
 ﻿using BackendTp.Helpers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -199,7 +200,7 @@ namespace BackendTp.Servicios
                 var email = new Mail();
                 var tokenUsuario = Db.InvitacionPedido
                     .FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido)?.Token;
-                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Link = "http://" + HttpContext.Current.Request.Url.Authority + "/pedido/elegir/" + tokenUsuario;
                 email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u)?.Email;
                 MandarMail(email, "Inicio de Pedido", "inicio");
             }
