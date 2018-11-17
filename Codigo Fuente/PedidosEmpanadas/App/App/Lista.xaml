@@ -3,25 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.Lista">
     <ContentPage.Content>
-        <!--<StackLayout>
-            <Label x:Name="EmailUser" />
-            <ListView x:Name="ListaPruebaAle">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout>
-                                    <Label Text="{Binding FechaCreacion}"></Label>
-                                    <Label Text="{Binding NombreNegocio}"></Label>
-                                    <Label Text="{Binding EstadoS}"></Label>
-                                    <Label Text="{Binding RolS}"></Label>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>-->
         <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

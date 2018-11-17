@@ -197,8 +197,41 @@ namespace BackendTp.Servicios
                 }
 
             }
-
             return gpu;
+        }
+
+        public List<PedidoViewModel> ListarPedidosMobile(int idUsuario)
+        {
+            List<PedidoViewModel> ListaPedido = new List<PedidoViewModel>();
+            var pedidos = Lista(idUsuario);
+            foreach (Pedido p in pedidos)
+            {
+                ListaPedido.Add(new PedidoViewModel
+                {
+                    IdPedido = p.IdPedido,
+                    IdUsuarioResponsable = p.IdUsuarioResponsable,
+                    FechaCreacion = p.FechaCreacion,
+                    NombreNegocio = p.NombreNegocio,
+                    Estado = p.IdEstadoPedido,
+                    Rol = p.IdUsuarioResponsable,
+                    EstadoS = p.EstadoPedido.Nombre
+                });
+            }
+
+            foreach (PedidoViewModel pvm in ListaPedido)
+            {
+                if (pvm.Rol == idUsuario)
+                {
+                    pvm.RolS = "Responsable";
+                }
+                else
+                {
+                    pvm.RolS = "Invitado";
+                }
+
+            }
+
+            return ListaPedido;
         }
     }
 }
