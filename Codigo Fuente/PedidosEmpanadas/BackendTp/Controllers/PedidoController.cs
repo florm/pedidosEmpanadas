@@ -58,9 +58,9 @@ namespace BackendTp.Controllers
         }
 
         [System.Web.Mvc.HttpGet]
-        public ActionResult Elegir(Guid Token)
+        public ActionResult Elegir(Guid id)
         {
-            var gpu = _servicioPedido.ElegirGustosPorToken(Token);
+            var gpu = _servicioPedido.ElegirGustosPorToken(id);
             return View("ElegirGustos", gpu);
         }
 
@@ -101,42 +101,6 @@ namespace BackendTp.Controllers
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
             var gpu = _servicioPedido.ElegirGustosUsuario(id, usuarioId);
-
-            //GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
-            //var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
-            //gpu.Pedido = _servicioPedido.GetById(id);
-            //gpu.InvitacionPedido = _servicioPedido.GetInvitacion(id, usuarioId);
-            //gpu.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
-            //foreach (var gusto in gustos)
-            //{
-            //    gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-            //}
-
-            //if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count() )
-            //{
-            //    var dif = gpu.GustosDisponibles.Count() - gpu.GustosElegidosUsuario.Count();
-            //    for(int i = 0 ; i < dif ; i++)
-            //    {
-            //        gpu.GustosElegidosUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario { });
-            //    }
-
-            //    foreach(GustosEmpanadasViewModel g in gpu.GustosDisponibles)
-            //    { 
-            //        foreach(InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario)
-            //        {
-            //            if(gu.IdGustoEmpanada == g.Id)
-            //            {
-            //                g.IsSelected = true;
-            //            } else if(g.IsSelected == false && gu.IdGustoEmpanada == 0)
-            //            {
-            //                gu.Cantidad = 0;
-            //                gu.IdGustoEmpanada = g.Id;
-            //                g.IsSelected = true;
-            //            }
-            //        }
-            //    }
-
-            //}
 
             return View(gpu);
         }
