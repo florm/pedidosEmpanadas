@@ -15,15 +15,19 @@ namespace BackendTp.Servicios
 {
     public class ServicioPedido : Servicio
     {
-        private static readonly Entities Context = new Entities();
-        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada(Context);
-        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
-        private readonly ServicioEmail _servicioEmail = new ServicioEmail(Context);
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
-        private readonly ServicioEstadoPedido _servicioEstadoPedido = new ServicioEstadoPedido(Context);
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada;
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido;
+        private readonly ServicioEmail _servicioEmail;
+        private readonly ServicioUsuario _servicioUsuario;
+        private readonly ServicioEstadoPedido _servicioEstadoPedido;
         
-        public ServicioPedido(Entities Context) : base(Context)
+        public ServicioPedido(Entities context) : base(context)
         {
+            _servicioGustoEmpanada = new ServicioGustoEmpanada(context);
+            _servicioInvitacionPedido = new ServicioInvitacionPedido(context);
+            _servicioEmail = new ServicioEmail(context);
+            _servicioUsuario = new ServicioUsuario(context);
+            _servicioEstadoPedido = new ServicioEstadoPedido(context);
         }
         
         public PedidoGustosEmpanadasViewModel  Iniciar()
@@ -66,21 +70,13 @@ namespace BackendTp.Servicios
             pedido.FechaCreacion = DateTime.Now;
             pedido.Usuario = _servicioUsuario.GetById(Sesion.IdUsuario);
             pedido.EstadoPedido = _servicioEstadoPedido.GetAbierto();
-            
-            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
-            foreach (var gusto in pge.GustosDisponibles)
-            {
-                if (gusto.IsSelected)
-                    gustosSeleccionados.Add(_servicioGustoEmpanada.GetById(gusto.Id));
-            }
-            pedido.GustoEmpanada = gustosSeleccionados;
+            pedido.GustoEmpanada = _servicioGustoEmpanada.Crear(pge.GustosDisponibles);
 
-            List<InvitacionPedido> invitaciones = _servicioInvitacionPedido.Crear(pge.Invitados, Sesion.IdUsuario);
+            List<InvitacionPedido> invitaciones = _servicioInvitacionPedido.Crear(pge.Invitados);
             pedido.InvitacionPedido.AddRange(invitaciones);
                         
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
-            
             _servicioEmail.ArmarMailInicioPedido(pedido);
 
             return pedido;

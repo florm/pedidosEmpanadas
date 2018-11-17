@@ -11,7 +11,19 @@ namespace BackendTp.Servicios
     public class ServicioGustoEmpanada: Servicio
     {
         public ServicioGustoEmpanada(Entities context) : base(context)
+        {   
+        }
+        
+        public List<GustoEmpanada> Crear(List<GustosEmpanadasViewModel> pgeGustosDisponibles)
         {
+            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
+            foreach (var gusto in pgeGustosDisponibles)
+            {
+                if (gusto.IsSelected)
+                    gustosSeleccionados.Add(GetById(gusto.Id));
+            }
+
+            return gustosSeleccionados;
         }
 
         public GustoEmpanada GetById(int id)

@@ -13,18 +13,18 @@ namespace BackendTp.Servicios
 {
     public class ServicioInvitacionPedido: Servicio
     {
-        private static readonly Entities Context = new Entities();
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
+        //private static readonly Entities Context = new Entities();
+        private readonly ServicioUsuario _servicioUsuario;
 
         public ServicioInvitacionPedido(Entities context) : base(context)
         {
-
+            _servicioUsuario = new ServicioUsuario(context);
         }
 
-        public List<InvitacionPedido> Crear(List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        public List<InvitacionPedido> Crear(List<UsuarioViewModel> invitados)
         {
-            var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
-            List<InvitacionPedido> Invitaciones = new List<InvitacionPedido>();
+            var idUsuarios = GetInvitados(invitados,  Sesion.IdUsuario);
+            List<InvitacionPedido> invitaciones = new List<InvitacionPedido>();
             
             foreach(var id in idUsuarios)
             {
@@ -35,10 +35,10 @@ namespace BackendTp.Servicios
                     Completado = false
                 };
 
-                Invitaciones.Add(invitacion);
+                invitaciones.Add(invitacion);
             }
 
-            return Invitaciones;
+            return invitaciones;
         }
 
         public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()

@@ -40,7 +40,9 @@ namespace BackendTp.Controllers
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             if(pedidoGustosEmpanadas.Invitados.Count == 0)
                 ViewBag.mensajeError = "Debe seleccionar al menos un invitado";
+            
             ViewBag.iniciar = false;
+            
             return View("Iniciar", pedidoGustosEmpanadas);
         }
 
