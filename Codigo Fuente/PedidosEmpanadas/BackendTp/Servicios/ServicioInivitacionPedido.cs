@@ -90,29 +90,10 @@ namespace BackendTp.Servicios
                     nuevosInvitados.Add(nuevaInvitacionPedido.IdUsuario);
                 }
             }
-            ServicioEmail servicioMail = new ServicioEmail();
-            switch (accion)
-            {
-                case (int)EmailAcciones.ANadie:
-                      break;
-                case (int)EmailAcciones.EnviarSoloALosNuevos:
-                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarInvitacionATodos:
-                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
-                        .Select(i=>i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
-                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
-                                                                            && ip.Completado == false)
-                        .Select(i => i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
-                    break;
-            }
+
             Db.SaveChanges();
+            EnviarMailInicioPedido(nuevosInvitados, idPedido, accion);
+            
         }
 
         public bool ConfirmarGustos(PedidoRequest pedido)
@@ -149,6 +130,32 @@ namespace BackendTp.Servicios
             catch
             {
                 return false;
+            }
+        }
+
+        public void EnviarMailInicioPedido(List<int> nuevosInvitados, int idPedido, int accion)
+        {
+            ServicioEmail servicioMail = new ServicioEmail();
+            switch (accion)
+            {
+                case (int)EmailAcciones.ANadie:
+                    break;
+                case (int)EmailAcciones.EnviarSoloALosNuevos:
+                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
+                    break;
+                case (int)EmailAcciones.ReEnviarInvitacionATodos:
+                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
+                        .Select(i => i.IdUsuario)
+                        .ToList();
+                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
+                    break;
+                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
+                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
+                                                                             && ip.Completado == false)
+                        .Select(i => i.IdUsuario)
+                        .ToList();
+                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
+                    break;
             }
         }
     }

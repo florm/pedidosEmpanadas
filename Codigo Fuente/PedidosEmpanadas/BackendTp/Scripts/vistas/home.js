@@ -130,6 +130,9 @@ function probandoajax() {
 
 function gustosOk(data) {
     mostrarMsgExito(data.Data.Mensaje);
+    setTimeout(function() {
+        window.location.href = window.pathPedidos;
+    }, 3000);
 }
 
 var btnCancelar = $("#btnCancelar");

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using BackendTp.Models;
+using WebGrease.Css.Extensions;
 
 namespace BackendTp.Servicios
 {
@@ -45,14 +46,18 @@ namespace BackendTp.Servicios
             foreach (var gustoDelPedido in pedido.GustoEmpanada)
             {
                 var gustoSelecccionado =
-                    gustosSeleccionados.FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
+                    gustosSeleccionados
+                        .FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
 
                 if (gustoSelecccionado != null)
                 {
+                    var cantidadTotal = 0;
+                    gustosSeleccionados.Where(gs=>gs.IdGustoEmpanada == gustoSelecccionado.IdGustoEmpanada)
+                        .ForEach(gs => { cantidadTotal += gs.Cantidad; });
                     email.GustosEmpanadas.Add(new GustoEmpanada
                     {
                         Nombre = gustoSelecccionado.GustoEmpanada.Nombre,
-                        Cantidad = gustoSelecccionado.Cantidad
+                        Cantidad = cantidadTotal
                     });
                 }
                 else
@@ -101,7 +106,7 @@ namespace BackendTp.Servicios
                         }).ToList();
                 var cantidadTotal=0;
                 email.GustosEmpanadas.ForEach(ge => { cantidadTotal += ge.Cantidad; });
-                email.PrecioTotal = cantidadTotal != 0? pedido.PrecioTotal / cantidadTotal:0; 
+                email.PrecioTotal = pedido.PrecioPorUnidad * cantidadTotal; 
                 MandarMail(email, "Detalles de Pedido Confirmado","invitado" );
             }
         }
@@ -192,9 +197,10 @@ namespace BackendTp.Servicios
             foreach (var u in usuarios)
             {
                 var email = new Mail();
-                var tokenUsuario = Db.InvitacionPedido.FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido).Token;
+                var tokenUsuario = Db.InvitacionPedido
+                    .FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido)?.Token;
                 email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
-                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u).Email;
+                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u)?.Email;
                 MandarMail(email, "Inicio de Pedido", "inicio");
             }
         }

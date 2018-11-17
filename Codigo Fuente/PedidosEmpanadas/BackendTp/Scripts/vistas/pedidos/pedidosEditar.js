@@ -6,6 +6,7 @@ var divInvitado = $("#divInvitado");
 var invitadosEditar = $(".invitadosEditar");
 
 inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
+HabilitarEnvioSoloANuevos();
 var inv = divInvitado.find("input");
 
 var btnEditar = $("#btnEditar");
@@ -69,4 +70,17 @@ function buscarInvitadosNoEliminados() {
     return invitadosConfirmados;
 }
 
+
+var acciones = $("#acciones");
+acciones.click(function() {
+    HabilitarEnvioSoloANuevos();
+});
+
+function HabilitarEnvioSoloANuevos() {
+    if (inputInvitados.val() === "") {
+        $("#acciones option[value='3']").attr('disabled', 'disabled');
+    }
+    else
+        $("#acciones option[value='3']").removeAttr('disabled');
+}
 

@@ -109,6 +109,7 @@
     <script>
         var usuarioController = "@Url.Action("Consultar","Usuario")";
         var pathRegistro = '@Url.Action("Registro", "Home")';
+        var iniciar = @(ViewBag.iniciar.ToString().ToLower());
     </script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidos.js")"></script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosIniciar.js")"></script>

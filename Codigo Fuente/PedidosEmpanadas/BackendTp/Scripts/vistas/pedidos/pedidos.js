@@ -11,7 +11,7 @@ var precioUnidad = $("#Pedido_PrecioUnidad");
 var precioDocena = $("#Pedido_PrecioDocena");
 
 
-function validar() {
+function validarPedido() {
     if (!validarCampoObligatorio(nombreNegocio)) return false;
     if (!validarCampoObligatorio(precioUnidad)) return false;
     if (!validarCampoObligatorio(precioDocena)) return false;
@@ -30,7 +30,7 @@ function validacionYEnvio(e, arrayViejos)
 {
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
-    if (!validar() || !validarSeleccionDeGustos(checkboxes) || !validarInvitados(inputInvitados)) return;
+    if (!validarPedido() || !validarSeleccionDeGustos(checkboxes) || !validarInvitados(inputInvitados)) return;
     
     armarInvitados(inputInvitados, arrayViejos);
     if ($("#formModificar").length > 0)
@@ -40,7 +40,7 @@ function validacionYEnvio(e, arrayViejos)
 }
 
 function validarInvitados(invitado) {
-    if (invitado.val() === "") {
+    if (invitado.val() === "" && window.iniciar === true) {
         textValidacionInvitados.removeClass("d-none");
         textValidacionInvitados.text("Debe seleccionar al menos 1 invitado");
         return false;

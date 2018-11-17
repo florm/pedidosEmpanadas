@@ -129,11 +129,6 @@ namespace BackendTp.Servicios
                             where p.IdPedido == pedido.IdPedido
                             select p).FirstOrDefault();
 
-            if (pedidoDetalle == null)
-            {
-                return null;
-            }
-
             return pedidoDetalle;
         }
 
