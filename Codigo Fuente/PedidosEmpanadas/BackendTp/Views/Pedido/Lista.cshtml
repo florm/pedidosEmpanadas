@@ -88,6 +88,11 @@
                                         </a>
                                     }
                                 }
+                                else{
+                                    <a href="@Url.Action("Detalle", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-primary" title="Ver Detalles">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                }
                                 <a href="@Url.Action("Clonar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-primary" title="Clonar">
                                     <i class="fa fa-clone" aria-hidden="true"></i>
                                 </a>
