@@ -10,6 +10,10 @@ namespace BackendTp.Servicios
 {
     public class ServicioGustoEmpanada: Servicio
     {
+        public GustoEmpanada GetById(int id)
+        {
+            return Db.GustoEmpanada.Single(e => e.IdGustoEmpanada == id);
+        }
 
         public List<GustoEmpanada> GetAll()
         {

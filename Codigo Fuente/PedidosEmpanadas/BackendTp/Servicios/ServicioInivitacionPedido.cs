@@ -15,9 +15,11 @@ namespace BackendTp.Servicios
     {
         private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
 
-        public void Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        public List<InvitacionPedido> Crear(List<UsuarioViewModel> invitados, int idUsuarioResponsable)
         {
             var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
+            List<InvitacionPedido> Invitaciones = new List<InvitacionPedido>();
+            
             foreach(var id in idUsuarios)
             {
                 InvitacionPedido invitacion = new InvitacionPedido
@@ -27,8 +29,10 @@ namespace BackendTp.Servicios
                     Completado = false
                 };
 
-                pedido.InvitacionPedido.Add(invitacion);
-            } 
+                Invitaciones.Add(invitacion);
+            }
+
+            return Invitaciones;
         }
 
         public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()
