@@ -83,7 +83,7 @@ namespace BackendTp.Servicios
                     {
                         cantidad += pu.Cantidad;
                     }
-                    email.InvitadosMail.Add(new InvitadosMail {Email = i.Usuario.Email, PrecioTotal = pedido.PrecioPorUnidad * cantidad}); 
+                    email.InvitadosMail.Add(new InvitadosMail {Email = i.Usuario.Email, PrecioTotal = pedido.PrecioCalculadoPorUnidad * cantidad}); 
 
                 }
 
@@ -107,7 +107,7 @@ namespace BackendTp.Servicios
                         }).ToList();
                 var cantidadTotal=0;
                 email.GustosEmpanadas.ForEach(ge => { cantidadTotal += ge.Cantidad; });
-                email.PrecioTotal = pedido.PrecioPorUnidad * cantidadTotal; 
+                email.PrecioTotal = pedido.PrecioCalculadoPorUnidad * cantidadTotal; 
                 MandarMail(email, "Detalles de Pedido Confirmado","invitado" );
             }
         }

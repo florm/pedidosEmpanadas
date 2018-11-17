@@ -29,5 +29,17 @@ namespace BackendTp.Servicios
             //return pedido.InvitacionPedidoGustoEmpanadaUsuario.ToList();
             return Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == idPedido && ip.IdUsuario == idUsuario).ToList();
         }
+
+        public int CantidadTotalDeEmpanadas(int idPedido)
+        {
+            if (idPedido != 0)
+            {
+                int cantidadadTotalEmpanadas = (from InvitacionPedidoGustoEmpanadaUsuario inv in Db.InvitacionPedidoGustoEmpanadaUsuario
+                                                where (inv.IdPedido == idPedido)
+                                                select (inv.Cantidad)).Sum();
+                return cantidadadTotalEmpanadas;
+            }
+            return 0;
+        }
     }
 }
