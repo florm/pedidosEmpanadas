@@ -12,8 +12,6 @@ namespace BackendTp.Servicios
 {
     public class ServicioEmail : Servicio
     {
-        private readonly ServicioPedido _servicioPedido = new ServicioPedido();
-
         public List<EmailAccion> GetAcciones()
         {
             return new List<EmailAccion>
