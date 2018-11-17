@@ -20,15 +20,15 @@ namespace BackendTp.Models
         public decimal CalcularPrecioTotal()
         {
 
-            int CantidadTotal = _servicioGustoEmpanada.CantidadTotalDeEmpanadas(IdPedido);
-            decimal precio = PrecioUnidad;
-            int cantidadDocenas = CantidadTotal / 12;
-            int empanadasSobrantes = CantidadTotal % 12;
+            int cantidadTotal = _servicioGustoEmpanada.CantidadTotalDeEmpanadas(IdPedido);
+            //decimal precio = PrecioUnidad;
+            int cantidadDocenas = cantidadTotal / 12;
+            int empanadasSobrantes = cantidadTotal % 12;
 
             try
             {
-                decimal PrecioTotal = (cantidadDocenas * PrecioDocena) + (empanadasSobrantes * PrecioUnidad);
-                return Math.Round(PrecioTotal);
+                decimal precioTotal = (cantidadDocenas * PrecioDocena) + (empanadasSobrantes * PrecioUnidad);
+                return Math.Round(precioTotal);
             }
             catch (Exception)
             {
@@ -39,11 +39,11 @@ namespace BackendTp.Models
 
         private decimal CalcularPrecioPorUnidad()
         {
-            int CantidadTotal = _servicioGustoEmpanada.CantidadTotalDeEmpanadas(IdPedido);
+            int cantidadTotal = _servicioGustoEmpanada.CantidadTotalDeEmpanadas(IdPedido);
             try
             {
-                decimal PrecioPorUnidad = PrecioTotal / CantidadTotal;
-                return Math.Round(PrecioPorUnidad, 2);
+                decimal precioPorUnidad = PrecioTotal / cantidadTotal;
+                return Math.Round(precioPorUnidad, 2);
             }
             catch (Exception)
             {
