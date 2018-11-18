@@ -152,9 +152,11 @@ namespace BackendTp.Servicios
         }
 
 
-        public ElegirGustosVm ElegirGustosPorToken(Guid Token)
+        public ElegirGustosVm ElegirGustosPorToken(Guid token)
         {
-            var invitacion = Db.InvitacionPedido.FirstOrDefault(i => i.Token == Token);
+            var invitacion = Db.InvitacionPedido.FirstOrDefault(i => i.Token == token);
+            if(invitacion?.IdUsuario != Sesion.IdUsuario)
+                  throw  new PermisosException();
             var gpu = ElegirGustosUsuario(invitacion.IdPedido, invitacion.IdUsuario);
             return gpu;
         }

@@ -34,10 +34,9 @@ namespace BackendTp.Servicios
         {
             if (idPedido != 0)
             {
-                int cantidadadTotalEmpanadas = (from InvitacionPedidoGustoEmpanadaUsuario inv in Db.InvitacionPedidoGustoEmpanadaUsuario
-                                                where (inv.IdPedido == idPedido)
-                                                select (inv.Cantidad)).Sum();
-                return cantidadadTotalEmpanadas;
+                var ipgeu = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(i => i.IdPedido == idPedido).ToList();
+                if (ipgeu.Count != 0)
+                    return ipgeu.Sum(i => i.Cantidad);
             }
             return 0;
         }

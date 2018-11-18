@@ -62,6 +62,7 @@ namespace BackendTp.Controllers
         public ActionResult LogOut()
         {
             Sesion.IdUsuario = 0;
+            Sesion.UltimaUrlAccedida = null;
             return RedirectToAction("Index");
         }
 
