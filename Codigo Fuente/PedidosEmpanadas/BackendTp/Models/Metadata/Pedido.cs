@@ -11,11 +11,10 @@ namespace BackendTp.Models
     [MetadataType(typeof(PedidoMetadata))]
     public partial class Pedido
     {
-
-        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada(Context);
         public decimal PrecioTotal => CalcularPrecioTotal();
         public decimal PrecioCalculadoPorUnidad => CalcularPrecioPorUnidad();
-
 
         public decimal CalcularPrecioTotal()
         {
@@ -34,7 +33,6 @@ namespace BackendTp.Models
             {
                 return 0;
             }
-
         }
 
         private decimal CalcularPrecioPorUnidad()

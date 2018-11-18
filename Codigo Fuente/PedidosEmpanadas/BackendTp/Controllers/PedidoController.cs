@@ -116,15 +116,14 @@ namespace BackendTp.Controllers
             _servicioEmail.ArmarMailsConfirmacion(pedido);
             return RedirectToAction("Lista", "Pedido");
         }
-
-        
+      
         public JsonResult DetallesPedido([FromBody]PedidoViewModel pvm)
         {
             var pedido = _servicioPedido.GetById(pvm.IdPedido);
             var pedidoAEliminar = new
             {
                 NombreNegocio = pedido.NombreNegocio,
-                Cantidad = pedido.InvitacionPedido.Count(p=>p.Completado == true)
+                Cantidad = pedido.InvitacionPedido.Count(p=>p.Completado)
             };
             return Json(pedidoAEliminar);
         }
