@@ -152,52 +152,43 @@ namespace BackendTp.Servicios
         }
 
 
-        public GustosPedidoUsuarioViewModel ElegirGustosPorToken(Guid Token)
+        public ElegirGustosVm ElegirGustosPorToken(Guid Token)
         {
             var invitacion = Db.InvitacionPedido.FirstOrDefault(i => i.Token == Token);
             var gpu = ElegirGustosUsuario(invitacion.IdPedido, invitacion.IdUsuario);
             return gpu;
         }
 
-        public GustosPedidoUsuarioViewModel ElegirGustosUsuario(int id, int usuarioId)
+        public ElegirGustosVm ElegirGustosUsuario(int id, int usuarioId)
         {
-            GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
-            var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
-            gpu.Pedido = GetById(id);
-            gpu.InvitacionPedido = GetInvitacion(id, usuarioId);
-            gpu.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
-            foreach (var gusto in gustos)
+            var pedido = GetById(id);
+            var gustosEnPedido = pedido.GustoEmpanada.ToList();
+            var gustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
+            var invitacionPedido = GetInvitacion(id, usuarioId);
+            ElegirGustosVm gustosDeUsuario = new ElegirGustosVm();
+            List<GustoEmpanadasCantidad> empanadas = new List<GustoEmpanadasCantidad>();
+
+            foreach (GustoEmpanada gu in gustosEnPedido)
             {
-                gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
+                empanadas.Add(new GustoEmpanadasCantidad() { IdGustoEmpanada = gu.IdGustoEmpanada, Nombre = gu.Nombre, Cantidad = 0 });
             }
 
-            if (gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count())
+            foreach (InvitacionPedidoGustoEmpanadaUsuario g in gustosElegidosUsuario)
             {
-                var dif = gpu.GustosDisponibles.Count() - gpu.GustosElegidosUsuario.Count();
-                for (int i = 0; i < dif; i++)
+                foreach (GustoEmpanadasCantidad gu in empanadas)
                 {
-                    gpu.GustosElegidosUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario { });
-                }
-
-                foreach (GustosEmpanadasViewModel g in gpu.GustosDisponibles)
-                {
-                    foreach (InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario)
+                    if (g.IdGustoEmpanada == gu.IdGustoEmpanada)
                     {
-                        if (gu.IdGustoEmpanada == g.Id)
-                        {
-                            g.IsSelected = true;
-                        }
-                        else if (g.IsSelected == false && gu.IdGustoEmpanada == 0)
-                        {
-                            gu.Cantidad = 0;
-                            gu.IdGustoEmpanada = g.Id;
-                            g.IsSelected = true;
-                        }
+                        gu.Cantidad = g.Cantidad;
                     }
                 }
-
             }
-            return gpu;
+
+            gustosDeUsuario.Token = invitacionPedido.Token;
+            gustosDeUsuario.Pedido = pedido;
+            gustosDeUsuario.Empanadas = empanadas;
+
+            return gustosDeUsuario;
         }
 
         public List<PedidoViewModel> ListarPedidosMobile(int idUsuario)

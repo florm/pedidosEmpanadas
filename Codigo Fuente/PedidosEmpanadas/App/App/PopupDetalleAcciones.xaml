@@ -16,8 +16,18 @@
                 <Label x:Name="PrecioUnidad"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15" Padding="0,10,0,0">
-                <Image x:Name="ImgOk" Source="ok.png" WidthRequest="45" HeightRequest="45"/>
-                <Image x:Name="ImgEdit" Source="edit.png" WidthRequest="40" HeightRequest="40"/>
+                <Image x:Name="ImgOk" Source="ok.png" WidthRequest="45" HeightRequest="45">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+                <Image x:Name="ImgEdit" Source="edit.png" WidthRequest="40" HeightRequest="40">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="IrAElegirGustos"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Image x:Name="ImgDelete" Source="delete.png" WidthRequest="45" HeightRequest="45"/>
                 <Image x:Name="ImgClone" Source="clone.png" WidthRequest="45" HeightRequest="45"/>
             </StackLayout>

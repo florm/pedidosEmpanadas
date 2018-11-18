@@ -36,5 +36,12 @@ namespace BackendTp.Controllers
             string respuesta = valida.Item1;
             return Ok(respuesta);
         }
+
+        [ResponseType(typeof(List<PedidoViewModel>))]
+        public IHttpActionResult GetListaDeGustosEnPedido(int id, int idUsuario)
+        {
+            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
+            return Ok(ListaPedido);
+        }
     }
 }
