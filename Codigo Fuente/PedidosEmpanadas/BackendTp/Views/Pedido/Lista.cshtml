@@ -76,7 +76,7 @@
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
                                         <form action="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" method="post" title="Borrar">
-                                            <button type="button" class="action_item btn btn-xs btn-danger delete" title="Eliminar">
+                                            <button type="button" class="action_item btn btn-xs btn-danger delete" id="@item.IdPedido" title="Eliminar">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -117,5 +117,8 @@
 }
 @section custom_js_code
 {
+    <script>
+        var detallesPedido = '@Url.Action("DetallesPedido","Pedido")';
+    </script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosLista.js")"></script>
  }
