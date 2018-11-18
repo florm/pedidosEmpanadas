@@ -78,15 +78,16 @@ namespace BackendTp.Servicios
         public void Modificar(Pedido pedido,PedidoGustosEmpanadasViewModel pge)
         {
             var invitadosModel = GetInvitados(pge.Invitados, Sesion.IdUsuario);
-            pedido.InvitacionPedido.RemoveAll( item => !invitadosModel.Contains(item.IdUsuario));
             
-//            foreach (var invitacionPedido in pedido.InvitacionPedido.Reverse<InvitacionPedido>())
-//            {
-//                if (!invitadosModel.Contains(invitacionPedido.IdUsuario))
-//                    pedido.InvitacionPedido.Remove(invitacionPedido);
-//                else
-//                    pge.Invitados.RemoveAll(x => x.Email == invitacionPedido.Usuario.Email);
-//            }
+            //borro todas las invitaciones que no vienen en el model
+            pedido.InvitacionPedido.RemoveAll( invitacion => !invitadosModel.Contains(invitacion.IdUsuario));
+            
+            //agrego los que son nuevos
+            foreach (var invitacionPedido in pedido.InvitacionPedido.Reverse<InvitacionPedido>())
+            {
+                if (invitadosModel.Contains(invitacionPedido.IdUsuario))
+                    pge.Invitados.RemoveAll(x => x.Email == invitacionPedido.Usuario.Email);
+            }
             
             List<InvitacionPedido> nuevosInvitados = Agregar(pge.Invitados);
            
