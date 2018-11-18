@@ -9,7 +9,12 @@ var textValidacionInvitados = $("#textValidacionInvitados");
 var nombreNegocio = $("#Pedido_NombreNegocio");
 var precioUnidad = $("#Pedido_PrecioUnidad");
 var precioDocena = $("#Pedido_PrecioDocena");
+var btnCancelar = $("#btnCancelar");
 
+btnCancelar.click(function (e) {
+    e.preventDefault();
+    window.location.href = window.pathPedidos;
+});
 
 function validarPedido() {
     if (!validarCampoObligatorio(nombreNegocio)) return false;

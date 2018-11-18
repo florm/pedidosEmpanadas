@@ -264,6 +264,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Sesion.cs" />
+    <Compile Include="Models\ElegirGustosVm.cs" />
     <Compile Include="Models\EmailViewModel.cs" />
     <Compile Include="Models\EstadoPedido.cs">
       <DependentUpon>TpModel.tt</DependentUpon>
@@ -272,7 +273,6 @@
       <DependentUpon>TpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GustoEmpanadasCantidad.cs" />
-    <Compile Include="Models\GustosPedidoUsuarioViewModel.cs" />
     <Compile Include="Models\InvitadosMail.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Metadata\GustoEmpanada.cs" />
@@ -354,12 +354,12 @@
     <Content Include="Views\Pedido\Iniciado.cshtml" />
     <Content Include="Views\Shared\Usuario.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Pedido\ElegirGustos.cshtml" />
     <Content Include="Views\Pedido\Editar.cshtml" />
     <Content Include="Views\Pedido\_pedidoFormulario.cshtml" />
     <Content Include="Views\Pedido\_invitados.cshtml" />
     <Content Include="Views\Pedido\Detalle.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Pedido\ElegirGustos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

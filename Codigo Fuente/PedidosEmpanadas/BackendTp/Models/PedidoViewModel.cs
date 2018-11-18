@@ -13,6 +13,9 @@ namespace BackendTp.Models
         public string RolS { get; set; }
         public string EstadoS { get; set; }
         public string NombreNegocio { get; set; }
+        public string Descripcion { get; set; }
+        public int PrecioDocena { get; set; }
+        public int PrecioUnidad { get; set; }
         public int Estado { get; set; }
         public System.DateTime FechaCreacion { get; set; }
     }

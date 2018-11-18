@@ -7,10 +7,14 @@ namespace App
 {
     public partial class App : Application
     {
+        public static App Current;
+        public static string UrlApi;
         public App()
         {
             InitializeComponent();
-
+            Current = this;
+            UrlApi = "http://192.168.0.9:45455"; 
+            //var isLoggedIn = Properties.ContainsKey("IsLoggedIn") ? (bool)Properties["IsLoggedIn"] : false;
             //MainPage = new MainPage();
             MainPage = new NavigationPage(new MainPage());
         }
@@ -28,6 +32,12 @@ namespace App
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public void Logout()
+        {
+            Properties["IsLoggedIn"] = false;
+            MainPage = new NavigationPage(new MainPage());
         }
     }
 }

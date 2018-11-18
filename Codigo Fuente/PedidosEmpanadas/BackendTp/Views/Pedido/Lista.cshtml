@@ -76,7 +76,7 @@
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
                                         <form action="@Url.Action("Eliminar", "Pedido", new {id = item.IdPedido})" method="post" title="Borrar">
-                                            <button type="button" class="action_item btn btn-xs btn-danger delete" title="Eliminar">
+                                            <button type="button" class="action_item btn btn-xs btn-danger delete" id="@item.IdPedido" title="Eliminar">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </button>
                                         </form>
@@ -87,6 +87,11 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     }
+                                }
+                                else{
+                                    <a href="@Url.Action("Detalle", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-primary" title="Ver Detalles">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
                                 }
                                 <a href="@Url.Action("Clonar", "Pedido", new {id = item.IdPedido})" class="action_item btn btn-xs btn-primary" title="Clonar">
                                     <i class="fa fa-clone" aria-hidden="true"></i>
@@ -112,5 +117,8 @@
 }
 @section custom_js_code
 {
+    <script>
+        var detallesPedido = '@Url.Action("DetallesPedido","Pedido")';
+    </script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosLista.js")"></script>
  }

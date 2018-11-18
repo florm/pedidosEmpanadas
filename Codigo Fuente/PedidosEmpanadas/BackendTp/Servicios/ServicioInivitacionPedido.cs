@@ -128,6 +128,9 @@ namespace BackendTp.Servicios
 
                 }
 
+                var invPedido = Db.InvitacionPedido.FirstOrDefault(i => i.IdPedido == pedido.IdPedido && i.IdUsuario == pedido.IdUsuario);
+                invPedido.Completado = true;
+
                 Db.SaveChanges();
 
                 return true;

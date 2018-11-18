@@ -21,44 +21,29 @@ namespace BackendTp.Controllers
         public IHttpActionResult GetMobileUser(string id, string param2)
         {
             var usuario = servicioUsuario.LoginMobile(id, param2);
-
             return Ok(usuario);
         }
 
         [ResponseType(typeof(List<PedidoViewModel>))]
         public IHttpActionResult GetListaPedidos(int id)
         {
-            List<PedidoViewModel> ListaPrueba = new List<PedidoViewModel>();
-            var pedidos = servicioPedido.Lista(id);
+            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
+            return Ok(ListaPedido);
+        }
 
-            foreach (Pedido p in pedidos)
-            {
-                ListaPrueba.Add(new PedidoViewModel
-                {
-                    IdPedido = p.IdPedido,
-                    IdUsuarioResponsable = p.IdUsuarioResponsable,
-                    FechaCreacion = p.FechaCreacion,
-                    NombreNegocio = p.NombreNegocio,
-                    Estado = p.IdEstadoPedido,
-                    Rol = p.IdUsuarioResponsable,
-                    EstadoS = p.EstadoPedido.Nombre
-                });
-            }
+        [ResponseType(typeof(string))]
+        public IHttpActionResult PostNewUser(Usuario usuario)
+        {
+            var valida = servicioUsuario.CrearUsuario(usuario);
+            string respuesta = valida.Item1;
+            return Ok(respuesta);
+        }
 
-            foreach (PedidoViewModel pvm in ListaPrueba)
-            {
-                if (pvm.Rol == id)
-                {
-                    pvm.RolS = "Responsable";
-                }
-                else
-                {
-                    pvm.RolS = "Invitado";
-                }
-
-            }
-
-            return Ok(ListaPrueba);
+        [ResponseType(typeof(List<PedidoViewModel>))]
+        public IHttpActionResult GetListaDeGustosEnPedido(int id, int idUsuario)
+        {
+            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
+            return Ok(ListaPedido);
         }
     }
 }

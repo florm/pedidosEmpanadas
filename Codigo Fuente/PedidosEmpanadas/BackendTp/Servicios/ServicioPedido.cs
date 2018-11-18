@@ -176,5 +176,83 @@ namespace BackendTp.Servicios
 
             return invitados;
         }
+
+        public ElegirGustosVm ElegirGustosPorToken(Guid token)
+        {
+            var invitacion = Db.InvitacionPedido.FirstOrDefault(i => i.Token == token);
+            if(invitacion?.IdUsuario != Sesion.IdUsuario)
+                  throw  new PermisosException();
+            var gpu = ElegirGustosUsuario(invitacion.IdPedido, invitacion.IdUsuario);
+            return gpu;
+        }
+
+        public ElegirGustosVm ElegirGustosUsuario(int id, int usuarioId)
+        {
+            var pedido = GetById(id);
+            var gustosEnPedido = pedido.GustoEmpanada.ToList();
+            var gustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
+            var invitacionPedido = GetInvitacion(id, usuarioId);
+            ElegirGustosVm gustosDeUsuario = new ElegirGustosVm();
+            List<GustoEmpanadasCantidad> empanadas = new List<GustoEmpanadasCantidad>();
+
+            foreach (GustoEmpanada gu in gustosEnPedido)
+            {
+                empanadas.Add(new GustoEmpanadasCantidad() { IdGustoEmpanada = gu.IdGustoEmpanada, Nombre = gu.Nombre, Cantidad = 0 });
+            }
+
+            foreach (InvitacionPedidoGustoEmpanadaUsuario g in gustosElegidosUsuario)
+            {
+                foreach (GustoEmpanadasCantidad gu in empanadas)
+                {
+                    if (g.IdGustoEmpanada == gu.IdGustoEmpanada)
+                    {
+                        gu.Cantidad = g.Cantidad;
+                    }
+                }
+            }
+
+            gustosDeUsuario.Token = invitacionPedido.Token;
+            gustosDeUsuario.Pedido = pedido;
+            gustosDeUsuario.Empanadas = empanadas;
+
+            return gustosDeUsuario;
+        }
+
+        public List<PedidoViewModel> ListarPedidosMobile(int idUsuario)
+        {
+            List<PedidoViewModel> ListaPedido = new List<PedidoViewModel>();
+            var pedidos = Lista(idUsuario);
+            foreach (Pedido p in pedidos)
+            {
+                ListaPedido.Add(new PedidoViewModel
+                {
+                    IdPedido = p.IdPedido,
+                    IdUsuarioResponsable = p.IdUsuarioResponsable,
+                    FechaCreacion = p.FechaCreacion,
+                    NombreNegocio = p.NombreNegocio,
+                    Estado = p.IdEstadoPedido,
+                    Rol = p.IdUsuarioResponsable,
+                    EstadoS = p.EstadoPedido.Nombre,
+                    Descripcion = p.Descripcion,
+                    PrecioDocena = p.PrecioDocena,
+                    PrecioUnidad = p.PrecioUnidad
+                });
+            }
+
+            foreach (PedidoViewModel pvm in ListaPedido)
+            {
+                if (pvm.Rol == idUsuario)
+                {
+                    pvm.RolS = "Responsable";
+                }
+                else
+                {
+                    pvm.RolS = "Invitado";
+                }
+
+            }
+
+            return ListaPedido;
+        }
     }
 }
