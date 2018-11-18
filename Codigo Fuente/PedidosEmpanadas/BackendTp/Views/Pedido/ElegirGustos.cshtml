@@ -46,7 +46,12 @@
         </div>
         <div class="col-12 text-right mt-3">
             <input type="reset" value="Volver" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <button id="testbtn" type="button" class="btn btn-primary">Aceptar</button>
+            <button id="btnElegirGustos" type="button" class="btn btn-primary">Aceptar</button>
         </div>
     </div>
 </div>
+
+@section custom_js_code
+{
+    <script src="@Url.Content("~/Scripts/vistas/pedidos/elegirGustos.js")"></script>
+}
