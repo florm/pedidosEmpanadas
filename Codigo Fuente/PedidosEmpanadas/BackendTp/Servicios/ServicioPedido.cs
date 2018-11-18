@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using BackendTp.Helpers;
 using Exceptions;
@@ -46,9 +47,18 @@ namespace BackendTp.Servicios
             return Db.Pedido.ToList();
         }
 
-        public Pedido GetById(int id)
+        public Pedido GetById(int id, [Optional, DefaultParameterValue(null)] string[] includes)
         {
-            var pedido = Db.Pedido.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == id);
+            var pedidoQuery = Db.Pedido;
+            if (includes != null)
+            {
+                foreach (var relacion in includes)
+                {
+                    pedidoQuery.Include(relacion);
+                }  
+            }
+            
+            Pedido pedido = pedidoQuery.FirstOrDefault(p => p.IdPedido == id);
             if (pedido == null)
                 throw new IdNoEncontradoException(Genero.Masculino, "Pedido");
             return pedido;
@@ -59,39 +69,26 @@ namespace BackendTp.Servicios
             return Db.InvitacionPedido.FirstOrDefault(p => p.IdPedido == idPedido && p.IdUsuario == idUsuario);
         }
 
-        //public string GetToken(int idPedido, int idUsuario)
-        //{
-        //    return Db.InvitacionPedido.Where(i => i.IdPedido == idPedido).Where(i => i.IdUsuario == idUsuario).Select(i => i.Token).ToString();
-        //}
-
         public Pedido Crear(PedidoGustosEmpanadasViewModel pge)
         {
             var pedido = pge.Pedido;
             pedido.FechaCreacion = DateTime.Now;
             pedido.Usuario = _servicioUsuario.GetById(Sesion.IdUsuario);
             pedido.EstadoPedido = _servicioEstadoPedido.GetAbierto();
-            pedido.GustoEmpanada = _servicioGustoEmpanada.Crear(pge.GustosDisponibles);
+            pedido.GustoEmpanada = _servicioGustoEmpanada.ObtenerGustos(pge.GustosDisponibles);
 
             List<InvitacionPedido> invitaciones = _servicioInvitacionPedido.Crear(pge.Invitados);
             pedido.InvitacionPedido.AddRange(invitaciones);
                         
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
-            _servicioEmail.ArmarMailInicioPedido(pedido);
+            _servicioEmail.EnviarMailInicioPedido(pedido);
 
             return pedido;
         }
 
         public List<Pedido> Lista(int idUsuario)
-        {
-            //List<Pedido> pedidosQuery = new List<Pedido>();
-
-//            pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
-//                            join InvitacionPedido i in Db.InvitacionPedido
-//                            on p.IdPedido equals i.IdPedido
-//                            where i.IdUsuario == IdUsuario
-//                            select p).OrderByDescending(p => p.FechaCreacion).ToList();
-            
+        {            
             var pedidosQuery = (from Pedido p in Db.Pedido.Include("EstadoPedido")
                 join InvitacionPedido i in Db.InvitacionPedido
                     on p.IdPedido equals i.IdPedido
@@ -106,20 +103,17 @@ namespace BackendTp.Servicios
         {
             if(pge.Pedido == null)
                 throw new IdNoEncontradoException(Genero.Masculino, "Pedido");
-            var pedido = GetById(pge.Pedido.IdPedido);
+            
+            var pedido = GetById(pge.Pedido.IdPedido, new []{"InvitacionPedido"});
             pedido.NombreNegocio = pge.Pedido.NombreNegocio;
             pedido.Descripcion = pge.Pedido.Descripcion;
             pedido.PrecioUnidad = pge.Pedido.PrecioUnidad;
             pedido.PrecioDocena = pge.Pedido.PrecioDocena;
             pedido.FechaModificacion = DateTime.Now;
-            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
-            foreach (var gusto in pge.GustosDisponibles)
-            {
-                if (gusto.IsSelected)
-                    gustosSeleccionados.Add(Db.GustoEmpanada.FirstOrDefault(ge => ge.IdGustoEmpanada == gusto.Id));
-            }
+            pedido.GustoEmpanada = _servicioGustoEmpanada.ObtenerGustos(pge.GustosDisponibles);
+            
+            _servicioInvitacionPedido.Modificar(pedido, pge);
 
-            pedido.GustoEmpanada = gustosSeleccionados;
             Db.SaveChanges();
             return pedido.IdPedido;
         }
@@ -164,7 +158,6 @@ namespace BackendTp.Servicios
 
         public PedidoGustosEmpanadasViewModel Clonar(int id)
         {
-            
             Pedido pedido = GetById(id);
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);

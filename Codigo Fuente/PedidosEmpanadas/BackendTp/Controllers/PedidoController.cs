@@ -21,6 +21,7 @@ namespace BackendTp.Controllers
         private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
         private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
         private readonly ServicioEmail _servicioEmail= new ServicioEmail(Context);
+        private readonly ServicioEstadoPedido _servicioEstadoPedido= new ServicioEstadoPedido(Context);
 
         public ActionResult Iniciar()
         {
@@ -58,38 +59,26 @@ namespace BackendTp.Controllers
             return View(gustos);
         }
 
-        //public ActionResult ListaPedidosTotal()
-        //{
-        //    var pedidos = _servicioPedido.GetAll();
-        //    return View(pedidos);
-        //}
-
         [System.Web.Mvc.HttpGet]
         public ActionResult Editar(int id)
         {
             _servicioUsuario.ValidarPermisoUsuario(id, Sesion.IdUsuario);
             var pedido = _servicioPedido.GetById(id);
-            //if (pedido.IdEstadoPedido == (int)EstadosPedido.Cerrado)
-            //    throw new PedidoCerradoException();
-            if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
+
+            if (pedido.EstadoPedido.Nombre == _servicioEstadoPedido.GetCerrado().Nombre)
             {
                 return RedirectToAction("Detalle", new { id });
             }
+            
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
                 gustosModel, invitados);
+            
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();
             return View("Editar", pgeVM);
         }
-
-        //[Route("ElegirGustos/{id}")]
-        //public ActionResult ElegirGustos(int id, int usuarioId)
-        //{
-        //    var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id);
-        //    return View();
-        //}
 
         [System.Web.Mvc.HttpGet]
         public ActionResult ElegirGustos(int id, int usuarioId)
@@ -145,11 +134,10 @@ namespace BackendTp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var pedidoId = _servicioPedido.Modificar(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Modificar(pedidoId, pedidoGustosEmpanadas.Invitados, pedidoGustosEmpanadas.Acciones);
+                _servicioPedido.Modificar(pedidoGustosEmpanadas);
                 return RedirectToAction("Lista");
-
             }
+            
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();
@@ -171,7 +159,7 @@ namespace BackendTp.Controllers
         
         public ActionResult Detalle(int id)
         {
-            Pedido pedidoElegido = _servicioPedido.GetById(id);
+            Pedido pedidoElegido = _servicioPedido.GetById(id, new string[]{"GustoEmpanada"});
             Pedido pedido = _servicioPedido.Detalle(pedidoElegido);
             return View(pedido);
         }

@@ -24,7 +24,7 @@ namespace BackendTp.Servicios
         
         public EstadoPedido GetCerrado()
         {
-            return Db.EstadoPedido.FirstOrDefault(p => p.Nombre == "Cerado");
+            return Db.EstadoPedido.FirstOrDefault(p => p.Nombre == "Cerrado");
         }
     }
 }

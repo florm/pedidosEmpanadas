@@ -194,8 +194,34 @@ namespace BackendTp.Servicios
 
             return mensaje;
         }
+        
+        public void EnviarALosQueNoEligieronGusto(Pedido pedido)
+        {
+            var invitadosSinGustos = pedido.InvitacionPedido.Where(ip => ip.Completado == false).ToList();
+            
+            foreach (var invitacion in invitadosSinGustos)
+            {
+                var email = new Mail();
+                var tokenUsuario = invitacion.Token;
+                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Email = invitacion.Usuario.Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
+        
+        public void EnviarANuevos(List<InvitacionPedido> nuevosInvitaciones)
+        {
+            foreach (var invitacion in nuevosInvitaciones)
+            {
+                var email = new Mail();
+                var tokenUsuario = invitacion.Token;
+                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Email = invitacion.Usuario.Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
 
-        public void ArmarMailInicioPedido(Pedido pedido)
+        public void EnviarMailInicioPedido(Pedido pedido)
         {
             foreach (var invitacionPedido in pedido.InvitacionPedido)
             {

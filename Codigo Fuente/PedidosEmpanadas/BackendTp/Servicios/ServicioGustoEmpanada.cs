@@ -14,7 +14,7 @@ namespace BackendTp.Servicios
         {   
         }
         
-        public List<GustoEmpanada> Crear(List<GustosEmpanadasViewModel> pgeGustosDisponibles)
+        public List<GustoEmpanada> ObtenerGustos(List<GustosEmpanadasViewModel> pgeGustosDisponibles)
         {
             List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
             foreach (var gusto in pgeGustosDisponibles)
