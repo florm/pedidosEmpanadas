@@ -214,7 +214,10 @@ namespace BackendTp.Servicios
                     NombreNegocio = p.NombreNegocio,
                     Estado = p.IdEstadoPedido,
                     Rol = p.IdUsuarioResponsable,
-                    EstadoS = p.EstadoPedido.Nombre
+                    EstadoS = p.EstadoPedido.Nombre,
+                    Descripcion = p.Descripcion,
+                    PrecioDocena = p.PrecioDocena,
+                    PrecioUnidad = p.PrecioUnidad
                 });
             }
 

@@ -14,7 +14,7 @@
         <Grid>
             <Image Source="empanadas.png" Aspect="AspectFill"/>
             <!--<BoxView Color="#6d97c9" Opacity="0.8"/>-->
-            <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
+            <ActivityIndicator x:Name="ActIndicator" Color="#6d97c9" ></ActivityIndicator>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -37,7 +37,11 @@
                         <Button HorizontalOptions="Start" WidthRequest="150" Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="Black" BorderRadius="10"/>
                         <Button HorizontalOptions="End" WidthRequest="150" Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10"/>
                     </StackLayout>
-                    
+                </StackLayout>
+                <StackLayout Grid.Row="2" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End" Padding="0,0,10,10">
+                    <Image Source="fb.png" WidthRequest="30" HeightRequest="30"></Image>
+                    <Image Source="inst.png" WidthRequest="30" HeightRequest="30"></Image>
+                    <Image Source="twit.png" WidthRequest="30" HeightRequest="30"></Image>
                 </StackLayout>
             </Grid>
         </Grid>

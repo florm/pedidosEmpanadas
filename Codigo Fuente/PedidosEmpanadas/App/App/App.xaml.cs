@@ -7,11 +7,13 @@ namespace App
 {
     public partial class App : Application
     {
-        public static App Current; // ver si borro
+        public static App Current;
+        public static string UrlApi;
         public App()
         {
             InitializeComponent();
             Current = this;
+            UrlApi = "http://192.168.0.6:45455";
             //var isLoggedIn = Properties.ContainsKey("IsLoggedIn") ? (bool)Properties["IsLoggedIn"] : false;
             //MainPage = new MainPage();
             MainPage = new NavigationPage(new MainPage());

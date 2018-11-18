@@ -9,13 +9,27 @@
             <DataTemplate x:Key="PedidoAbiertoTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Orientation="Vertical" BackgroundColor="#e8e8e8">
-                            <StackLayout Padding="15" Margin="6,3,6,3" BackgroundColor="#9ebeff">
-                                <Label TextColor="White" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
-                            </StackLayout>
+                        <StackLayout Orientation="Vertical" BackgroundColor="Black">
+                            <Frame Padding="15" Margin="6,3,6,3" BackgroundColor="White" CornerRadius="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0">
+                                        <Label TextColor="Black" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                        <Label TextColor="Black" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                        <Label TextColor="Black" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                        <Label TextColor="Black" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                                    </StackLayout>
+                                    <Image Grid.Column="2" Source="mas.png" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" ClassId="{Binding IdPedido}" HorizontalOptions="End">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="MasAcciones"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
@@ -23,13 +37,27 @@
             <DataTemplate x:Key="PedidoCerradoTemplate">
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Orientation="Vertical" BackgroundColor="#e8e8e8">
-                            <StackLayout Padding="15" Margin="6,3,6,3" BackgroundColor="#ff9e9e">
-                                <Label TextColor="White" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
-                                <Label TextColor="White" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
-                            </StackLayout>
+                        <StackLayout Orientation="Vertical" BackgroundColor="Black">
+                            <Frame Padding="15" Margin="6,3,6,3" BackgroundColor="#a4a4a4" CornerRadius="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0">
+                                        <Label TextColor="White" Text="{Binding FechaCreacion, StringFormat='Fecha: {0}'}"></Label>
+                                        <Label TextColor="White" Text="{Binding NombreNegocio, StringFormat='Negocio: {0}'}"></Label>
+                                        <Label TextColor="White" Text="{Binding EstadoS, StringFormat='Estado: {0}'}"></Label>
+                                        <Label TextColor="White" Text="{Binding RolS, StringFormat='Rol: {0}'}"></Label>
+                                    </StackLayout>
+                                    <Image Grid.Column="2" Source="mas.png" HeightRequest="50" WidthRequest="50" VerticalOptions="Center" ClassId="{Binding IdPedido}" HorizontalOptions="End">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="MasAcciones"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </Frame>
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
@@ -48,13 +76,18 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackLayout Spacing="0" Grid.Row="0">
+            <StackLayout Spacing="0" Grid.Row="0" Orientation="Horizontal" BackgroundColor="Black">
                 <!--<BoxView BackgroundColor="#414143" HeightRequest="3"></BoxView>-->
-                <StackLayout BackgroundColor="#6d97c9" HeightRequest="60" Orientation="Horizontal" Padding="10,0,0,0">
-                    <Label FontAttributes="Bold" Text="Mis pedidos" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                <StackLayout HeightRequest="60" Orientation="Horizontal" Padding="10,0,0,0">
+                    <Label FontAttributes="Bold" Text="Mis pedidos" FontSize="Large" TextColor="Gray" VerticalTextAlignment="Center"/>
                 </StackLayout>
+                <Image Margin="220,0,0,0" Source="out.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LogOutApp"/>
+                    </Image.GestureRecognizers>
+                </Image>              
             </StackLayout>
-            <ListView Grid.Row="1" SeparatorVisibility="None" BackgroundColor="#e8e8e8" x:Name="ListaPruebaAle" HasUnevenRows="True" ItemTemplate="{StaticResource pedidoTemplateSelector}"/>
+            <ListView Grid.Row="1" SeparatorVisibility="None" x:Name="ListaPruebaAle" HasUnevenRows="True" ItemTemplate="{StaticResource pedidoTemplateSelector}"/>
 
         </Grid>
 

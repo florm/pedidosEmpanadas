@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+            xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+            xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.PopupDetalleAcciones">
+    <Frame x:Name="FramePopUp" BackgroundColor="White" CornerRadius="10" Margin="12" Padding="24" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="275">
+        <StackLayout Orientation="Vertical">
+            <StackLayout>
+                <Label x:Name="FechaCreacion"/>
+                <Label x:Name="NombreNegocio"/>
+                <Label x:Name="EstadoS"/>
+                <Label x:Name="RolS"/>
+                <Label x:Name="Descripcion"/>
+                <Label x:Name="PrecioDocena"/>
+                <Label x:Name="PrecioUnidad"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15" Padding="0,10,0,0">
+                <Image x:Name="ImgOk" Source="ok.png" WidthRequest="45" HeightRequest="45"/>
+                <Image x:Name="ImgEdit" Source="edit.png" WidthRequest="40" HeightRequest="40"/>
+                <Image x:Name="ImgDelete" Source="delete.png" WidthRequest="45" HeightRequest="45"/>
+                <Image x:Name="ImgClone" Source="clone.png" WidthRequest="45" HeightRequest="45"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

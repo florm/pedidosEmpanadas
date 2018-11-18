@@ -63,7 +63,7 @@ namespace App
                 HttpClient client = new HttpClient();
 
                 string url = string.Format("/api/Usuarios/PostNewUser");
-                string url2 = "http://192.168.0.6:45457" + url;
+                string url2 = App.UrlApi + url;
 
                 var response = await client.PostAsync(url2, content);
                 result = response.Content.ReadAsStringAsync().Result;
@@ -87,7 +87,7 @@ namespace App
                 return;
             }
 
-            await DisplayAlert("Alerta", "Registro exitoso!", "Aceptar");
+            await DisplayAlert("", "Registro exitoso!", "Aceptar");
             await Navigation.PushAsync(new MainPage());
         }
 

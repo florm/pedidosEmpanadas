@@ -1,5 +1,6 @@
 ﻿using App.Models;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace App
             {
                 HttpClient client = new HttpClient();
                 string url = string.Format("/api/Usuarios/GetListaPedidos/{0}", id);
-                string url2 = "http://192.168.0.6:45457" + url;
+                string url2 = App.UrlApi + url;
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
             }
@@ -47,7 +48,29 @@ namespace App
 
             ListaDePedidos = JsonConvert.DeserializeObject<List<PedidosVm>>(result);
             ListaPruebaAle.ItemsSource = ListaDePedidos;
+        }
 
+        private async void MasAcciones(object sender, EventArgs e)
+        {
+            var boton = (Image)sender;
+            var IdPedidoStr = boton.ClassId;
+            int.TryParse(IdPedidoStr, out int IdPedido);
+            PedidosVm pedidoCompleto = new PedidosVm();
+
+            foreach(PedidosVm p in ListaDePedidos)
+            {
+                if(p.IdPedido == IdPedido)
+                {
+                    pedidoCompleto = p;
+                }
+            }
+
+            await PopupNavigation.Instance.PushAsync(new PopupDetalleAcciones(pedidoCompleto));
+        }
+
+        private void LogOutApp(object sender, EventArgs e)
+        {
+            App.Current.Logout();
         }
     }
 }
