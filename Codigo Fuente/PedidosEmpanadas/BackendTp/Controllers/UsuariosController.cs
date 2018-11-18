@@ -39,11 +39,11 @@ namespace BackendTp.Controllers
             return Ok(respuesta);
         }
 
-        [ResponseType(typeof(List<PedidoViewModel>))]
-        public IHttpActionResult GetListaDeGustosEnPedido(int id, int idUsuario)
+        [ResponseType(typeof(ElegirGustosVm))]
+        public IHttpActionResult GetListaDeGustosEnPedido(int id, int param2)
         {
-            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
-            return Ok(ListaPedido);
+            var gpu = servicioPedido.ElegirGustosUsuario(id, param2);
+            return Ok(gpu);
         }
     }
 }

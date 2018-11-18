@@ -235,6 +235,7 @@
     <Content Include="Scripts\popper\popper.js" />
     <Content Include="Scripts\popper\popper.min.js" />
     <Content Include="Scripts\utilidades\utilidades.js" />
+    <Content Include="Scripts\vistas\pedidos\elegirGustos.js" />
     <Content Include="Scripts\vistas\pedidos\pedidoEditar.js" />
     <Content Include="Scripts\vistas\pedidos\pedidos.js" />
     <Content Include="Scripts\vistas\pedidos\pedidosEditar.js" />
