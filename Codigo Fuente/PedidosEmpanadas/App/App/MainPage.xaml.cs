@@ -31,6 +31,7 @@ namespace App
             try
             {
                 Boton.IsEnabled = false;
+                IrARegistro.IsEnabled = false;
                 HttpClient client = new HttpClient();
 
                 string url = string.Format("/api/Usuarios/GetMobileUser/{0}/{1}", Correo.Text, Pass.Text);
@@ -40,12 +41,14 @@ namespace App
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
                 Boton.IsEnabled = true;
+                IrARegistro.IsEnabled = true;
             }
             catch
             {
                 ActIndicator.IsRunning = false;
                 await DisplayAlert("Error", "Error de conexion", "Aceptar");
                 Boton.IsEnabled = true;
+                IrARegistro.IsEnabled = true;
                 return;
 
             }

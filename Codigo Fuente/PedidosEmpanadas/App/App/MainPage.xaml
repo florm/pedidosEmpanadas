@@ -12,8 +12,8 @@
     </StackLayout>-->
     <ContentPage.Content>
         <Grid>
-            <Image Source="portada.jpg" Aspect="AspectFill"/>
-            <BoxView Color="#6d97c9" Opacity="0.8"/>
+            <Image Source="empanadas.png" Aspect="AspectFill"/>
+            <!--<BoxView Color="#6d97c9" Opacity="0.8"/>-->
             <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
             <Grid>
                 <Grid.RowDefinitions>
@@ -22,19 +22,22 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="1" Padding="20,200,20,0">
-                    <Frame CornerRadius="10" BackgroundColor="White" Opacity="0.5" Padding="5,0,5,0">
+                    <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
                         <StackLayout>
-                            <Entry Placeholder="Correo electrónico" x:Name="Correo"/>
+                            <Entry TextColor="White" PlaceholderColor="White" Placeholder="Correo electrónico" x:Name="Correo"/>
                         </StackLayout>
                     </Frame>
-                    <Frame CornerRadius="10" BackgroundColor="White" Opacity="0.5" Padding="5,0,5,0">
+
+                    <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
                         <StackLayout>
-                            <Entry Placeholder="Password" x:Name="Pass" IsPassword="True"/>
+                            <Entry TextColor="White" PlaceholderColor="White" Placeholder="Password" x:Name="Pass" IsPassword="True"/>
                         </StackLayout>
                     </Frame>
+                    <StackLayout Orientation="Horizontal" Spacing="80" Margin="0,20,0,0">
+                        <Button HorizontalOptions="Start" WidthRequest="150" Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="Black" BorderRadius="10"/>
+                        <Button HorizontalOptions="End" WidthRequest="150" Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10"/>
+                    </StackLayout>
                     
-                    <Button Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
-                    <Button Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="20"/>
                 </StackLayout>
             </Grid>
         </Grid>
