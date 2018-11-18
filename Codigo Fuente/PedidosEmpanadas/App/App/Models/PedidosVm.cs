@@ -14,5 +14,8 @@ namespace App.Models
         public System.DateTime FechaCreacion { get; set; }
         public string RolS { get; set; }
         public string EstadoS { get; set; }
+        public string Descripcion { get; set; }
+        public int PrecioDocena { get; set; }
+        public int PrecioUnidad { get; set; }
     }
 }

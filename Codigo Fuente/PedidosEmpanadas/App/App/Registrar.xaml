@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.Registrar">
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="empanadas2.png" Aspect="AspectFill"/>
+            <!--<BoxView Color="Black" Opacity="0.5"/>-->
+            <ActivityIndicator x:Name="ActIndicator" Color="#6d97c9"></ActivityIndicator>
+            <StackLayout WidthRequest="250" HorizontalOptions="Center" HeightRequest="300" VerticalOptions="Center">
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese su Email" x:Name="CorreoRegistro"/>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese una Contraseña" x:Name="PassRegistro" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Repita la Contraseña" x:Name="RePassRegistro" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Button HorizontalOptions="Center" WidthRequest="150" Clicked="Registrar_Click" Text="Registrar" x:Name="BotonReg" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10" Margin="0,30,0,0"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
