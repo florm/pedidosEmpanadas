@@ -7,32 +7,24 @@
             <Image Source="empanadas2.png" Aspect="AspectFill"/>
             <!--<BoxView Color="Black" Opacity="0.5"/>-->
             <ActivityIndicator x:Name="ActIndicator"></ActivityIndicator>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <StackLayout Grid.Row="1" Padding="20,200,20,0">
-                    <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
-                        <StackLayout>
-                            <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese su Email" x:Name="CorreoRegistro"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
-                        <StackLayout>
-                            <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese una Contraseña" x:Name="PassRegistro" IsPassword="True"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
-                        <StackLayout>
-                            <Entry TextColor="White" PlaceholderColor="White" Placeholder="Repita la Contraseña" x:Name="RePassRegistro" IsPassword="True"/>
-                        </StackLayout>
-                    </Frame>
-                    <Button HorizontalOptions="End" WidthRequest="150" Clicked="Registrar_Click" Text="Registrar" x:Name="BotonReg" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10" Margin="0,30,0,0"/>
-
-                </StackLayout>
-            </Grid>
+            <StackLayout WidthRequest="250" HorizontalOptions="Center" HeightRequest="300" VerticalOptions="Center">
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese su Email" x:Name="CorreoRegistro"/>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Ingrese una Contraseña" x:Name="PassRegistro" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
+                    <StackLayout>
+                        <Entry TextColor="White" PlaceholderColor="White" Placeholder="Repita la Contraseña" x:Name="RePassRegistro" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Button HorizontalOptions="Center" WidthRequest="150" Clicked="Registrar_Click" Text="Registrar" x:Name="BotonReg" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10" Margin="0,30,0,0"/>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
