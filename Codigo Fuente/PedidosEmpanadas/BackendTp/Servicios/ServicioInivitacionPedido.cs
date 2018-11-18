@@ -79,24 +79,25 @@ namespace BackendTp.Servicios
         {
             var invitadosModel = GetInvitados(pge.Invitados, Sesion.IdUsuario);
             
-            //borro todas las invitaciones que no vienen en el model
-            pedido.InvitacionPedido.RemoveAll( invitacion => !invitadosModel.Contains(invitacion.IdUsuario));
-            
-            //agrego los que son nuevos
             foreach (var invitacionPedido in pedido.InvitacionPedido.Reverse<InvitacionPedido>())
             {
-                if (invitadosModel.Contains(invitacionPedido.IdUsuario))
+                if (!invitadosModel.Contains(invitacionPedido.IdUsuario))//Borro las invicationes que no se encuentran en las nuevas
+                {
+                    //pedido.InvitacionPedido.Remove(invitacionPedido);//porque no funciona de esta manera????? Error de FK no nulleable.
+                    Db.InvitacionPedido.Remove(invitacionPedido);
+                }
+                else //como ya se encuentran las borro del viewmodel para no volverlos a invitar
                     pge.Invitados.RemoveAll(x => x.Email == invitacionPedido.Usuario.Email);
             }
             
-            List<InvitacionPedido> nuevosInvitados = Agregar(pge.Invitados);
+            List<InvitacionPedido> nuevosInvitados = GetNuevosInvitados(pge.Invitados);
            
             if (nuevosInvitados.Count != 0)
             {
                 pedido.InvitacionPedido.AddRange(nuevosInvitados);
             }
                
-            EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
+           EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
             
         }
 
@@ -159,7 +160,7 @@ namespace BackendTp.Servicios
             }
         }
         
-        public List<InvitacionPedido> Agregar(List<UsuarioViewModel> invitados)
+        public List<InvitacionPedido> GetNuevosInvitados(List<UsuarioViewModel> invitados)
         {
             var idUsuarios = GetInvitados(invitados);
             List<InvitacionPedido> invitaciones = new List<InvitacionPedido>();
