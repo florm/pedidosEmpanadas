@@ -267,6 +267,5 @@ namespace BackendTp.Servicios
             }
             return Empanadas;
         }
-
     }
 }

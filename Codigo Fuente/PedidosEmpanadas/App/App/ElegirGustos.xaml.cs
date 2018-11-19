@@ -46,7 +46,7 @@ namespace App
             try
             {
                 HttpClient client = new HttpClient();
-                string url = string.Format("/api/Usuarios/GetListaDeGustosEnPedido/{0}/{1}", id, App.Current.Properties["IdUsuario"]);
+                string url = string.Format("/api/Pedidos/GetListaDeGustosEnPedido/{0}/{1}", id, App.Current.Properties["IdUsuario"]);
                 string url2 = App.UrlApi + url;
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
@@ -57,17 +57,10 @@ namespace App
                 return;
             }
 
-            //var settings = new JsonSerializerSettings
-            //{
-            //    NullValueHandling = NullValueHandling.Ignore,
-            //    MissingMemberHandling = MissingMemberHandling.Ignore
-            //};
-
             ListaDeGustos = JsonConvert.DeserializeObject<List<GustoEmpanadasCantidad>>(result);
 
             foreach (GustoEmpanadasCantidad u in ListaDeGustos)
             {
-                //ContenedorEntrys.Children.Add(new Entry() { Text = u.Email, ClassId = u.IdUsuario.ToString() });
                 ListaEntries.Add(new Entry() { ClassId = u.IdGustoEmpanada.ToString(), Text = u.Cantidad.ToString(), Keyboard = Keyboard.Numeric });
                 ListaLabels.Add(new Label() { Text = u.Nombre, ClassId = u.IdGustoEmpanada.ToString() });
             }
@@ -87,23 +80,16 @@ namespace App
 
         private async void BotonReg_Clicked(object sender, EventArgs e)
         {
-            //Falta validar
-            //string txt = "";
-            //foreach (Entry entr in ListaEntries)
-            //{
-            //    txt = entr.Text;
-            //    if (txt.Contains("."))
-            //    {
-            //        await DisplayAlert("", "Solo se admiten números enteros", "");
-            //        return;
-            //    }
-            //}
-
-            //if (txt.Contains("."))
-            //{
-            //    await DisplayAlert("", "Solo se admiten números enteros", "");
-            //    return;
-            //}
+            string txt = "";
+            foreach (Entry entr in ListaEntries)
+            {
+                txt = entr.Text;
+                if (txt.Contains("."))
+                {
+                    await DisplayAlert("", "Solo se admiten números enteros", "Ok");
+                    return;
+                }
+            }
 
             PedidoRequest pr = new PedidoRequest();
             foreach (Entry entr in ListaEntries)

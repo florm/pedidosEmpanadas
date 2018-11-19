@@ -22,11 +22,8 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Image x:Name="ImgEdit" Source="edit.png" WidthRequest="40" HeightRequest="40"/>
-                <Image x:Name="ImgDelete" Source="delete.png" WidthRequest="45" HeightRequest="45">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="IrAEliminar"/>
-                    </Image.GestureRecognizers>
-                </Image>
+                <Image x:Name="ImgDelete" Source="delete.png" WidthRequest="45" HeightRequest="45"/>
+
                 <Image x:Name="ImgClone" Source="clone.png" WidthRequest="45" HeightRequest="45"/>
             </StackLayout>
         </StackLayout>

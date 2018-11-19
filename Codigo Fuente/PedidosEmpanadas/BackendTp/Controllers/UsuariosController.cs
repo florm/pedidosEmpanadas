@@ -15,20 +15,12 @@ namespace BackendTp.Controllers
         private static readonly Entities Context = new Entities();
 
         private readonly ServicioUsuario servicioUsuario = new ServicioUsuario(Context);
-        private readonly ServicioPedido servicioPedido = new ServicioPedido(Context);
 
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetMobileUser(string id, string param2)
         {
             var usuario = servicioUsuario.LoginMobile(id, param2);
             return Ok(usuario);
-        }
-
-        [ResponseType(typeof(List<PedidoViewModel>))]
-        public IHttpActionResult GetListaPedidos(int id)
-        {
-            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
-            return Ok(ListaPedido);
         }
 
         [ResponseType(typeof(string))]
@@ -39,18 +31,5 @@ namespace BackendTp.Controllers
             return Ok(respuesta);
         }
 
-        [ResponseType(typeof(List<GustoEmpanadasCantidad>))]
-        public IHttpActionResult GetListaDeGustosEnPedido(int id, int param2)
-        {
-            var gpu = servicioPedido.GetGustosForMobile(id, param2);
-            return Ok(gpu);
-        }
-
-        //[ResponseType(typeof(void))]
-        //public void EliminarPedido(int id)
-        //{
-        //    servicioPedido.Eliminar(id);
-
-        //}
     }
 }

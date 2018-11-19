@@ -69,7 +69,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid ColumnSpacing="0" RowSpacing="0" BackgroundColor="Black">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*" />

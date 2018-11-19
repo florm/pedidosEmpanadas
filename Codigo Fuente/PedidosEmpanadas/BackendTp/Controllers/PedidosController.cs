@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using BackendTp.Models;
 using RouteAttribute = System.Web.Http.RouteAttribute;
 using System.Web.Http.Description;
+using System.Threading.Tasks;
 
 namespace BackendTp.Controllers
 {
@@ -36,41 +37,19 @@ namespace BackendTp.Controllers
             }
         }
 
-        //[ResponseType(typeof(string))]
-        //public IHttpActionResult EliminarPedido(int id)
-        //{
-        //    servicioPedido.Eliminar(id);
-        //    return Ok("Pedido eliminado satisfactoriamente.");
-        //}
-
-        public void EliminarPedido(int id)
+        [ResponseType(typeof(List<PedidoViewModel>))]
+        public IHttpActionResult GetListaPedidos(int id)
         {
-            servicioPedido.Eliminar(id);
-
+            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
+            return Ok(ListaPedido);
         }
 
-        ////[Route("api/pedidos/confirmargustos")]
-        //public JsonResult ConfirmarGustos([FromBody] PedidoRequest pedido)
-        //{
-        //    var resp = _servicioInvitacionPedido.ConfirmarGustos(pedido);
-        //    if (resp == true)
-        //    {
-        //        //return Json(new Respuesta() { Resultado = "OK", Mensaje = "Gustos elegidos satisfactoriamente" });
-        //        return new JsonResult
-        //        {
-        //            Data = new { Resultado = "OK", Mensaje = "Gustos elegidos satisfactoriamente"}
-        //        };
-        //    }
-        //    else
-        //    {
-        //        //return Json(new Respuesta() { Resultado = "ERROR", Mensaje = "No se pudo efectuar la operación" });
-        //        return new JsonResult
-        //        {
-        //            Data = new { Resultado = "ERROR", Mensaje = "No se pudo efectuar la operación" },
-        //        };
-        //    }
-
-        //}
+        [ResponseType(typeof(List<GustoEmpanadasCantidad>))]
+        public IHttpActionResult GetListaDeGustosEnPedido(int id, int param2)
+        {
+            var gpu = servicioPedido.GetGustosForMobile(id, param2);
+            return Ok(gpu);
+        }
 
     }
 }
