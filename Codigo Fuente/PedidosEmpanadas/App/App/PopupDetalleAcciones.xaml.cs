@@ -1,5 +1,6 @@
 ﻿using App.Models;
 using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,10 +66,12 @@ namespace App
 
         private async void IrAElegirGustos(object sender, EventArgs e)
         {
+            
             //await PopupNavigation.Instance.PopAsync(true);
             //int.TryParse(((Image)sender).ClassId, out int idPedido);
             //int idPedido = 1;
             await Navigation.PushAsync(new ElegirGustos(Pedido));
+            await PopupNavigation.Instance.PopAsync(true);
         }
     }
 }

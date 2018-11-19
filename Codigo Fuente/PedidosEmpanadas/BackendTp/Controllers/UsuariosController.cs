@@ -39,10 +39,10 @@ namespace BackendTp.Controllers
             return Ok(respuesta);
         }
 
-        [ResponseType(typeof(ElegirGustosVm))]
+        [ResponseType(typeof(List<GustoEmpanadasCantidad>))]
         public IHttpActionResult GetListaDeGustosEnPedido(int id, int param2)
         {
-            var gpu = servicioPedido.ElegirGustosUsuario(id, param2);
+            var gpu = servicioPedido.GetGustosForMobile(id, param2);
             return Ok(gpu);
         }
 
