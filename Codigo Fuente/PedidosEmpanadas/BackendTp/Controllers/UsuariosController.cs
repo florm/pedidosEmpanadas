@@ -45,5 +45,12 @@ namespace BackendTp.Controllers
             var gpu = servicioPedido.ElegirGustosUsuario(id, param2);
             return Ok(gpu);
         }
+
+        //[ResponseType(typeof(void))]
+        //public void EliminarPedido(int id)
+        //{
+        //    servicioPedido.Eliminar(id);
+
+        //}
     }
 }
