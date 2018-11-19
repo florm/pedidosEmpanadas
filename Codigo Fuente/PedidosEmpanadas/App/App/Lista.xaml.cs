@@ -35,7 +35,7 @@ namespace App
             try
             {
                 HttpClient client = new HttpClient();
-                string url = string.Format("/api/Usuarios/GetListaPedidos/{0}", id);
+                string url = string.Format("/api/Pedidos/GetListaPedidos/{0}", id);
                 string url2 = App.UrlApi + url;
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;

@@ -256,5 +256,16 @@ namespace BackendTp.Servicios
 
             return ListaPedido;
         }
+
+        public List<GustoEmpanadasCantidad> GetGustosForMobile(int id, int usuarioId)
+        {
+            ElegirGustosVm Gustos = ElegirGustosUsuario(id, usuarioId);
+            List<GustoEmpanadasCantidad> Empanadas = new List<GustoEmpanadasCantidad>();
+            foreach (GustoEmpanadasCantidad g in Gustos.Empanadas)
+            {
+                Empanadas.Add(new GustoEmpanadasCantidad() { Nombre = g.Nombre, Cantidad = g.Cantidad, IdGustoEmpanada = g.IdGustoEmpanada });
+            }
+            return Empanadas;
+        }
     }
 }
