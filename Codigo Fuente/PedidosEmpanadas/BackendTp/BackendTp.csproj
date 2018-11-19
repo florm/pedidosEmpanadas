@@ -225,6 +225,7 @@
     <Content Include="lib\bootstrap-tagsinput\package.json" />
     <Content Include="lib\bootstrap-tagsinput\README.md" />
     <None Include="Scripts\jquery\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery\jquery.numeric.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.slim.js" />

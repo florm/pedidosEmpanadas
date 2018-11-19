@@ -144,6 +144,8 @@ namespace BackendTp.Servicios
             pedidoDetalle = (from Pedido p in Db.Pedido.Include("EstadoPedido").Include("GustoEmpanada").Include("InvitacionPedido").Include("Usuario")
                             where p.IdPedido == pedido.IdPedido
                             select p).FirstOrDefault();
+            if (!pedidoDetalle.InvitacionPedido.Any(i=>i.IdUsuario == Sesion.IdUsuario))
+                throw new PermisosException();
 
             return pedidoDetalle;
         }

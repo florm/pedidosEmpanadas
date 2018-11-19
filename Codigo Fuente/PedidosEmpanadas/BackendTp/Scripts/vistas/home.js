@@ -60,7 +60,11 @@ function callback(data) {
 
 function loginOk(data) {
     var url = data.split('/');
-    if (url[1] === 'Pedido' && url[2] === 'Detalle' || url[1] === 'Pedido' && url[2] === 'ElegirGustos')
+    if (data === "")
+        window.location.href = window.pathListaPedidos;
+    else if (url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'detalle'
+        || url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'elegirGustos'
+        || url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'elegir')
         window.location.href = data;
     else
     {

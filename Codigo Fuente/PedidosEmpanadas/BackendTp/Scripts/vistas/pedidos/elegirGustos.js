@@ -1,4 +1,5 @@
-﻿$("#btnElegirGustos").click(function () {
+﻿$(".gustosUsuario").numeric({ decimal: false, negative: false, min: 1, max: 5000 });
+$("#btnElegirGustos").click(function () {
     ElegirGustos();
 });
 

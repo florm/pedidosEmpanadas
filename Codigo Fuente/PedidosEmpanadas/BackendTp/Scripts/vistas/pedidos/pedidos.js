@@ -7,9 +7,13 @@
 });
 var textValidacionInvitados = $("#textValidacionInvitados");
 var nombreNegocio = $("#Pedido_NombreNegocio");
+var descripcion = $("#Pedido_Descripcion");
 var precioUnidad = $("#Pedido_PrecioUnidad");
 var precioDocena = $("#Pedido_PrecioDocena");
 var btnCancelar = $("#btnCancelar");
+
+precioUnidad.numeric({ decimal: false, negative: false, min: 1, max: 5000 });
+precioDocena.numeric({ decimal: false, negative: false, min: 1, max: 5000 });
 
 btnCancelar.click(function (e) {
     e.preventDefault();
@@ -18,6 +22,7 @@ btnCancelar.click(function (e) {
 
 function validarPedido() {
     if (!validarCampoObligatorio(nombreNegocio)) return false;
+    if (!validarCampoObligatorio(descripcion)) return false;
     if (!validarCampoObligatorio(precioUnidad)) return false;
     if (!validarCampoObligatorio(precioDocena)) return false;
     
@@ -175,7 +180,7 @@ function validarRegistro() {
 }
 
 function validarTextRepetir() {
-    if (textPassword.val() != textRepetirPassword.val()) {
+    if (textPassword.val() !== textRepetirPassword.val()) {
         mostrarMensajeValidacionErronea(textRepetirPassword, "Las contraseñas deben ser iguales");
         return false;
     }
