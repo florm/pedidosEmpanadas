@@ -3,10 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App.ElegirGustos">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Image Source="empanadas.png" Aspect="AspectFill"/>
+            <BoxView Color="#6d97c9" Opacity="0.8"/>
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <StackLayout HeightRequest="60" Orientation="Horizontal" Padding="10,0,0,0" BackgroundColor="#6d97c9">
+                        <Label FontAttributes="Bold" Text="Elige tus gustos!" FontSize="Large" TextColor="White" VerticalTextAlignment="Center"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Padding="20" VerticalOptions="Center" HorizontalOptions="Center">
+                        <StackLayout>
+                            <Label TextColor="White" FontAttributes="Bold" x:Name="NombreNegocio"/>
+                            <Label TextColor="White" FontAttributes="Bold" x:Name="Descripcion"/>
+                            <Label TextColor="White" FontAttributes="Bold" x:Name="PrecioDocena"/>
+                            <Label TextColor="White" FontAttributes="Bold" x:Name="PrecioUnidad"/>
+                        </StackLayout>
+                        <Frame BackgroundColor="White" CornerRadius="10" Margin="0,20,0,0">
+                            <StackLayout x:Name="ContenedorEntrys" Padding="10" BackgroundColor="White"></StackLayout>
+                        </Frame>
+                        <Button HorizontalOptions="Center" WidthRequest="150" Clicked="BotonReg_Clicked" Text="Elegir" x:Name="BotonReg" BorderWidth="1" BorderColor="Black" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10" Margin="0,30,0,0"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

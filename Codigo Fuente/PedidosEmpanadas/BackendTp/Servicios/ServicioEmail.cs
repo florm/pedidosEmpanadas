@@ -31,7 +31,7 @@ namespace BackendTp.Servicios
         public void ArmarMailsConfirmacion(Pedido pedidoView)
         {
 
-            var pedido = Db.Pedido.FirstOrDefault(p => p.IdPedido == pedidoView.IdPedido);
+            var pedido = Db.Pedido.Include("InvitacionPedidoGustoEmpanadaUsuario").FirstOrDefault(p => p.IdPedido == pedidoView.IdPedido);
             EmailInvitados(pedido);
             EmailResponsable(pedido);
 

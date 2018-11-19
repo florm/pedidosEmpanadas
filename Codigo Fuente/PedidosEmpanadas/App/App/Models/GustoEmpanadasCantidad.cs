@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App.Models
 {
-    class GustoEmpanadasCantidad
+    public class GustoEmpanadasCantidad
     {
         public int IdGustoEmpanada { get; set; }
         public int Cantidad { get; set; }

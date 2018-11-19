@@ -21,7 +21,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="1" Padding="20,200,20,0">
+                <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center" HorizontalOptions="Center">
                     <Frame CornerRadius="10" BackgroundColor="Black" Opacity="0.5" Padding="5,0,5,0">
                         <StackLayout>
                             <Entry TextColor="White" PlaceholderColor="White" Placeholder="Correo electrónico" x:Name="Correo"/>
@@ -33,9 +33,9 @@
                             <Entry TextColor="White" PlaceholderColor="White" Placeholder="Password" x:Name="Pass" IsPassword="True"/>
                         </StackLayout>
                     </Frame>
-                    <StackLayout Orientation="Horizontal" Spacing="80" Margin="0,20,0,0">
-                        <Button HorizontalOptions="Start" WidthRequest="150" Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="Black" BorderRadius="10"/>
-                        <Button HorizontalOptions="End" WidthRequest="150" Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10"/>
+                    <StackLayout Orientation="Horizontal" Margin="0,20,0,0" HorizontalOptions="Center">
+                        <Button WidthRequest="150" HorizontalOptions="Start" Clicked="Button_Clicked" Text="Iniciar Sesion" x:Name="Boton" BackgroundColor="White" TextColor="Black" BorderRadius="10"/>
+                        <Button WidthRequest="150" HorizontalOptions="Start" Clicked="IrARegistro_Clicked" Text="Registrar" x:Name="IrARegistro" BackgroundColor="White" TextColor="#6d97c9" BorderRadius="10"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End" Padding="0,0,10,10">

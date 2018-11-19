@@ -23,7 +23,7 @@ function ElegirGustos() {
 }
 
 function gustosOk(data) {
-    mostrarMsgExito(data.Data.Mensaje);
+    mostrarMsgExito(data);
     setTimeout(function () {
         window.location.href = window.pathPedidos;
     }, 3000);
