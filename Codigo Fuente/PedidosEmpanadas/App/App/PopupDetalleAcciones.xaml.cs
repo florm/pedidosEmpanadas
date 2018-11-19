@@ -3,6 +3,7 @@ using Rg.Plugins.Popup.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,11 +15,12 @@ namespace App
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PopupDetalleAcciones : PopupPage
 	{
-		public PopupDetalleAcciones (PedidosVm pedido)
-		{
-			InitializeComponent ();
+        PedidosVm Pedido = new PedidosVm();
+        public PopupDetalleAcciones(PedidosVm pedido)
+        {
+            InitializeComponent();
 
-            if(pedido.Estado != 1)
+            if (pedido.Estado != 1)
             {
                 ImgOk.IsVisible = false;
                 ImgEdit.IsVisible = false;
@@ -26,6 +28,7 @@ namespace App
                 FramePopUp.BackgroundColor = Color.LightGray;
             }
 
+            Pedido = pedido;
             FechaCreacion.Text = "Fecha: " + pedido.FechaCreacion;
             NombreNegocio.Text = "Negocio: " + pedido.NombreNegocio;
             EstadoS.Text = "Estado de pedido: " + pedido.EstadoS;
@@ -35,21 +38,37 @@ namespace App
             PrecioUnidad.Text = "Precio por unidad: $ " + pedido.PrecioUnidad;
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void IrAEliminar(object sender, EventArgs e)
         {
-            List<DeviceUser> ListaDePrueba = new List<DeviceUser>();
-            ListaDePrueba.Add(new DeviceUser { Email = "Pepex", IdUsuario = 1 });
-            ListaDePrueba.Add(new DeviceUser { Email = "Poli", IdUsuario = 2 });
-            ListaDePrueba.Add(new DeviceUser { Email = "Lele", IdUsuario = 3 });
-            ListaDePrueba.Add(new DeviceUser { Email = "Nene", IdUsuario = 45 });
+            string result;
+            try
+            {
+                HttpClient client = new HttpClient();
+                string url = string.Format("/api/Pedidos/EliminarPedido/{0}", Pedido.IdPedido);
+                string url2 = App.UrlApi + url;
+                //var jsonRequest = JsonConvert.SerializeObject(Pedido.IdPedido);
+                //var content = new StringContent(jsonRequest, Encoding.UTF8, "text/json");
+                var response = await client.DeleteAsync(url2);
+                //var response = await client.PostAsync(url2, content);
+                result = response.Content.ReadAsStringAsync().Result;
+            }
+            catch
+            {
+                await DisplayAlert("Error", "Error de conexion", "Aceptar");
+                return;
+            }
 
-            await Navigation.PushAsync(new Borrar(ListaDePrueba));
+            //string respuesta = JsonConvert.DeserializeObject<string>(result);
+            //await DisplayAlert("", respuesta, "Aceptar");
+
         }
 
         private async void IrAElegirGustos(object sender, EventArgs e)
         {
-            int.TryParse(((Image)sender).ClassId, out int idPedido);
-            await Navigation.PushAsync(new ElegirGustos(idPedido));
+            //await PopupNavigation.Instance.PopAsync(true);
+            //int.TryParse(((Image)sender).ClassId, out int idPedido);
+            //int idPedido = 1;
+            await Navigation.PushAsync(new ElegirGustos(Pedido));
         }
     }
 }
