@@ -16,37 +16,88 @@
             <h2>Iniciar Pedido</h2>
         </div>
         <div class="col-2 action_buttons">
-         
+
         </div>
     </div>
 
-@using (Html.BeginForm("Crear", "Pedido"))
-{
-    @Html.AntiForgeryToken()
-    <div class="row">
-        
-        @Html.Partial("_pedidoFormulario")
+    @using (Html.BeginForm("Crear", "Pedido"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
 
-        <div class="col-md-4">
-            <div class="recuadro box-shadow bg-white">
-                <h5>3. Ingrese email de los invitados</h5>
-                <hr />
-                @for (int i = 0; i < Model.Invitados.Count; i++)
-                {
-                    <input class="invitadosEditar" id="@Model.Invitados[i].Id" value="@Model.Invitados[i].Email" hidden="" />
-                }
-                <div id="divInvitado" class="form-group w-100">
-                    <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejempl@email.com" />
+            @Html.Partial("_pedidoFormulario")
+
+            <div class="col-md-4">
+                <div class="recuadro box-shadow bg-white">
+                    <h5>3. Ingrese email de los invitados</h5>
+                    <hr />
+                    @for (int i = 0; i < Model.Invitados.Count; i++)
+                    {
+                        <input class="invitadosEditar" id="@Model.Invitados[i].Id" value="@Model.Invitados[i].Email" hidden="" />
+                    }
+                    <div id="divInvitado" class="form-group w-100">
+                        <input id="inputInvitados" data-role="tagsinput" class="form-control" type="text" placeholder="ejemplo@email.com" />
+                        @if (ViewBag.mensajeError != null)
+                        {
+                            <span class="field-validation-error text-danger">@ViewBag.mensajeError</span>
+                        }
+                        <span id="textValidacionInvitados" class="field-validation-error text-danger text-center d-none mt-2 d-inline-block"></span>
+                    </div>
+                    <div>
+                        <span>¿No encuentra el mail del invitado?</span>
+                        <div class="d-flex flex-row">
+                            <span class="pr-1">Puede registrarlo</span>
+                            <a href="#" data-toggle="modal" data-target="#modalRegistro">aquí</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="col-12 text-right mt-3">
+                <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
+                <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
+            </div>
         </div>
-        <div class="col-12 text-right mt-3">
-            <input type="reset" value="Cancelar" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <input type="submit" value="Iniciar" id="btnIniciar" class="btn btn-aceptar" />
+    }
+</div>
+
+@*modals*@
+<div class="modal" id="modalRegistro">
+    <div class="modal-dialog">
+        <div class="modal-content custom-modal-content">
+            <!-- Modal Header -->
+            <div class="d-flex modal-header border-bottom-0">
+                <h4 class="modal-title">Registro</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="pt-2">
+                    <div class="form-group col">
+                        <label for="textEmail">Email</label>
+                        <input class="form-control col-12" id="textEmail" type="email" name="email" value="" placeholder="Ingrese su email" />
+                    </div>
+                    <div class="form-group col">
+                        <label for="textPassword">Contraseña</label>
+                        <input class="form-control col-12" id="textPassword" type="password" name="password" value="" placeholder="Ingrese una contraseña" />
+                    </div>
+                    <div class="form-group col">
+                        <label for="textRepetirPassword">Repetir contraseña</label>
+                        <input class="form-control col-12" id="textRepetirPassword" type="password" name="password" value="" placeholder="Repita la contraseña" />
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-aceptar" id="btnRegistro">Aceptar</button>
+            </div>
+
         </div>
     </div>
-}
 </div>
+
 @section custom_js_libraries
 {
     <script src="@Url.Content("~/lib/bootstrap-tagsinput/typeahead.bundle.js")"></script>
@@ -57,6 +108,8 @@
 {
     <script>
         var usuarioController = "@Url.Action("Consultar","Usuario")";
+        var pathRegistro = '@Url.Action("Registro", "Home")';
+        var iniciar = "@(ViewBag.iniciar!=null ? ViewBag.iniciar.ToString().ToLower() : "")";
     </script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidos.js")"></script>
     <script src="@Url.Content("~/Scripts/vistas/pedidos/pedidosIniciar.js")"></script>

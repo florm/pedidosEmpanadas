@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using BackendTp.Helpers;
 using Exceptions;
@@ -13,24 +14,33 @@ namespace BackendTp.Servicios
 {
     public class ServicioInvitacionPedido: Servicio
     {
-        
-        public List<int> Crear(Pedido pedido, List<UsuarioViewModel> invitados, int idUsuarioResponsable)
+        private readonly ServicioUsuario _servicioUsuario;
+        private readonly ServicioEmail _servicioMail;
+
+        public ServicioInvitacionPedido(Entities context) : base(context)
         {
-            var idUsuarios = GetInvitados(invitados, idUsuarioResponsable);
+            _servicioUsuario = new ServicioUsuario(context);
+            _servicioMail = new ServicioEmail(context);
+        }
+
+        public List<InvitacionPedido> Crear(List<UsuarioViewModel> invitados)
+        {
+            var idUsuarios = GetInvitados(invitados,  Sesion.IdUsuario);
+            List<InvitacionPedido> invitaciones = new List<InvitacionPedido>();
+            
             foreach(var id in idUsuarios)
             {
-                Db.InvitacionPedido.Add(new InvitacionPedido
-                    {
-                        IdPedido = pedido.IdPedido,
-                        IdUsuario = id,
-                        Token = Guid.NewGuid(),
-                        Completado = false
-                    });
-                
-            } 
-            
-            Db.SaveChanges();
-            return idUsuarios;
+                InvitacionPedido invitacion = new InvitacionPedido
+                {
+                    Usuario = _servicioUsuario.GetById(id),
+                    Token = Guid.NewGuid(),
+                    Completado = false
+                };
+
+                invitaciones.Add(invitacion);
+            }
+
+            return invitaciones;
         }
 
         public InvitacionPedidoGustoEmpanadaUsuario ElegirGustos()
@@ -38,7 +48,7 @@ namespace BackendTp.Servicios
             return null;
         }
 
-        private List<int> GetInvitados (List<UsuarioViewModel> invitados, int? idUsuarioResponsable)
+        private List<int> GetInvitados (List<UsuarioViewModel> invitados, [Optional, DefaultParameterValue(0)] int idUsuarioResponsable)
         {
             List<int> idUsuarios = new List<int>();
             foreach(var invitado in invitados)
@@ -49,8 +59,8 @@ namespace BackendTp.Servicios
                     idUsuarios.Add(usuario.IdUsuario);
             }
             //se agrega tambien como invitado al usuario que realizo inicio el pedido
-            if(idUsuarioResponsable!=null)
-            idUsuarios.Add((int)idUsuarioResponsable);
+            if(idUsuarioResponsable!=0)
+                idUsuarios.Add((int)idUsuarioResponsable);
             return idUsuarios;
         }
 
@@ -65,54 +75,30 @@ namespace BackendTp.Servicios
             return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
         }
 
-        public void Modificar(int idPedido, List<UsuarioViewModel> invitados, int accion)
+        public void Modificar(Pedido pedido,PedidoGustosEmpanadasViewModel pge)
         {
-            var invitacionPedidoModel = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido).ToList();
-            var invitadosModel = GetInvitados(invitados, Sesion.IdUsuario);
-            foreach (var invitacionPedido in invitacionPedidoModel)
+            var invitadosModel = GetInvitados(pge.Invitados, Sesion.IdUsuario);
+            
+            foreach (var invitacionPedido in pedido.InvitacionPedido.Reverse<InvitacionPedido>())
             {
-                if (!invitadosModel.Contains(invitacionPedido.IdUsuario))
-                    Db.InvitacionPedido.Remove(invitacionPedido);
-            }
-            var nuevosInvitados = new List<int>();
-            foreach (var invitado in invitadosModel)
-            {
-                if (!invitacionPedidoModel.Select(ip => ip.IdUsuario).Contains(invitado))
+                if (!invitadosModel.Contains(invitacionPedido.IdUsuario))//Borro las invicationes que no se encuentran en las nuevas
                 {
-                    var nuevaInvitacionPedido = new InvitacionPedido
-                    {
-                        IdUsuario = invitado,
-                        IdPedido = idPedido,
-                        Token = Guid.NewGuid(),
-                        Completado = false
-                    };
-                    Db.InvitacionPedido.Add(nuevaInvitacionPedido);
-                    nuevosInvitados.Add(nuevaInvitacionPedido.IdUsuario);
+                    //pedido.InvitacionPedido.Remove(invitacionPedido);//porque no funciona de esta manera????? Error de FK no nulleable.
+                    Db.InvitacionPedido.Remove(invitacionPedido);
                 }
+                else //como ya se encuentran las borro del viewmodel para no volverlos a invitar
+                    pge.Invitados.RemoveAll(x => x.Email == invitacionPedido.Usuario.Email);
             }
-            ServicioEmail servicioMail = new ServicioEmail();
-            switch (accion)
+            
+            List<InvitacionPedido> nuevosInvitados = GetNuevosInvitados(pge.Invitados);
+           
+            if (nuevosInvitados.Count != 0)
             {
-                case (int)EmailAcciones.ANadie:
-                      break;
-                case (int)EmailAcciones.EnviarSoloALosNuevos:
-                    servicioMail.ArmarMailInicioPedido(nuevosInvitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarInvitacionATodos:
-                    var todosLosInivitados = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido)
-                        .Select(i=>i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(todosLosInivitados, idPedido);
-                    break;
-                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
-                    var invitadosSinGustos = Db.InvitacionPedido.Where(ip => ip.IdPedido == idPedido
-                                                                            && ip.Completado == false)
-                        .Select(i => i.IdUsuario)
-                        .ToList();
-                    servicioMail.ArmarMailInicioPedido(invitadosSinGustos, idPedido);
-                    break;
+                pedido.InvitacionPedido.AddRange(nuevosInvitados);
             }
-            Db.SaveChanges();
+               
+           EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
+            
         }
 
         public bool ConfirmarGustos(PedidoRequest pedido)
@@ -142,6 +128,9 @@ namespace BackendTp.Servicios
 
                 }
 
+                var invPedido = Db.InvitacionPedido.FirstOrDefault(i => i.IdPedido == pedido.IdPedido && i.IdUsuario == pedido.IdUsuario);
+                invPedido.Completado = true;
+
                 Db.SaveChanges();
 
                 return true;
@@ -150,6 +139,48 @@ namespace BackendTp.Servicios
             {
                 return false;
             }
+        }
+
+        public void EnviarMailInicioPedido(List<InvitacionPedido> nuevosInvitados, Pedido pedido, int accion)
+        {
+            switch (accion)
+            {
+                case (int)EmailAcciones.ANadie:
+                    break;
+                case (int)EmailAcciones.EnviarSoloALosNuevos:
+                    if (nuevosInvitados.Count != 0)
+                    {
+                        _servicioMail.EnviarANuevos(nuevosInvitados);
+
+                    }
+                    break;
+                case (int)EmailAcciones.ReEnviarInvitacionATodos:
+                    _servicioMail.EnviarMailInicioPedido(pedido);
+                    break;
+                case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
+                    _servicioMail.EnviarALosQueNoEligieronGusto(pedido);
+                    break;
+            }
+        }
+        
+        public List<InvitacionPedido> GetNuevosInvitados(List<UsuarioViewModel> invitados)
+        {
+            var idUsuarios = GetInvitados(invitados);
+            List<InvitacionPedido> invitaciones = new List<InvitacionPedido>();
+            
+            foreach(var id in idUsuarios)
+            {
+                InvitacionPedido invitacion = new InvitacionPedido
+                {
+                    Usuario = _servicioUsuario.GetById(id),
+                    Token = Guid.NewGuid(),
+                    Completado = false
+                };
+
+                invitaciones.Add(invitacion);
+            }
+
+            return invitaciones;
         }
     }
 }

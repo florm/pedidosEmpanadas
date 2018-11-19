@@ -1,11 +1,22 @@
-﻿$(document).ready(function() {
-    $('button.delete').on('click',function(e){
+﻿$(document).ready(function () {
+    
+    function getDatos(id) {
+        var pvm = new Object();
+        pvm.IdPedido = id;
+        llamadaAjax(window.detallesPedido, JSON.stringify(pvm), false, "obtuvoDatos");
+    }
+
+    
+    $('button.delete').on('click', function (e) {
         var button = $(this);
+        getDatos(button.attr("id"));
         e.preventDefault();
         var form = $(this).parents('form');
         swal({
-            title: "Esta seguro?",
-            text: "No se podrá recuperar el pedido elminiado",
+            title: "Esta seguro que desea eliminar el pedido" + " " + pedidoAEliminar.NombreNegocio +"?",
+            text: (pedidoAEliminar.Cantidad === 0)
+                    ? "Actualmente no posee invitaciones confirmadas."
+                    : "Actualmente posee " + pedidoAEliminar.Cantidad + " invitaciones confirmadas.",
             icon: "warning",
             buttons:  ["Cancelar", "Aceptar"],
             dangerMode: true,
@@ -61,4 +72,7 @@
     });
 });
 
-
+var pedidoAEliminar;
+function obtuvoDatos(data) {
+    pedidoAEliminar = data;
+}

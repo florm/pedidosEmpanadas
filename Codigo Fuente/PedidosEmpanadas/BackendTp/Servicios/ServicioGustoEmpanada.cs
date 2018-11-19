@@ -10,6 +10,26 @@ namespace BackendTp.Servicios
 {
     public class ServicioGustoEmpanada: Servicio
     {
+        public ServicioGustoEmpanada(Entities context) : base(context)
+        {   
+        }
+        
+        public List<GustoEmpanada> ObtenerGustos(List<GustosEmpanadasViewModel> pgeGustosDisponibles)
+        {
+            List<GustoEmpanada> gustosSeleccionados = new List<GustoEmpanada>();
+            foreach (var gusto in pgeGustosDisponibles)
+            {
+                if (gusto.IsSelected)
+                    gustosSeleccionados.Add(GetById(gusto.Id));
+            }
+
+            return gustosSeleccionados;
+        }
+
+        public GustoEmpanada GetById(int id)
+        {
+            return Db.GustoEmpanada.Single(e => e.IdGustoEmpanada == id);
+        }
 
         public List<GustoEmpanada> GetAll()
         {
@@ -28,6 +48,17 @@ namespace BackendTp.Servicios
             //var pedido = Db.InvitacionPedidoGustoEmpanadaUsuario.Include("GustoEmpanada").FirstOrDefault(p => p.IdPedido == idPedido && p.IdUsuario == idUsuario);
             //return pedido.InvitacionPedidoGustoEmpanadaUsuario.ToList();
             return Db.InvitacionPedidoGustoEmpanadaUsuario.Where(ip => ip.IdPedido == idPedido && ip.IdUsuario == idUsuario).ToList();
+        }
+
+        public int CantidadTotalDeEmpanadas(int idPedido)
+        {
+            if (idPedido != 0)
+            {
+                var ipgeu = Db.InvitacionPedidoGustoEmpanadaUsuario.Where(i => i.IdPedido == idPedido).ToList();
+                if (ipgeu.Count != 0)
+                    return ipgeu.Sum(i => i.Cantidad);
+            }
+            return 0;
         }
     }
 }

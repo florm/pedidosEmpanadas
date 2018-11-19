@@ -47,6 +47,7 @@ namespace BackendTp
 
         public void ValidarUsuarioLogueado()
         {
+            Sesion.UltimaUrlAccedida = _context.HttpContext.Request.FilePath + ((_context.HttpContext.Request.QueryString.Count != 0) ? "?"+ _context.HttpContext.Request.QueryString : "");
             if(Sesion.IdUsuario == 0)
                 throw new UsuarioDeslogueadoException();
         }

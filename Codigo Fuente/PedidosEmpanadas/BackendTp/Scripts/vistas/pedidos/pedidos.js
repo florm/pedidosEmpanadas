@@ -1,10 +1,33 @@
 ﻿$(document).ready(function () {
     var textValidacionGustos = $("#textValidacionGustos");
+    
     //var btnIniciar = $("#btnIniciar");
     var inputInvitados = $("#inputInvitados");
     var divInvitado = $("#divInvitado");
 });
+var textValidacionInvitados = $("#textValidacionInvitados");
+var nombreNegocio = $("#Pedido_NombreNegocio");
+var descripcion = $("#Pedido_Descripcion");
+var precioUnidad = $("#Pedido_PrecioUnidad");
+var precioDocena = $("#Pedido_PrecioDocena");
+var btnCancelar = $("#btnCancelar");
 
+precioUnidad.numeric({ decimal: false, negative: false, min: 1, max: 5000 });
+precioDocena.numeric({ decimal: false, negative: false, min: 1, max: 5000 });
+
+btnCancelar.click(function (e) {
+    e.preventDefault();
+    window.location.href = window.pathPedidos;
+});
+
+function validarPedido() {
+    if (!validarCampoObligatorio(nombreNegocio)) return false;
+    if (!validarCampoObligatorio(descripcion)) return false;
+    if (!validarCampoObligatorio(precioUnidad)) return false;
+    if (!validarCampoObligatorio(precioDocena)) return false;
+    
+    return true;
+}
 
 function seleccionarTodos(source) {
     var checkboxes = $("form input:checkbox");
@@ -17,17 +40,22 @@ function validacionYEnvio(e, arrayViejos)
 {
     event.preventDefault(e);
     var checkboxes = $("form input:checkbox");
-    if (validarSeleccionDeGustos(checkboxes)) {
-        armarInvitados(inputInvitados, arrayViejos);
-        if ($("#formModificar").length > 0)
-            $("#formModificar").submit();
-        else
-            $("form").submit();
+    if (!validarPedido() || !validarSeleccionDeGustos(checkboxes) || !validarInvitados(inputInvitados)) return;
+    
+    armarInvitados(inputInvitados, arrayViejos);
+    if ($("#formModificar").length > 0)
+        $("#formModificar").submit();
+    else
+        $("form").submit();
+}
+
+function validarInvitados(invitado) {
+    if (invitado.val() === "" && window.iniciar === true) {
+        textValidacionInvitados.removeClass("d-none");
+        textValidacionInvitados.text("Debe seleccionar al menos 1 invitado");
+        return false;
     }
-    else {
-        textValidacionGustos.removeClass("d-none");
-        textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
-    }
+    return true;
 }
 
 function validarSeleccionDeGustos(checkboxes) {
@@ -36,8 +64,11 @@ function validarSeleccionDeGustos(checkboxes) {
         if (checkboxes[i].checked === false)
             validacion++;
     }
-    if (checkboxes.length === validacion)
+    if (checkboxes.length === validacion) {
+        textValidacionGustos.removeClass("d-none");
+        textValidacionGustos.text("Debe seleccionar al menos 1 gusto");
         return false;
+    }
     else
         return true;
 }
@@ -111,6 +142,50 @@ function agregarTag(select, array) {
         });
 }
 
+//registro
+//$("#btnRegistro").click(function() {
+    
+
+//});
+
+
+$("#btnRegistro").click(function () {
+    if (!validarRegistro())
+        return;
+
+    var usuario = new Object();
+    usuario.email = textEmail.val();
+    usuario.password = textPassword.val();
+
+    llamadaAjax(window.pathRegistro, JSON.stringify(usuario), false, "callback");
+});
+
+function callback(data) {
+    mostrarMsgExito(data.mensaje);
+    if (data.operacion === "ok")
+        $("#modalRegistro").modal("hide");
+    inicializaSelectTags(window.usuarioController, inputInvitados, "invitados");
+
+}
+
+var textEmail = $("#textEmail");
+var textPassword = $("#textPassword");
+var textRepetirPassword = $("#textRepetirPassword");
+
+function validarRegistro() {
+    if (!validarCampoEmail(textEmail)) return false;
+    if (!validarCampoObligatorio(textPassword)) return false;
+    if (!validarTextRepetir()) return false;
+    return true;
+}
+
+function validarTextRepetir() {
+    if (textPassword.val() !== textRepetirPassword.val()) {
+        mostrarMensajeValidacionErronea(textRepetirPassword, "Las contraseñas deben ser iguales");
+        return false;
+    }
+    return validarCampoObligatorio(textRepetirPassword);
+}
 
 
 

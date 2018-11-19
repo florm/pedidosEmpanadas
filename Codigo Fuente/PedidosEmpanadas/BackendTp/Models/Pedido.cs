@@ -11,14 +11,13 @@ namespace BackendTp.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Pedido
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pedido()
         {
-            this.InvitacionPedido = new HashSet<InvitacionPedido>();
+            this.InvitacionPedido = new List<InvitacionPedido>();
             this.InvitacionPedidoGustoEmpanadaUsuario = new HashSet<InvitacionPedidoGustoEmpanadaUsuario>();
             this.GustoEmpanada = new HashSet<GustoEmpanada>();
         }
@@ -35,12 +34,11 @@ namespace BackendTp.Models
     
         public virtual EstadoPedido EstadoPedido { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InvitacionPedido> InvitacionPedido { get; set; }
+        public virtual List<InvitacionPedido> InvitacionPedido { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvitacionPedidoGustoEmpanadaUsuario> InvitacionPedidoGustoEmpanadaUsuario { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GustoEmpanada> GustoEmpanada { get; set; }
     }
-    
 }

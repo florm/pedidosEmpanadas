@@ -9,11 +9,11 @@ namespace BackendTp.Servicios
 {
     public class Servicio
     {
-        protected Entities Db { get; }
+        protected Entities Db;
 
-        public Servicio()
+        public Servicio(Entities context)
         {
-            Db = new Entities();
+            Db = context;
         }
     }
 }

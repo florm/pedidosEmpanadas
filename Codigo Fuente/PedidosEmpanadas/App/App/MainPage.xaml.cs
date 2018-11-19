@@ -31,21 +31,24 @@ namespace App
             try
             {
                 Boton.IsEnabled = false;
+                IrARegistro.IsEnabled = false;
                 HttpClient client = new HttpClient();
 
                 string url = string.Format("/api/Usuarios/GetMobileUser/{0}/{1}", Correo.Text, Pass.Text);
 
-                string url2 = "http://192.168.0.14:45455" + url;
+                string url2 = App.UrlApi + url;
 
                 var response = await client.GetAsync(url2);
                 result = response.Content.ReadAsStringAsync().Result;
                 Boton.IsEnabled = true;
+                IrARegistro.IsEnabled = true;
             }
             catch
             {
                 ActIndicator.IsRunning = false;
                 await DisplayAlert("Error", "Error de conexion", "Aceptar");
                 Boton.IsEnabled = true;
+                IrARegistro.IsEnabled = true;
                 return;
 
             }
@@ -63,8 +66,16 @@ namespace App
 
             var deviceUser = JsonConvert.DeserializeObject<DeviceUser>(result);
 
-            await Navigation.PushAsync(new Lista(deviceUser));
+            App.Current.Properties["IdUsuario"] = deviceUser.IdUsuario; 
+            App.Current.Properties["IsLoggedIn"] = true;
 
+            //await Navigation.PushAsync(new Lista(deviceUser));
+            await Navigation.PushAsync(new Lista());
+        }
+
+        private async void IrARegistro_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Registrar());
         }
     }
 }

@@ -6,11 +6,15 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using BackendTp.Models;
+using WebGrease.Css.Extensions;
 
 namespace BackendTp.Servicios
 {
     public class ServicioEmail : Servicio
     {
+        public ServicioEmail(Entities context) : base(context)
+        {
+        }
 
         public List<EmailAccion> GetAcciones()
         {
@@ -45,14 +49,18 @@ namespace BackendTp.Servicios
             foreach (var gustoDelPedido in pedido.GustoEmpanada)
             {
                 var gustoSelecccionado =
-                    gustosSeleccionados.FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
+                    gustosSeleccionados
+                        .FirstOrDefault(g => g.IdGustoEmpanada == gustoDelPedido.IdGustoEmpanada);
 
                 if (gustoSelecccionado != null)
                 {
+                    var cantidadTotal = 0;
+                    gustosSeleccionados.Where(gs=>gs.IdGustoEmpanada == gustoSelecccionado.IdGustoEmpanada)
+                        .ForEach(gs => { cantidadTotal += gs.Cantidad; });
                     email.GustosEmpanadas.Add(new GustoEmpanada
                     {
                         Nombre = gustoSelecccionado.GustoEmpanada.Nombre,
-                        Cantidad = gustoSelecccionado.Cantidad
+                        Cantidad = cantidadTotal
                     });
                 }
                 else
@@ -77,7 +85,7 @@ namespace BackendTp.Servicios
                     {
                         cantidad += pu.Cantidad;
                     }
-                    email.InvitadosMail.Add(new InvitadosMail {Email = i.Usuario.Email, PrecioTotal = pedido.PrecioPorUnidad * cantidad}); 
+                    email.InvitadosMail.Add(new InvitadosMail {Email = i.Usuario.Email, PrecioTotal = pedido.PrecioCalculadoPorUnidad * cantidad}); 
 
                 }
 
@@ -101,7 +109,7 @@ namespace BackendTp.Servicios
                         }).ToList();
                 var cantidadTotal=0;
                 email.GustosEmpanadas.ForEach(ge => { cantidadTotal += ge.Cantidad; });
-                email.PrecioTotal = cantidadTotal != 0? pedido.PrecioTotal / cantidadTotal:0; 
+                email.PrecioTotal = pedido.PrecioCalculadoPorUnidad * cantidadTotal; 
                 MandarMail(email, "Detalles de Pedido Confirmado","invitado" );
             }
         }
@@ -144,11 +152,11 @@ namespace BackendTp.Servicios
                     mensaje = $"Hola {mailInfo.Email}, <br/><br/>" +
                               "Estos son los detalles de tu pedido: <br/>";
                     mensaje += "<strong>Detalle de la recaudación:</strong> <br/>" +
-                               "Precio Total: " + mailInfo.PrecioTotal + "<br/>" +
+                               "Precio Total: $" + mailInfo.PrecioTotal + "<br/>" +
                                "Invitados: <br/>";
                     foreach (var invitado in mailInfo.InvitadosMail)
                     {
-                        mensaje += invitado.Email + ": " + invitado.PrecioTotal + "<br/>";
+                        mensaje += invitado.Email + ": $" + invitado.PrecioTotal + "<br/>";
                     }
 
                     mensaje += "<strong>Detalle del pedido:</strong> <br/>" +
@@ -172,7 +180,7 @@ namespace BackendTp.Servicios
                     mensaje +=
                         $"<br/><br/> La <strong>cantidad total</strong> de empanadas que elegiste es: {cantidadTotal}" +
                         "<br/>";
-                    mensaje += $"El <strong>precio</strong> que debes abonar es de: {mailInfo.PrecioTotal}" +
+                    mensaje += $"El <strong>precio</strong> que debes abonar es de: ${mailInfo.PrecioTotal}" +
                                "<br/>" +
                                "Gracias por elegirnos!";
                     break;
@@ -186,15 +194,41 @@ namespace BackendTp.Servicios
 
             return mensaje;
         }
-
-        public void ArmarMailInicioPedido(List<int> usuarios, int idPedido)
+        
+        public void EnviarALosQueNoEligieronGusto(Pedido pedido)
         {
-            foreach (var u in usuarios)
+            var invitadosSinGustos = pedido.InvitacionPedido.Where(ip => ip.Completado == false).ToList();
+            
+            foreach (var invitacion in invitadosSinGustos)
             {
                 var email = new Mail();
-                var tokenUsuario = Db.InvitacionPedido.FirstOrDefault(ip => ip.IdUsuario == u && ip.IdPedido == idPedido).Token;
+                var tokenUsuario = invitacion.Token;
                 email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
-                email.Email = Db.Usuario.FirstOrDefault(um => um.IdUsuario == u).Email;
+                email.Email = invitacion.Usuario.Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
+        
+        public void EnviarANuevos(List<InvitacionPedido> nuevosInvitaciones)
+        {
+            foreach (var invitacion in nuevosInvitaciones)
+            {
+                var email = new Mail();
+                var tokenUsuario = invitacion.Token;
+                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+                email.Email = invitacion.Usuario.Email;
+                MandarMail(email, "Inicio de Pedido", "inicio");
+            }
+        }
+
+        public void EnviarMailInicioPedido(Pedido pedido)
+        {
+            foreach (var invitacionPedido in pedido.InvitacionPedido)
+            {
+                var email = new Mail();
+                var tokenUsuario = invitacionPedido.Token;
+                email.Link = "http://" + HttpContext.Current.Request.Url.Authority + "/pedido/elegir/" + tokenUsuario;
+                email.Email = invitacionPedido.Usuario.Email;
                 MandarMail(email, "Inicio de Pedido", "inicio");
             }
         }

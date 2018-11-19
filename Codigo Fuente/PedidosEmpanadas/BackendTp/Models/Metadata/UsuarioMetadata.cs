@@ -10,6 +10,7 @@ namespace BackendTp.Models.Metadata
     {
         [Required(ErrorMessage = "Debe completar su mail")]
         [StringLength(300, ErrorMessage = "El mail no puede superar los 300 caracteres")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Debe completar la contraseña")]

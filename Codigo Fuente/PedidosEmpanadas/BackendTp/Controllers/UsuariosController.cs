@@ -12,51 +12,38 @@ namespace BackendTp.Controllers
 {
     public class UsuariosController : ApiController
     {
-        ServicioUsuario servicioUsuario = new ServicioUsuario();
-        ServicioPedido servicioPedido = new ServicioPedido();
+        private static readonly Entities Context = new Entities();
+
+        private readonly ServicioUsuario servicioUsuario = new ServicioUsuario(Context);
+        private readonly ServicioPedido servicioPedido = new ServicioPedido(Context);
 
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetMobileUser(string id, string param2)
         {
             var usuario = servicioUsuario.LoginMobile(id, param2);
-
             return Ok(usuario);
         }
 
         [ResponseType(typeof(List<PedidoViewModel>))]
         public IHttpActionResult GetListaPedidos(int id)
         {
-            List<PedidoViewModel> ListaPrueba = new List<PedidoViewModel>();
-            var pedidos = servicioPedido.Lista(id);
+            List<PedidoViewModel> ListaPedido = servicioPedido.ListarPedidosMobile(id);
+            return Ok(ListaPedido);
+        }
 
-            foreach (Pedido p in pedidos)
-            {
-                ListaPrueba.Add(new PedidoViewModel
-                {
-                    IdPedido = p.IdPedido,
-                    IdUsuarioResponsable = p.IdUsuarioResponsable,
-                    FechaCreacion = p.FechaCreacion,
-                    NombreNegocio = p.NombreNegocio,
-                    Estado = p.IdEstadoPedido,
-                    Rol = p.IdUsuarioResponsable,
-                    EstadoS = p.EstadoPedido.Nombre
-                });
-            }
+        [ResponseType(typeof(string))]
+        public IHttpActionResult PostNewUser(Usuario usuario)
+        {
+            var valida = servicioUsuario.CrearUsuario(usuario);
+            string respuesta = valida.Item1;
+            return Ok(respuesta);
+        }
 
-            foreach (PedidoViewModel pvm in ListaPrueba)
-            {
-                if (pvm.Rol == id)
-                {
-                    pvm.RolS = "Responsable";
-                }
-                else
-                {
-                    pvm.RolS = "Invitado";
-                }
-
-            }
-
-            return Ok(ListaPrueba);
+        [ResponseType(typeof(ElegirGustosVm))]
+        public IHttpActionResult GetListaDeGustosEnPedido(int id, int param2)
+        {
+            var gpu = servicioPedido.ElegirGustosUsuario(id, param2);
+            return Ok(gpu);
         }
     }
 }

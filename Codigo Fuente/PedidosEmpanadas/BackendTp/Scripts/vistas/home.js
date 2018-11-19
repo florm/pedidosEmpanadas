@@ -58,8 +58,18 @@ function callback(data) {
 }
 
 
-function loginOk() {
-    window.location.href = window.pathListaPedidos;
+function loginOk(data) {
+    var url = data.split('/');
+    if (data === "")
+        window.location.href = window.pathListaPedidos;
+    else if (url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'detalle'
+        || url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'elegirGustos'
+        || url[1].toLowerCase() === 'pedido' && url[2].toLowerCase() === 'elegir')
+        window.location.href = data;
+    else
+    {
+        window.location.href = window.pathListaPedidos;
+    }
 
 }
 
@@ -83,47 +93,6 @@ function validarTextRepetir() {
         return false;
     }
     return validarCampoObligatorio(textRepetirPassword);
-}
-
-
-$("#testbtn").click(function () {
-    probandoajax();
-});
-
-function probandoajax() {
-
-    var pedidoRequest = new Object();
-    pedidoRequest.IdUsuario = $("#idUsuario").val();
-    pedidoRequest.IdPedido = $("#idPedido").val();
-    pedidoRequest.Token = $("#tokenUsuario").val();
-
-    var GustoEmpanadasCantidad = $("#listaGustos input.gustosUsuario").map(function () {
-        var GustoEmpanadasCantidad = new Object();
-        //GustoEmpanadasCantidad.Nombre = $("#listTest").val();
-        //GustoEmpanadasCantidad.IdGustoEmpanada = $(this).data("id");
-        //GustoEmpanadasCantidad.Nombre = $(this).val();
-
-        //GustoEmpanadasCantidad.Nombre = $(this).data("name");
-        GustoEmpanadasCantidad.Cantidad = $(this).val();
-        GustoEmpanadasCantidad.IdGustoEmpanada = $(this).attr('id');
-
-        //GustoEmpanadasCantidad.IdGustoEmpanada = $("input").data("id")
-
-        //GustoEmpanadasCantidad.IdGustoEmpanada = $("#testAle").val();
-        //return JSON.stringify(GustoEmpanadasCantidad);
-        return GustoEmpanadasCantidad;
-    }).get();
-
-    pedidoRequest.GustoEmpanadasCantidad = GustoEmpanadasCantidad;
-
-    //pedidoRequest.IdUsuario = $("#IdTest").val();
-    //pedidoRequest.Token = $("#TokenTest").val();
-    llamadaAjax("/api/pedidos/confirmargustos", JSON.stringify(pedidoRequest), true, "gustosOk", "mostrarMensajeDeError");
-
-}
-
-function gustosOk(data) {
-    mostrarMsgExito(data.Data.Mensaje);
 }
 
 var btnCancelar = $("#btnCancelar");

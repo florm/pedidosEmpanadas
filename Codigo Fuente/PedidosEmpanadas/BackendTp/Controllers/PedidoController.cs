@@ -15,37 +15,35 @@ namespace BackendTp.Controllers
 {
     public class PedidoController : BaseController
     {
-        private readonly ServicioPedido _servicioPedido = new ServicioPedido();
-        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada();
-        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido();
-        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario();
-        private readonly ServicioEmail _servicioEmail= new ServicioEmail();
+        private static readonly Entities Context = new Entities();
+        private readonly ServicioPedido _servicioPedido = new ServicioPedido(Context);
+        private readonly ServicioGustoEmpanada _servicioGustoEmpanada = new ServicioGustoEmpanada(Context);
+        private readonly ServicioInvitacionPedido _servicioInvitacionPedido = new ServicioInvitacionPedido(Context);
+        private readonly ServicioUsuario _servicioUsuario = new ServicioUsuario(Context);
+        private readonly ServicioEmail _servicioEmail= new ServicioEmail(Context);
+        private readonly ServicioEstadoPedido _servicioEstadoPedido= new ServicioEstadoPedido(Context);
 
         public ActionResult Iniciar()
         {
-            PedidoGustosEmpanadasViewModel pgeVm = new PedidoGustosEmpanadasViewModel();
-            var gustos = _servicioGustoEmpanada.GetAll();
-            foreach (var gusto in gustos)
-            {
-                pgeVm.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-
-            }
+            PedidoGustosEmpanadasViewModel pgeVm = _servicioPedido.Iniciar();
             ViewBag.iniciar = true;
             return View(pgeVm);
         }
 
         public ActionResult Crear(PedidoGustosEmpanadasViewModel pedidoGustosEmpanadas)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && pedidoGustosEmpanadas.Invitados.Count != 0)
             {
                 var pedidoNuevo = _servicioPedido.Crear(pedidoGustosEmpanadas);
-                var usuarios = _servicioInvitacionPedido.Crear(pedidoNuevo, pedidoGustosEmpanadas.Invitados, Sesion.IdUsuario);
-                _servicioEmail.ArmarMailInicioPedido(usuarios, pedidoNuevo.IdPedido);
                 return RedirectToAction("Iniciado", new { id = pedidoNuevo.IdPedido });
-
             }
+            
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
+            if(pedidoGustosEmpanadas.Invitados.Count == 0)
+                ViewBag.mensajeError = "Debe seleccionar al menos un invitado";
+            
             ViewBag.iniciar = false;
+            
             return View("Iniciar", pedidoGustosEmpanadas);
         }
 
@@ -54,85 +52,39 @@ namespace BackendTp.Controllers
         {
             return View();
         }
-        
-        public ActionResult Elegir()
-        {
-            var gustos = _servicioGustoEmpanada.GetAll();
-            return View(gustos);
-        }
 
-        //public ActionResult ListaPedidosTotal()
-        //{
-        //    var pedidos = _servicioPedido.GetAll();
-        //    return View(pedidos);
-        //}
+        [System.Web.Mvc.HttpGet]
+        public ActionResult Elegir(Guid id)
+        {
+            var gpu = _servicioPedido.ElegirGustosPorToken(id);
+            return View("ElegirGustos", gpu);
+        }
 
         [System.Web.Mvc.HttpGet]
         public ActionResult Editar(int id)
         {
+            _servicioUsuario.ValidarPermisoUsuario(id, Sesion.IdUsuario);
             var pedido = _servicioPedido.GetById(id);
-            if (pedido.IdEstadoPedido == (int)EstadosPedido.Cerrado)
-                throw new PedidoCerradoException();
-            if (pedido.EstadoPedido.IdEstadoPedido == (int) EstadosPedido.Cerrado)
+
+            if (pedido.EstadoPedido.Nombre == _servicioEstadoPedido.GetCerrado().Nombre)
             {
-                //todo
-                //RedirectToAction("Detalle");
+                return RedirectToAction("Detalle", new { id });
             }
+            
             var gustosModel = _servicioGustoEmpanada.GetAll();
             var invitados = _servicioInvitacionPedido.GetByIdPedido(pedido, Sesion.IdUsuario);
             var pgeVM = new PedidoGustosEmpanadasViewModel(pedido, pedido.GustoEmpanada.ToList(), 
                 gustosModel, invitados);
+            
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();
             return View("Editar", pgeVM);
         }
 
-        //[Route("ElegirGustos/{id}")]
-        //public ActionResult ElegirGustos(int id, int usuarioId)
-        //{
-        //    var invitacionPedido = _servicioInvitacionPedido.GetInvitacionPedidoPorPedido(id);
-        //    return View();
-        //}
-
         [System.Web.Mvc.HttpGet]
         public ActionResult ElegirGustos(int id, int usuarioId)
         {
-
-            GustosPedidoUsuarioViewModel gpu = new GustosPedidoUsuarioViewModel();
-            var gustos = _servicioGustoEmpanada.GetGustosEnPedido(id);
-            gpu.Pedido = _servicioPedido.GetById(id);
-            gpu.InvitacionPedido = _servicioPedido.GetInvitacion(id, usuarioId);
-            gpu.GustosElegidosUsuario = _servicioGustoEmpanada.GetGustosDeUsuario(id, usuarioId);
-            foreach (var gusto in gustos)
-            {
-                gpu.GustosDisponibles.Add(new GustosEmpanadasViewModel(gusto.IdGustoEmpanada, gusto.Nombre));
-            }
-
-            if(gpu.GustosDisponibles.Count() > gpu.GustosElegidosUsuario.Count() )
-            {
-                var dif = gpu.GustosDisponibles.Count() - gpu.GustosElegidosUsuario.Count();
-                for(int i = 0 ; i < dif ; i++)
-                {
-                    gpu.GustosElegidosUsuario.Add(new InvitacionPedidoGustoEmpanadaUsuario { });
-                }
-
-                foreach(GustosEmpanadasViewModel g in gpu.GustosDisponibles)
-                { 
-                    foreach(InvitacionPedidoGustoEmpanadaUsuario gu in gpu.GustosElegidosUsuario)
-                    {
-                        if(gu.IdGustoEmpanada == g.Id)
-                        {
-                            g.IsSelected = true;
-                        } else if(g.IsSelected == false && gu.IdGustoEmpanada == 0)
-                        {
-                            gu.Cantidad = 0;
-                            gu.IdGustoEmpanada = g.Id;
-                            g.IsSelected = true;
-                        }
-                    }
-                }
-
-            }
+            var gpu = _servicioPedido.ElegirGustosUsuario(id, usuarioId);
 
             return View(gpu);
         }
@@ -148,11 +100,10 @@ namespace BackendTp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var pedidoId = _servicioPedido.Modificar(pedidoGustosEmpanadas);
-                _servicioInvitacionPedido.Modificar(pedidoId, pedidoGustosEmpanadas.Invitados, pedidoGustosEmpanadas.Acciones);
+                _servicioPedido.Modificar(pedidoGustosEmpanadas);
                 return RedirectToAction("Lista");
-
             }
+            
             pedidoGustosEmpanadas.Invitados = _servicioUsuario.GetAllByEmail(pedidoGustosEmpanadas.Invitados);
             ViewBag.iniciar = false;
             ViewBag.emailAcciones = _servicioEmail.GetAcciones();
@@ -165,6 +116,17 @@ namespace BackendTp.Controllers
             _servicioEmail.ArmarMailsConfirmacion(pedido);
             return RedirectToAction("Lista", "Pedido");
         }
+      
+        public JsonResult DetallesPedido([FromBody]PedidoViewModel pvm)
+        {
+            var pedido = _servicioPedido.GetById(pvm.IdPedido);
+            var pedidoAEliminar = new
+            {
+                NombreNegocio = pedido.NombreNegocio,
+                Cantidad = pedido.InvitacionPedido.Count(p=>p.Completado)
+            };
+            return Json(pedidoAEliminar);
+        }
 
         [System.Web.Mvc.HttpPost]
         public void Eliminar(int id)
@@ -174,7 +136,7 @@ namespace BackendTp.Controllers
         
         public ActionResult Detalle(int id)
         {
-            Pedido pedidoElegido = _servicioPedido.GetById(id);
+            Pedido pedidoElegido = _servicioPedido.GetById(id, new string[]{"GustoEmpanada"});
             Pedido pedido = _servicioPedido.Detalle(pedidoElegido);
             return View(pedido);
         }
@@ -182,6 +144,7 @@ namespace BackendTp.Controllers
         public ActionResult Clonar(int id)
         {
             PedidoGustosEmpanadasViewModel pedido = _servicioPedido.Clonar(id);
+            ViewBag.iniciar = true;
             return View("Iniciar", pedido);
         }
     }

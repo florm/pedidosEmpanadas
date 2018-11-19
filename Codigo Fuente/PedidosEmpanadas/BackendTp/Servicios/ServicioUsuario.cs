@@ -12,11 +12,22 @@ namespace BackendTp.Servicios
 {
     public class ServicioUsuario : Servicio
     {
-        
-        public void CrearUsuario(Usuario usuario)
+        public ServicioUsuario(Entities context) : base(context)
         {
+        }
+
+        public Usuario GetById(int id)
+        {
+            return Db.Usuario.Single(u=> u.IdUsuario==id);
+        } 
+        
+        public (string, string) CrearUsuario(Usuario usuario)
+        {
+            if(!UsuarioValido(usuario))
+                return ("error","El usuario ya existe");
             Db.Usuario.Add(usuario);
             Db.SaveChanges();
+            return ("ok", "El registro se realizó correctamente");
         }
 
         public Usuario Login(Usuario usuario)
@@ -50,6 +61,15 @@ namespace BackendTp.Servicios
             return lista;
         }
 
+        public void ValidarPermisoUsuario(int pedidoId, int usuarioId)
+        {
+            var pedido = Db.Pedido
+                .FirstOrDefault(p => p.IdUsuarioResponsable == usuarioId && p.IdPedido == pedidoId);
+            if(pedido==null)
+                throw new PermisosException();
+
+        }
+
         //App
         public Usuario LoginMobile(string email, string pass)
         {
@@ -59,5 +79,13 @@ namespace BackendTp.Servicios
             return user;
         }
 
+        public bool UsuarioValido(Usuario usuario)
+        {
+            var usuarioModel = Db.Usuario.FirstOrDefault(u => u.Email == usuario.Email);
+            if (usuarioModel != null)
+                return false;
+            return true;
+
+        }
     }
 }

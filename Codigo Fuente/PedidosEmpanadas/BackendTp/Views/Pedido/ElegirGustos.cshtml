@@ -1,6 +1,7 @@
-﻿@model BackendTp.Models.GustosPedidoUsuarioViewModel
+﻿@model BackendTp.Models.ElegirGustosVm
 @using BackendTp.Models
 @using BackendTp.Helpers
+
 @{
     ViewBag.Title = "ElegirGustos";
     Layout = "~/Views/Shared/_UsuarioLayout.cshtml";
@@ -21,35 +22,36 @@
                     <label class="font-weight-bold">Unidad:</label> $@Model.Pedido.PrecioUnidad<br />
                     <label class="font-weight-bold">Docena:</label> $@Model.Pedido.PrecioDocena<br />
                 </div>
-                <hr/>
+                <hr />
                 <span class="text-black-50">Elige cuantas empanadas quieres de cada gusto.</span><br /><br />
-                
-                @using (Html.BeginForm("ConfirmarGustos", "Pedidos",FormMethod.Post, new { @id="listaGustos" }))
+
+                @using (Html.BeginForm("ConfirmarGustos", "Pedidos", FormMethod.Post, new { @id = "listaGustos" }))
                 {
-            
+
                     @Html.Hidden("idUsuario", Sesion.IdUsuario)
-                    @Html.Hidden("tokenUsuario", Model.InvitacionPedido.Token)
+                    @Html.Hidden("tokenUsuario", Model.Token)
                     @Html.Hidden("idPedido", Model.Pedido.IdPedido)
-            
-                    foreach (GustosEmpanadasViewModel g in Model.GustosDisponibles)
+
+                    foreach (GustoEmpanadasCantidad g in Model.Empanadas)
                     {
-                        foreach (InvitacionPedidoGustoEmpanadaUsuario gu in Model.GustosElegidosUsuario)
-                        {
-                            if (gu.IdGustoEmpanada == g.Id)
-                            {
-                                <div class="form-group w-100">
-                                    <label for="@g.Id" class="control-label">@g.Nombre</label>
-                                    <input id="@g.Id" value="@gu.Cantidad" class="form-control gustosUsuario" />
-                                </div>
-                            }
-                        }
+
+                        <div class="form-group w-100">
+                            <label for="@g.IdGustoEmpanada" class="control-label">@g.Nombre</label>
+                            <input id="@g.IdGustoEmpanada" value="@g.Cantidad" class="form-control gustosUsuario" type="number" />
+                        </div>
+
                     }
                 }
             </div>
         </div>
         <div class="col-12 text-right mt-3">
             <input type="reset" value="Volver" id="btnCancelar" class="btn btn-cancelar mr-1" />
-            <button id="testbtn" type="button" class="btn btn-primary">Aceptar</button>
+            <button id="btnElegirGustos" type="button" class="btn btn-primary">Aceptar</button>
         </div>
     </div>
 </div>
+
+@section custom_js_code
+{
+    <script src="@Url.Content("~/Scripts/vistas/pedidos/elegirGustos.js")"></script>
+}
