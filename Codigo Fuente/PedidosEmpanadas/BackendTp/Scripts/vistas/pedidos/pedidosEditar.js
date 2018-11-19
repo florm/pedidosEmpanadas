@@ -53,9 +53,13 @@ $("#btnConfirmar").click(function () {
         if (willConfirm) {
             buttonLoading($(this), true);
             $.post( "/Pedido/Confirmar", { "Pedido.IdPedido": $(this).data("pedido_id") })
-                .done(function( data ) {
+                .done(function (data) {
+                    toastr.options.onHidden = function () {
+                        window.location.href = window.pathPedidos;
+                    };
                     toastr.success("El pedido fue Confirmado exitosamente.");
                     $("#btnConfirmar").find("span").remove();
+                    
                 });
         }
     });
