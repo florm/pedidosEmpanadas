@@ -130,7 +130,6 @@ namespace BackendTp.Servicios
 
                 var invPedido = Db.InvitacionPedido.FirstOrDefault(i => i.IdPedido == pedido.IdPedido && i.IdUsuario == pedido.IdUsuario);
                 invPedido.Completado = true;
-
                 Db.SaveChanges();
 
                 return true;
@@ -149,16 +148,13 @@ namespace BackendTp.Servicios
                     break;
                 case (int)EmailAcciones.EnviarSoloALosNuevos:
                     if (nuevosInvitados.Count != 0)
-                    {
-                        _servicioMail.EnviarANuevos(nuevosInvitados);
-
-                    }
+                        _servicioMail.EnviarMailInicioPedido(nuevosInvitados);
                     break;
                 case (int)EmailAcciones.ReEnviarInvitacionATodos:
-                    _servicioMail.EnviarMailInicioPedido(pedido);
+                    _servicioMail.EnviarMailInicioPedido(pedido.InvitacionPedido);
                     break;
                 case (int)EmailAcciones.ReEnviarSoloALosQueNoEligieronGustos:
-                    _servicioMail.EnviarALosQueNoEligieronGusto(pedido);
+                    _servicioMail.EnviarMailInicioPedido(pedido.InvitacionPedido.Where(ip => ip.Completado == false).ToList());
                     break;
             }
         }

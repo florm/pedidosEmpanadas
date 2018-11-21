@@ -13,7 +13,7 @@ namespace App
         {
             InitializeComponent();
             Current = this;
-            UrlApi = "http://192.168.0.6:45455"; 
+            UrlApi = "http://192.168.0.9:45455"; 
             //var isLoggedIn = Properties.ContainsKey("IsLoggedIn") ? (bool)Properties["IsLoggedIn"] : false;
             //MainPage = new MainPage();
             MainPage = new NavigationPage(new MainPage());

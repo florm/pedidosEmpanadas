@@ -82,7 +82,7 @@ namespace BackendTp.Servicios
                         
             Db.Pedido.Add(pedido);
             Db.SaveChanges();
-            _servicioEmail.EnviarMailInicioPedido(pedido);
+            _servicioEmail.EnviarMailInicioPedido(pedido.InvitacionPedido);
 
             return pedido;
         }

@@ -195,35 +195,35 @@ namespace BackendTp.Servicios
             return mensaje;
         }
         
-        public void EnviarALosQueNoEligieronGusto(Pedido pedido)
-        {
-            var invitadosSinGustos = pedido.InvitacionPedido.Where(ip => ip.Completado == false).ToList();
+        //public void EnviarConFiltro(List<InvitacionPedido> invitaciones)
+        //{
+        //    //var invitadosSinGustos = pedido.InvitacionPedido.Where(ip => ip.Completado == false).ToList();
             
-            foreach (var invitacion in invitadosSinGustos)
-            {
-                var email = new Mail();
-                var tokenUsuario = invitacion.Token;
-                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
-                email.Email = invitacion.Usuario.Email;
-                MandarMail(email, "Inicio de Pedido", "inicio");
-            }
-        }
+        //    foreach (var invitacion in invitaciones)
+        //    {
+        //        var email = new Mail();
+        //        var tokenUsuario = invitacion.Token;
+        //        email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+        //        email.Email = invitacion.Usuario.Email;
+        //        MandarMail(email, "Inicio de Pedido", "inicio");
+        //    }
+        //}
         
-        public void EnviarANuevos(List<InvitacionPedido> nuevosInvitaciones)
-        {
-            foreach (var invitacion in nuevosInvitaciones)
-            {
-                var email = new Mail();
-                var tokenUsuario = invitacion.Token;
-                email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
-                email.Email = invitacion.Usuario.Email;
-                MandarMail(email, "Inicio de Pedido", "inicio");
-            }
-        }
+        //public void EnviarANuevos(List<InvitacionPedido> nuevosInvitaciones)
+        //{
+        //    foreach (var invitacion in nuevosInvitaciones)
+        //    {
+        //        var email = new Mail();
+        //        var tokenUsuario = invitacion.Token;
+        //        email.Link = "http://localhost:57162/pedido/elegir/"+tokenUsuario;
+        //        email.Email = invitacion.Usuario.Email;
+        //        MandarMail(email, "Inicio de Pedido", "inicio");
+        //    }
+        //}
 
-        public void EnviarMailInicioPedido(Pedido pedido)
+        public void EnviarMailInicioPedido(List<InvitacionPedido> invitaciones)
         {
-            foreach (var invitacionPedido in pedido.InvitacionPedido)
+            foreach (var invitacionPedido in invitaciones)
             {
                 var email = new Mail();
                 var tokenUsuario = invitacionPedido.Token;
