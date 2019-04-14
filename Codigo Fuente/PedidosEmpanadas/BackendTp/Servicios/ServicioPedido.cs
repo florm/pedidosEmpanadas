@@ -111,10 +111,12 @@ namespace BackendTp.Servicios
             pedido.PrecioDocena = pge.Pedido.PrecioDocena;
             pedido.FechaModificacion = DateTime.Now;
             pedido.GustoEmpanada = _servicioGustoEmpanada.ObtenerGustos(pge.GustosDisponibles);
-            
-            _servicioInvitacionPedido.Modificar(pedido, pge);
 
+            List<InvitacionPedido> nuevosInvitados = _servicioInvitacionPedido.Modificar(pedido, pge);
             Db.SaveChanges();
+
+            _servicioInvitacionPedido.EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
+
             return pedido.IdPedido;
         }
 

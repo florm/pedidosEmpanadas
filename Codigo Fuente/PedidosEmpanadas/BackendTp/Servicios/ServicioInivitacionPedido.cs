@@ -75,7 +75,7 @@ namespace BackendTp.Servicios
             return Db.InvitacionPedido.FirstOrDefault(ip => ip.IdPedido == id && ip.IdUsuario == idUsuario);
         }
 
-        public void Modificar(Pedido pedido,PedidoGustosEmpanadasViewModel pge)
+        public List<InvitacionPedido> Modificar(Pedido pedido,PedidoGustosEmpanadasViewModel pge)
         {
             var invitadosModel = GetInvitados(pge.Invitados, Sesion.IdUsuario);
             
@@ -96,8 +96,9 @@ namespace BackendTp.Servicios
             {
                 pedido.InvitacionPedido.AddRange(nuevosInvitados);
             }
-               
-           EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
+
+            return nuevosInvitados;
+           //EnviarMailInicioPedido(nuevosInvitados, pedido, pge.Acciones);
             
         }
 
